@@ -1,11 +1,11 @@
 package com.example.coffeeshop.domain.repository
 
-import com.example.coffeeshop.data.model.DataCart
+import com.example.coffeeshop.data.model.DataCartItem
 
 interface CartRepository {
 
-    suspend fun addCart(dataCart: DataCart)
-    suspend fun getCarts():List<DataCart>
-    suspend fun deleteCart(dataCart: DataCart)
+    suspend fun addCart(dataCartItem: DataCartItem)
+    suspend fun getCarts():List<DataCartItem>
+    suspend fun deleteCart(dataCartItem: DataCartItem)
 
 }
