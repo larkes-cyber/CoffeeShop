@@ -1,5 +1,8 @@
 package com.example.coffeeshop.data.model
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class DataCoffee(
     val id:String,
     val photoSrc:String?,
