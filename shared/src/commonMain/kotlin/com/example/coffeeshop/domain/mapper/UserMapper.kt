@@ -36,3 +36,15 @@ fun UserDto.toDataUser():DataUser{
         password = password
     )
 }
+
+fun DataUser.toUserDto():UserDto{
+    return UserDto(
+        name = name,
+        photoSrc = photoSrc,
+        number = number,
+        favoriteCoffee = favoriteCoffee ?: "",
+        session = session ?: "",
+        login = login!!,
+        password = password!!
+    )
+}

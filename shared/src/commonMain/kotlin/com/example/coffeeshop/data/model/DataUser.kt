@@ -7,7 +7,7 @@ data class DataUser(
     val name:String,
     val photoSrc:String?,
     val number:String?,
-    val favoriteCoffee:String?,
+    var favoriteCoffee:String?,
     val session:String?,
     val login:String?,
     val password:String?

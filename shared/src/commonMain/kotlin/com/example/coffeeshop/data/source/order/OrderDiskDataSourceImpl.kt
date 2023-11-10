@@ -26,7 +26,7 @@ class OrderDiskDataSourceImpl(
         ).list.toMutableList() else mutableListOf()
     }
 
-    override suspend fun cleanOrders() {
+    override suspend fun cleanUpOrders() {
         jsonStorage.putItemsToStorage(Constants.ORDER_JSON_FIELD, "")
     }
 }

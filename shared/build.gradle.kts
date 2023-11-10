@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     id("org.jetbrains.kotlin.plugin.serialization")
+    id("com.squareup.sqldelight")
 }
 
 val sqlDelightVersion = "1.5.5"
@@ -56,6 +57,13 @@ kotlin {
                 implementation ("io.ktor:ktor-client-ios:$ktorVersion")
 
         }
+    }
+}
+
+sqldelight{
+    database("CartDatabase"){
+        packageName = "com.example.coffeeshop.database"
+        sourceFolders = listOf("sqldelight")
     }
 }
 

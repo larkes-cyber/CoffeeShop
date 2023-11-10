@@ -7,9 +7,9 @@ interface CoffeeRepository {
 
     suspend fun syncCoffee()
     suspend fun syncCoffeeCategory()
-    suspend fun getCoffeeByCategory(id:String)
-    suspend fun getCoffeeDetail(id:String)
+    suspend fun getCoffeeByCategory(id:String):List<DataCoffee>
+    suspend fun getCoffeeDetail(id:String):DataCoffee
     suspend fun getCoffeeCategories():List<DataCoffeeCategory>
-    suspend fun searchForCoffee():List<DataCoffee>
+    suspend fun searchForCoffee(symbols:String):List<DataCoffee>
 
 }

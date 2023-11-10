@@ -1,22 +1,19 @@
 package com.example.coffeeshop.domain.usecase
 
 import com.example.coffeeshop.domain.mapper.toCoffee
-import com.example.coffeeshop.domain.mapper.toCoffeeCategory
 import com.example.coffeeshop.domain.model.Coffee
-import com.example.coffeeshop.domain.model.CoffeeCategory
 import com.example.coffeeshop.domain.repository.CoffeeRepository
 import com.example.coffeeshop.untils.Resource
 
-class UseGetCoffeeDetailById(
+class UseSyncCoffee(
     private val coffeeRepository: CoffeeRepository
-) {
-
-    suspend fun execute(id:String): Resource<Coffee> {
+){
+    suspend fun execute(): Resource<String> {
         return try {
-            Resource.Success(coffeeRepository.getCoffeeDetail(id).toCoffee())
+            coffeeRepository.syncCoffee()
+            Resource.Success("success")
         }catch (e:Exception){
             Resource.Error(e.message!!)
         }
     }
-
 }

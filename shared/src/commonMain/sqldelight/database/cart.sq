@@ -1,0 +1,23 @@
+CREATE TABLE cartEntity(
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    amount INTEGER NOT NULL,
+    productId TEXT NOT NULL
+);
+
+getAllCarts:
+SELECT *
+FROM cartEntity;
+
+
+insertCart:
+INSERT OR REPLACE
+INTO cartEntity(
+    id,
+    amount,
+    productId
+)VALUES(?,?,?);
+
+deleteCart:
+DELETE FROM cartEntity
+WHERE id = ?;
+

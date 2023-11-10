@@ -6,6 +6,6 @@ interface OrderDiskDataSource {
 
     suspend fun insertOrder(dataOrder: DataOrder)
     suspend fun getOrders():List<DataOrder>
-    suspend fun cleanOrders()
+    suspend fun cleanUpOrders()
 
 }
