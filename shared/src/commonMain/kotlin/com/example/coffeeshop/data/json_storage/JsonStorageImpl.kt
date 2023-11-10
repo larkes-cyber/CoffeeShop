@@ -10,6 +10,6 @@ class JsonStorageImpl(
         setting.putString(key, items)
     }
 
-    override suspend fun getItemsByKey(key:String):String = setting.getString(key, "null")
+    override suspend fun getItemsByKey(key:String):String = setting.getString(key, "")
 
 }
