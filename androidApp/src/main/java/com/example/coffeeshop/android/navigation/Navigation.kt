@@ -17,6 +17,9 @@ fun Navigation(navController: NavHostController) {
         composable(Screen.StartScreen.route){
             StartScreen()
         }
+        composable(Screen.LoginScreen.route){
+
+        }
 
     }
 
