@@ -19,8 +19,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.coffeeshop.android.R
 import com.example.coffeeshop.android.component.AppPrimaryButton
+import com.example.coffeeshop.android.navigation.Screen
 import com.example.coffeeshop.android.theme.AppTheme
 import com.example.coffeeshop.android.theme.sora
 import com.example.coffeeshop.android.untils.Constants.GET_STARTED_BTN_TITLE
@@ -28,7 +30,9 @@ import com.example.coffeeshop.android.untils.Constants.START_SCREEN_SUBTITLE
 import com.example.coffeeshop.android.untils.Constants.START_SCREEN_TITLE
 
 @Composable
-fun StartScreen() {
+fun StartScreen(
+    navController: NavController
+) {
     Box(modifier = Modifier
         .fillMaxSize()
         .background(AppTheme.colors.background)
@@ -63,7 +67,7 @@ fun StartScreen() {
                 title = GET_STARTED_BTN_TITLE,
                 modifier = Modifier.fillMaxWidth()
             ){
-
+                navController.navigate(Screen.LoginScreen.route)
             }
             Spacer(modifier = Modifier.height(30.dp))
 

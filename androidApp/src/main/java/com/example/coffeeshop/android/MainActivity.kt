@@ -20,6 +20,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             BusinessModule(this).init()
+
             val navController = rememberNavController()
 
             CoffeeShopAppTheme {

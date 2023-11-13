@@ -8,17 +8,25 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.coffeeshop.android.screen.login_screen.LoginScreen
 import com.example.coffeeshop.android.screen.login_screen.LoginViewModel
+import com.example.coffeeshop.android.screen.splash_screen.SplashScreen
+import com.example.coffeeshop.android.screen.splash_screen.SplashViewModel
 import com.example.coffeeshop.android.screen.start_screen.StartScreen
 
 @Composable
 fun Navigation(navController: NavHostController) {
 
-    NavHost(navController = navController, startDestination = Screen.LoginScreen.route){
+    NavHost(navController = navController, startDestination = Screen.SplashScreen.route){
         composable(Screen.SplashScreen.route){
-
+            val viewModel:SplashViewModel = hiltViewModel()
+            SplashScreen(
+                navController = navController,
+                viewModel = viewModel
+            )
         }
         composable(Screen.StartScreen.route){
-            StartScreen()
+            StartScreen(
+                navController = navController
+            )
         }
         composable(Screen.LoginScreen.route){
             val viewModel:LoginViewModel = hiltViewModel()

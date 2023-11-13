@@ -23,24 +23,23 @@ import com.example.coffeeshop.domain.usecase.UseUploadUserPhoto
 import org.koin.dsl.module
 
 fun domainModule() = module {
-    factory { UseAddCart(get()) }
-    factory { UseAddFavoriteCoffee(get()) }
-    factory { UseAuthUser(get()) }
-    factory { UseEditUser(get()) }
-    factory { UseGetCarts(get()) }
-    factory { UseGetCoffeeByCategory(get()) }
-    factory { UseGetCoffeeCategories(get()) }
-    factory { UseGetCoffeeDetailById(get()) }
-    factory { UseGetFavoriteCoffee(get(), get()) }
-    factory { UseGetOrders(get()) }
-    factory { UseGetUserData(get()) }
-    factory { UseMakePayment(get()) }
-    factory { UseRegisterUser(get()) }
-    factory { UseRemoveFavoriteCoffee(get()) }
-    factory { UseSearchForCoffee(get()) }
-    factory { UseSyncCoffee(get()) }
-    factory { UseSyncCoffeeCategories(get()) }
-    factory { UseSyncOrders(get()) }
-    factory { UseSyncUserData(get()) }
-    factory { UseUploadUserPhoto(get()) }
+    single { UseAddCart(get()) }
+    single { UseAddFavoriteCoffee(get()) }
+    single { UseAuthUser(get()) }
+    single { UseEditUser(get()) }
+    single { UseGetCarts(get()) }
+    single { UseGetCoffeeByCategory(get()) }
+    single { UseGetCoffeeCategories(get()) }
+    single { UseGetCoffeeDetailById(get()) }
+    single { UseGetFavoriteCoffee(get(), get()) }
+    single { UseGetOrders(get()) }
+    single { UseMakePayment(get()) }
+    single { UseRegisterUser(get()) }
+    single { UseRemoveFavoriteCoffee(get()) }
+    single { UseSearchForCoffee(get()) }
+    single { UseSyncCoffee(get()) }
+    single { UseSyncCoffeeCategories(get()) }
+    single{ UseSyncOrders(get()) }
+    single { UseSyncUserData(get()) }
+    single { UseUploadUserPhoto(get()) }
 }

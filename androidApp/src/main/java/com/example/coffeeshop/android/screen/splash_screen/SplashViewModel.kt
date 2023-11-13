@@ -6,7 +6,6 @@ import com.example.coffeeshop.android.untils.Constants.AUTH_NOT_STATED
 import com.example.coffeeshop.android.untils.Constants.HASNT_AUTH
 import com.example.coffeeshop.android.untils.Constants.HAS_AUTH
 import com.example.coffeeshop.di.UseCases
-import com.example.coffeeshop.domain.model.User
 import com.example.coffeeshop.domain.usecase.UseGetUserData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,15 +15,15 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(
-    private val useGetUserData:UseGetUserData = UseCases.useGetUserData()
 ):ViewModel(){
 
-    private val _hasBeenAuth = MutableStateFlow(AUTH_NOT_STATED)
-    val hasBeenAuth:StateFlow<Int> = _hasBeenAuth
+    private val _authUIState = MutableStateFlow(AUTH_NOT_STATED)
+    val authUIState:StateFlow<Int> = _authUIState
     init {
         viewModelScope.launch {
-           val user = useGetUserData.execute().data
-            _hasBeenAuth.value =  if(user == null) HASNT_AUTH else HAS_AUTH
+            UseCases.useGetOrders().execute().data
+//            val user = usecase.execute().data
+//            _authUIState.value =  if(user == null) HASNT_AUTH else HAS_AUTH
 
         }
     }

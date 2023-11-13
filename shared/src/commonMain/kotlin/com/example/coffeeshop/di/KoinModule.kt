@@ -53,7 +53,6 @@ object UseCases:KoinComponent{
     fun useGetCoffeeDetailById() = get<UseGetCoffeeDetailById>()
     fun useGetFavoriteCoffee() = get<UseGetFavoriteCoffee>()
     fun useGetOrders() = get<UseGetOrders>()
-    fun useGetUserData() = get<UseGetUserData>()
     fun useMakePayment() = get<UseMakePayment>()
     fun useRegisterUser() = get<UseRegisterUser>()
     fun useRemoveFavoriteCoffee() = get<UseRemoveFavoriteCoffee>()
