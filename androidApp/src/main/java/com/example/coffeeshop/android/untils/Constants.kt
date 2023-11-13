@@ -21,6 +21,10 @@ object Constants {
     const val SIGN_UP_TITLE = "Sign up"
     const val AUTH_TITLE = "Welcome back!"
     const val AUTH_SUBTITLE = "login in your account"
+    const val AUTH_NOT_STATED = 0
+    const val HAS_AUTH = 1
+    const val HASNT_AUTH = 2
+
 
 
 }
