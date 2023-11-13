@@ -12,7 +12,9 @@ import androidx.navigation.compose.rememberNavController
 import com.example.coffeeshop.BusinessModule
 import com.example.coffeeshop.android.navigation.Navigation
 import com.example.coffeeshop.android.theme.CoffeeShopAppTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
