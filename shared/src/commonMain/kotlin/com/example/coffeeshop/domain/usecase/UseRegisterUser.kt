@@ -14,6 +14,7 @@ class UseRegisterUser(
             userRepository.registerUser(user.toDataUser())
             Resource.Success("success")
         }catch (e:Exception){
+            println(e)
             Resource.Error(e.message!!)
         }
     }

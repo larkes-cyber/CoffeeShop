@@ -12,8 +12,8 @@ fun User.toDataUser():DataUser{
         number = number,
         favoriteCoffee = null,
         session = null,
-        login = null,
-        password = null
+        login = login,
+        password = password
     )
 }
 
@@ -31,9 +31,9 @@ fun UserDto.toDataUser():DataUser{
         photoSrc = photoSrc,
         number = number,
         favoriteCoffee = favoriteCoffee,
-        session = session,
         login = login,
-        password = password
+        password = password,
+        session = null
     )
 }
 
@@ -43,7 +43,6 @@ fun DataUser.toUserDto():UserDto{
         photoSrc = photoSrc,
         number = number,
         favoriteCoffee = favoriteCoffee ?: "",
-        session = session ?: "",
         login = login!!,
         password = password!!
     )

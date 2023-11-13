@@ -39,12 +39,14 @@ class UserRemoteDataSourceImpl(
     private val httpClient: HttpClient
 ):UserRemoteDataSource {
     @OptIn(InternalAPI::class)
-    override suspend fun registerUser(userDto: UserDto): UserDto {
+    override suspend fun registerUser(userDto: UserDto): UserDto? {
         val response:HttpResponse = httpClient.post(POST_REGISTER_USER){
             contentType(ContentType.Application.Json)
-            body = userDto
+            setBody(userDto)
         }
-        return Json.decodeFromString(response.bodyAsText())
+        val resp = response.bodyAsText()
+        println(resp)
+        return null
     }
 
 

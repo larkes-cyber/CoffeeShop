@@ -15,7 +15,7 @@ class UseGetOrders(
         return try {
             Resource.Success(orderRepository.getOrders().map { it.toOrder() })
         }catch (e:Exception){
-            Resource.Error(e.message!!)
+            Resource.Error(e.message ?: "null")
         }
     }
 

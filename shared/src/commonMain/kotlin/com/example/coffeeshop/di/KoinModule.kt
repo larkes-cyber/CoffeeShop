@@ -1,8 +1,33 @@
 package com.example.coffeeshop.di
 
+import com.example.coffeeshop.data.json_storage.JsonStorage
+import com.example.coffeeshop.data.json_storage.JsonStorageImpl
+import com.example.coffeeshop.data.repository.CartRepositoryImpl
+import com.example.coffeeshop.data.repository.CoffeeRepositoryImpl
+import com.example.coffeeshop.data.repository.OrderRepositoryImpl
+import com.example.coffeeshop.data.repository.UserRepositoryImpl
+import com.example.coffeeshop.data.source.cart.CartDiskDataSource
+import com.example.coffeeshop.data.source.cart.CartDiskDataSourceImpl
+import com.example.coffeeshop.data.source.coffee.CoffeeDiskDataSource
+import com.example.coffeeshop.data.source.coffee.CoffeeDiskDataSourceImpl
+import com.example.coffeeshop.data.source.coffee.CoffeeRemoteDataSource
+import com.example.coffeeshop.data.source.coffee.CoffeeRemoteDataSourceImpl
+import com.example.coffeeshop.data.source.order.OrderDiskDataSource
+import com.example.coffeeshop.data.source.order.OrderDiskDataSourceImpl
+import com.example.coffeeshop.data.source.order.OrderRemoteDataSource
+import com.example.coffeeshop.data.source.order.OrderRemoteDataSourceImpl
+import com.example.coffeeshop.data.source.user.UserDiskDataSource
+import com.example.coffeeshop.data.source.user.UserDiskDataSourceImpl
+import com.example.coffeeshop.data.source.user.UserRemoteDataSource
+import com.example.coffeeshop.data.source.user.UserRemoteDataSourceImpl
 import com.example.coffeeshop.database.CartDatabase
+import com.example.coffeeshop.domain.repository.CartRepository
+import com.example.coffeeshop.domain.repository.CoffeeRepository
+import com.example.coffeeshop.domain.repository.OrderRepository
+import com.example.coffeeshop.domain.repository.UserRepository
 import com.example.coffeeshop.domain.usecase.UseAddCart
 import com.example.coffeeshop.domain.usecase.UseAddFavoriteCoffee
+import com.example.coffeeshop.domain.usecase.UseAuthUser
 import com.example.coffeeshop.domain.usecase.UseEditUser
 import com.example.coffeeshop.domain.usecase.UseGetCarts
 import com.example.coffeeshop.domain.usecase.UseGetCoffeeByCategory
@@ -20,6 +45,7 @@ import com.example.coffeeshop.domain.usecase.UseSyncCoffeeCategories
 import com.example.coffeeshop.domain.usecase.UseSyncOrders
 import com.example.coffeeshop.domain.usecase.UseSyncUserData
 import com.example.coffeeshop.domain.usecase.UseUploadUserPhoto
+import com.russhwolf.settings.Settings
 import io.ktor.client.HttpClient
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
@@ -33,12 +59,14 @@ fun initKoin(
 
     modules(
         module {
+            single { Settings() }
             single { httpClient }
             single { database }
-            dataSourceModule()
-            repositoryModule()
-            domainModule()
-        }
+            single<JsonStorage> { JsonStorageImpl(get()) }
+        },
+        dataSourceModule(),
+        repositoryModule(),
+        domainModule()
     )
 
 }
@@ -62,5 +90,6 @@ object UseCases:KoinComponent{
     fun useSyncOrders() = get<UseSyncOrders>()
     fun useSyncUserData() = get<UseSyncUserData>()
     fun useUploadUserPhoto() = get<UseUploadUserPhoto>()
+    fun useGetUserData() = get<UseGetUserData>()
 
 }

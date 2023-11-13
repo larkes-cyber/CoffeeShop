@@ -42,4 +42,8 @@ fun domainModule() = module {
     single{ UseSyncOrders(get()) }
     single { UseSyncUserData(get()) }
     single { UseUploadUserPhoto(get()) }
+    single { UseGetOrders(get()) }
+    single { UseGetUserData(get()) }
+    single { UseGetUserData(get()) }
+
 }

@@ -16,7 +16,7 @@ class UserRepositoryImpl(
 ):UserRepository {
     override suspend fun registerUser(dataUser: DataUser) {
         val user = userRemoteDataSource.registerUser(dataUser.toUserDto())
-        userDiskDataSource.putUserData(user.toDataUser())
+        //userDiskDataSource.putUserData(user.toDataUser())
     }
 
     override suspend fun authUser(login: String, password: String) {

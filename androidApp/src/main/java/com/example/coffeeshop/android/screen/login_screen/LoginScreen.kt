@@ -118,7 +118,7 @@ fun LoginScreen(
                 title = CONTINUE_BTN_TITLE,
                 modifier = Modifier.fillMaxWidth()
             ){
-
+                viewModel.onDone()
             }
             Spacer(modifier = Modifier.height(18.dp))
             Box(

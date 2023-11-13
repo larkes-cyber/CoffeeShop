@@ -12,9 +12,9 @@ import org.koin.dsl.module
 
 fun repositoryModule() = module {
 
+    single<UserRepository> { UserRepositoryImpl(get(), get()) }
+    single<OrderRepository> { OrderRepositoryImpl(get(), get(), get()) }
     single<CartRepository> { CartRepositoryImpl(get()) }
     single<CoffeeRepository> { CoffeeRepositoryImpl(get(), get(), get()) }
-    single<OrderRepository> { OrderRepositoryImpl(get(), get(), get()) }
-    single<UserRepository> { UserRepositoryImpl(get(), get()) }
 
 }

@@ -21,9 +21,8 @@ class SplashViewModel @Inject constructor(
     val authUIState:StateFlow<Int> = _authUIState
     init {
         viewModelScope.launch {
-            UseCases.useGetOrders().execute().data
-//            val user = usecase.execute().data
-//            _authUIState.value =  if(user == null) HASNT_AUTH else HAS_AUTH
+            val user = UseCases.useGetUserData().execute().data
+            _authUIState.value =  if(user == null) HASNT_AUTH else HAS_AUTH
 
         }
     }

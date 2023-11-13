@@ -10,6 +10,5 @@ data class UserDto(
     val number:String? = null,
     val login:String,
     val password:String,
-    val favoriteCoffee:String,
-    val session:String
+    val favoriteCoffee:String
 )

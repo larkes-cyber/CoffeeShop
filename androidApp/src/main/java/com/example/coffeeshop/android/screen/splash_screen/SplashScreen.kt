@@ -26,7 +26,7 @@ fun SplashScreen(
     val authUIState by viewModel.authUIState.collectAsState()
     LaunchedEffect(authUIState){
         if(authUIState == HAS_AUTH){
-           // navController.navigate(Screen.)
+            navController.navigate(Screen.MainScreen.route)
         }else if(authUIState == HASNT_AUTH){
             navController.navigate(Screen.StartScreen.route)
         }
