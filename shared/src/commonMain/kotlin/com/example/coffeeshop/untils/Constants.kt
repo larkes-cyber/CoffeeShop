@@ -7,5 +7,6 @@ object Constants {
     const val USER_JSON_FILED = "user_json"
     const val COFFEE_CATEGORY_FILED = "coffee_category_field"
     const val COFFEE_API = "http://192.168.43.109:8080"
+    const val COFFEE_PHOTOS_URL = "$COFFEE_API/coffee/image?file_name="
 
 }

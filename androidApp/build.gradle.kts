@@ -52,4 +52,5 @@ dependencies {
     kapt ("com.google.dagger:hilt-compiler:2.44")
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0-alpha03")
     implementation("io.insert-koin:koin-core:3.3.3")
+    implementation("io.coil-kt:coil-compose:2.0.0-rc01")
 }
