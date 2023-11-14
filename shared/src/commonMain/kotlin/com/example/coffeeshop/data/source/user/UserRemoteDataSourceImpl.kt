@@ -28,6 +28,7 @@ import io.ktor.http.ContentDisposition.Companion.File
 import io.ktor.http.ContentType
 import io.ktor.http.Headers
 import io.ktor.http.HttpHeaders
+import io.ktor.http.HttpStatusCode
 import io.ktor.http.contentType
 import io.ktor.util.InternalAPI
 import kotlinx.serialization.decodeFromString
@@ -39,14 +40,15 @@ class UserRemoteDataSourceImpl(
     private val httpClient: HttpClient
 ):UserRemoteDataSource {
     @OptIn(InternalAPI::class)
-    override suspend fun registerUser(userDto: UserDto): UserDto? {
+    override suspend fun registerUser(userDto: UserDto): UserDto {
         val response:HttpResponse = httpClient.post(POST_REGISTER_USER){
             contentType(ContentType.Application.Json)
             setBody(userDto)
         }
-        val resp = response.bodyAsText()
-        println(resp)
-        return null
+        if(response.status == HttpStatusCode.OK){
+            return Json.decodeFromString(response.bodyAsText())
+        }
+        throw Exception(response.bodyAsText())
     }
 
 

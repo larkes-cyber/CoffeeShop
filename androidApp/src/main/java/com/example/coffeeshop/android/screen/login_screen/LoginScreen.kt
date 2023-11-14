@@ -10,12 +10,15 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.ClickableText
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -25,6 +28,7 @@ import androidx.navigation.NavController
 import com.example.coffeeshop.android.component.AppPrimaryButton
 import com.example.coffeeshop.android.component.AppTextField
 import com.example.coffeeshop.android.component.PasswordTextField
+import com.example.coffeeshop.android.navigation.Screen
 import com.example.coffeeshop.android.theme.AppTheme
 import com.example.coffeeshop.android.theme.sora
 import com.example.coffeeshop.android.untils.Constants.ALREADY_HAVE_ACCOUNT
@@ -48,6 +52,12 @@ fun LoginScreen(
 ){
 
     val loginUIState by viewModel.loginUIState.collectAsState()
+
+    LaunchedEffect(loginUIState.hasBeenDone){
+        if(loginUIState.hasBeenDone){
+            navController.navigate(Screen.MainScreen.route)
+        }
+    }
 
     Box(
         modifier = Modifier
@@ -112,6 +122,15 @@ fun LoginScreen(
                     }
                 }
 
+            }
+            if(loginUIState.error.isNotEmpty()){
+                Column {
+                    Spacer(modifier = Modifier.height(10.dp))
+                    Text(
+                        text = loginUIState.error,
+                        style = MaterialTheme.typography.bodySmall.copy(color = Color.Red)
+                    )
+                }
             }
             Spacer(modifier = Modifier.height(55.dp))
             AppPrimaryButton(

@@ -9,7 +9,7 @@ import com.example.coffeeshop.untils.Constants.COFFEE_API
 
 interface UserRemoteDataSource {
 
-    suspend fun registerUser(userDto: UserDto):UserDto?
+    suspend fun registerUser(userDto: UserDto):UserDto
     suspend fun authUser(loginDto: LoginDto):UserDto
     suspend fun editUser(dataUser: UserDto)
     suspend fun addFavoriteCoffee(coffeeDto: FavoriteCoffeeDto)

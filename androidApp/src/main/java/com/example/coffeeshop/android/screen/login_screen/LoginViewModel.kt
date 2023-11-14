@@ -43,7 +43,13 @@ class LoginViewModel @Inject constructor():ViewModel() {
                     name = loginUIState.value.name
                 )
             )
-            Log.d("sdfsdfsdfsdfsdf",res.message.toString())
+            if(res.message != null){
+                _loginUIState.value = loginUIState.value.copy(error = res.message!!)
+            }else{
+                _loginUIState.value = loginUIState.value.copy(hasBeenDone = true)
+            }
+
+
         }
     }
 }
