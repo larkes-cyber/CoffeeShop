@@ -1,5 +1,6 @@
 package com.example.coffeeshop.android.screen.login_screen
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -10,8 +11,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.ClickableText
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
+
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -55,13 +57,14 @@ fun LoginScreen(
 
     LaunchedEffect(loginUIState.hasBeenDone){
         if(loginUIState.hasBeenDone){
-            navController.navigate(Screen.MainScreen.route)
+            navController.navigate(Screen.SplashScreen.route)
         }
     }
 
     Box(
         modifier = Modifier
             .fillMaxSize()
+            .background(AppTheme.colors.background)
             .padding(horizontal = 30.dp),
         contentAlignment = Alignment.Center
     ) {
@@ -128,7 +131,7 @@ fun LoginScreen(
                     Spacer(modifier = Modifier.height(10.dp))
                     Text(
                         text = loginUIState.error,
-                        style = MaterialTheme.typography.bodySmall.copy(color = Color.Red)
+                        style = MaterialTheme.typography.caption.copy(color = Color.Red)
                     )
                 }
             }

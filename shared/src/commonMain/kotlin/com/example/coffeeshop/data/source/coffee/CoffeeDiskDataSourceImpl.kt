@@ -35,6 +35,7 @@ class CoffeeDiskDataSourceImpl(
         val coffeeList = getCoffeeCategories()
         coffeeList.add(dataCoffeeCategory)
         val jsonString = Json.encodeToString(CoffeeCategoryModel.serializer(), CoffeeCategoryModel(coffeeList))
+        println("####################################################    " + jsonString)
         jsonStorage.putItemsToStorage(COFFEE_CATEGORY_FILED, jsonString)
     }
 

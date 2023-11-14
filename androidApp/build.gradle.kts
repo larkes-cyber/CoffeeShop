@@ -44,7 +44,7 @@ dependencies {
     implementation(projects.shared)
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.tooling.preview)
-    implementation(libs.compose.material3)
+    implementation("androidx.compose.material:material:1.5.4")
     implementation(libs.androidx.activity.compose)
     debugImplementation(libs.compose.ui.tooling)
     implementation ("androidx.navigation:navigation-compose:2.7.5")

@@ -7,7 +7,6 @@ import com.example.coffeeshop.domain.model.Coffee
 fun Coffee.toDataCoffee():DataCoffee{
     return DataCoffee(
         id = id,
-        photoSrc = photoSrc,
         includeBeans = includeBeans,
         includeMilk = includeMilk,
         categoryId = categoryId,
@@ -23,7 +22,6 @@ fun Coffee.toDataCoffee():DataCoffee{
 fun DataCoffee.toCoffee():Coffee{
     return Coffee(
         id = id,
-        photoSrc = photoSrc,
         includeBeans = includeBeans,
         includeMilk = includeMilk,
         categoryId = categoryId,
@@ -39,7 +37,6 @@ fun DataCoffee.toCoffee():Coffee{
 fun DataCoffee.toCoffeeDto(session:String):CoffeeDto{
     return CoffeeDto(
         id = id,
-        photoSrc = photoSrc,
         includeBeans = includeBeans,
         includeMilk = includeMilk,
         categoryId = categoryId,
@@ -56,7 +53,6 @@ fun DataCoffee.toCoffeeDto(session:String):CoffeeDto{
 fun CoffeeDto.toDataCoffee():DataCoffee{
     return DataCoffee(
         id = id!!,
-        photoSrc = photoSrc,
         includeBeans = includeBeans,
         includeMilk = includeMilk,
         categoryId = categoryId,

@@ -2,9 +2,10 @@ package com.example.coffeeshop.android.component
 
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Text
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Text
+
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -26,9 +27,9 @@ fun AppPrimaryButton(
         onClick()
         },
         modifier = modifier.height(62.dp),
-        colors = ButtonDefaults.buttonColors(containerColor = AppTheme.colors.thirdBackground),
+        colors = ButtonDefaults.buttonColors(backgroundColor = AppTheme.colors.thirdBackground),
         shape = RoundedCornerShape(16.dp),
-        elevation = ButtonDefaults.buttonElevation(0.dp)
+        elevation = ButtonDefaults.elevation(0.dp)
     ) {
         Text(
             text = title,

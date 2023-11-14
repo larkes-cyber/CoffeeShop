@@ -2,7 +2,6 @@ package com.example.coffeeshop.domain.model
 
 data class Coffee(
     val id:String,
-    val photoSrc:String?,
     val includeBeans:Boolean,
     val includeMilk:Boolean,
     val categoryId:String,

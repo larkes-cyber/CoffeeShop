@@ -22,8 +22,14 @@ object Constants {
     const val AUTH_TITLE = "Welcome back!"
     const val AUTH_SUBTITLE = "login in your account"
     const val AUTH_NOT_STATED = 0
-    const val HAS_AUTH = 1
-    const val HASNT_AUTH = 2
+    const val AUTH_SUCCESS = 1
+    const val NOT_AUTH = 2
+    const val HOME_ICON = "home"
+    const val FAVORITE_ICON = "favorite"
+    const val CART_ICON = "cart"
+    const val NOTIFICATIONS_ICON = "notifications"
+    const val WELCOME_TITLE = "Welcome"
+    const val SEARCH_COFFEE_TITLE = "Search coffee"
 
 
 

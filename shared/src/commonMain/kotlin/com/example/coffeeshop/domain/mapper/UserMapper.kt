@@ -8,7 +8,6 @@ import kotlin.math.log
 fun User.toDataUser():DataUser{
     return DataUser(
         name = name,
-        photoSrc = photoSrc,
         number = number,
         favoriteCoffee = null,
         session = null,
@@ -20,7 +19,6 @@ fun User.toDataUser():DataUser{
 fun DataUser.toUser():User{
     return User(
         name = name,
-        photoSrc = photoSrc,
         number = number
     )
 }
@@ -28,19 +26,17 @@ fun DataUser.toUser():User{
 fun UserDto.toDataUser():DataUser{
     return DataUser(
         name = name,
-        photoSrc = photoSrc,
         number = number,
         favoriteCoffee = favoriteCoffee,
         login = login,
         password = password,
-        session = null
+        session = id
     )
 }
 
 fun DataUser.toUserDto():UserDto{
     return UserDto(
         name = name,
-        photoSrc = photoSrc,
         number = number,
         favoriteCoffee = favoriteCoffee ?: "",
         login = login!!,

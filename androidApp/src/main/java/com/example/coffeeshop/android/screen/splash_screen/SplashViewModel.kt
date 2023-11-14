@@ -3,10 +3,9 @@ package com.example.coffeeshop.android.screen.splash_screen
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.coffeeshop.android.untils.Constants.AUTH_NOT_STATED
-import com.example.coffeeshop.android.untils.Constants.HASNT_AUTH
-import com.example.coffeeshop.android.untils.Constants.HAS_AUTH
+import com.example.coffeeshop.android.untils.Constants.NOT_AUTH
+import com.example.coffeeshop.android.untils.Constants.AUTH_SUCCESS
 import com.example.coffeeshop.di.UseCases
-import com.example.coffeeshop.domain.usecase.UseGetUserData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -22,9 +21,17 @@ class SplashViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             val user = UseCases.useGetUserData().execute().data
-            _authUIState.value =  if(user == null) HASNT_AUTH else HAS_AUTH
 
+            if(user != null){
+                UseCases.useSyncCoffeeCategories().execute()
+                UseCases.useSyncCoffee().execute()
+                UseCases.useSyncUserData().execute()
+                UseCases.useSyncOrders().execute()
+            }
+
+            _authUIState.value =  if(user == null) NOT_AUTH else AUTH_SUCCESS
         }
     }
 
 }
+

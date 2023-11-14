@@ -9,6 +9,7 @@ import androidx.navigation.compose.composable
 import com.example.coffeeshop.android.screen.login_screen.LoginScreen
 import com.example.coffeeshop.android.screen.login_screen.LoginViewModel
 import com.example.coffeeshop.android.screen.main_screen.MainScreen
+import com.example.coffeeshop.android.screen.main_screen.MainViewModel
 import com.example.coffeeshop.android.screen.splash_screen.SplashScreen
 import com.example.coffeeshop.android.screen.splash_screen.SplashViewModel
 import com.example.coffeeshop.android.screen.start_screen.StartScreen
@@ -34,7 +35,11 @@ fun Navigation(navController: NavHostController) {
             LoginScreen(navController = navController, viewModel = viewModel)
         }
         composable(Screen.MainScreen.route){
-            MainScreen(navController = navController)
+            val viewModel:MainViewModel = hiltViewModel()
+            MainScreen(
+                navController = navController,
+                viewModel = viewModel
+            )
         }
 
     }

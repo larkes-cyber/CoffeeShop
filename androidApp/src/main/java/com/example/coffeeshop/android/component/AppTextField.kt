@@ -4,11 +4,10 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.relocation.BringIntoViewRequester
 import androidx.compose.foundation.relocation.bringIntoViewRequester
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material.OutlinedTextField
+import androidx.compose.material.Text
+import androidx.compose.material.TextFieldDefaults
+
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -23,7 +22,7 @@ import com.example.coffeeshop.android.theme.sora
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun AppTextField(
     modifier:Modifier = Modifier,
@@ -72,16 +71,19 @@ fun AppTextField(
                     }
                 }
             },
-        colors = TextFieldDefaults.colors(
+        colors = TextFieldDefaults.textFieldColors(
             cursorColor = AppTheme.colors.primaryTitle,
             unfocusedIndicatorColor = AppTheme.colors.primaryTitle,
-            focusedTextColor = AppTheme.colors.primaryTitle,
-            unfocusedContainerColor = Color.Transparent,
-            focusedContainerColor = Color.Transparent,
             focusedIndicatorColor = AppTheme.colors.primaryTitle,
-            unfocusedTextColor = AppTheme.colors.primaryTitle
+            textColor = AppTheme.colors.primaryTitle,
+            backgroundColor = Color.Transparent
         )
     )
 
 
 }
+
+//focusedTextColor = AppTheme.colors.primaryTitle,
+//unfocusedContainerColor = Color.Transparent,
+//focusedContainerColor = Color.Transparent,
+//            unfocusedTextColor = AppTheme.colors.primaryTitle,

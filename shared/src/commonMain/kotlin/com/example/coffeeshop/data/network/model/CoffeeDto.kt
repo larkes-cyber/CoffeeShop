@@ -6,7 +6,6 @@ import kotlinx.serialization.Serializable
 data class CoffeeDto(
     val session:String,
     val id:String? = null,
-    val photoSrc:String? = null,
     val includeBeans:Boolean = false,
     val includeMilk:Boolean = false,
     val categoryId:String,

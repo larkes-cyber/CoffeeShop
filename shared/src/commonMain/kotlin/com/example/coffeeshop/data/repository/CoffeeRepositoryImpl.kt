@@ -8,6 +8,7 @@ import com.example.coffeeshop.domain.mapper.toDataCoffee
 import com.example.coffeeshop.domain.mapper.toDataCoffeeCategory
 import com.example.coffeeshop.domain.repository.CoffeeRepository
 import com.example.coffeeshop.domain.repository.UserRepository
+import com.example.coffeeshop.logInTerminal
 
 class CoffeeRepositoryImpl(
     private val coffeeDiskDataSource: CoffeeDiskDataSource,
@@ -26,6 +27,7 @@ class CoffeeRepositoryImpl(
     }
 
     override suspend fun syncCoffeeCategory() {
+        logInTerminal(userRepository.getUser().toString())
         val session = userRepository.getUser()!!.session
         val coffee = coffeeRemoteDataSource.getAllCoffeeCategory(session!!)
         coffeeDiskDataSource.cleanUpCoffeeCategory()

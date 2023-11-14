@@ -3,11 +3,12 @@ package com.example.coffeeshop.android.component
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.relocation.BringIntoViewRequester
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.OutlinedTextField
+import androidx.compose.material.Text
+import androidx.compose.material.TextFieldDefaults
+
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -66,14 +67,12 @@ fun PasswordTextField(
             },
             modifier = modifier,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-            colors = TextFieldDefaults.colors(
+            colors = TextFieldDefaults.textFieldColors(
                 cursorColor = AppTheme.colors.primaryTitle,
                 unfocusedIndicatorColor = AppTheme.colors.primaryTitle,
-                focusedTextColor = AppTheme.colors.primaryTitle,
-                unfocusedContainerColor = Color.Transparent,
-                focusedContainerColor = Color.Transparent,
                 focusedIndicatorColor = AppTheme.colors.primaryTitle,
-                unfocusedTextColor = AppTheme.colors.primaryTitle
+                textColor = AppTheme.colors.primaryTitle,
+                backgroundColor = Color.Transparent
                 ),
             visualTransformation = if (passwordVisible.value) VisualTransformation.None else PasswordVisualTransformation(),
             trailingIcon = {

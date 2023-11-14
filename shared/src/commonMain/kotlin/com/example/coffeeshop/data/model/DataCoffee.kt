@@ -5,7 +5,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class DataCoffee(
     val id:String,
-    val photoSrc:String?,
     val includeBeans:Boolean,
     val includeMilk:Boolean,
     val categoryId:String,
