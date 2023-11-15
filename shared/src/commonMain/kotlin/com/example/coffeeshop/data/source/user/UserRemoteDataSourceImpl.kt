@@ -56,7 +56,7 @@ class UserRemoteDataSourceImpl(
     override suspend fun authUser(loginDto: LoginDto): UserDto {
         val response:HttpResponse = httpClient.post(POST_AUTH_USER){
             contentType(ContentType.Application.Json)
-            body = loginDto
+            setBody(loginDto)
         }
         return Json.decodeFromString(response.bodyAsText())
     }

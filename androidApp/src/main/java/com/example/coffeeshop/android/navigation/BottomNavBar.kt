@@ -49,6 +49,7 @@ fun BottomNavBar(
         showBottomNavState.value = !((backStackEntryValue == Screen.LoginScreen.route)
                 || (backStackEntryValue == Screen.SplashScreen.route)
                 || (backStackEntryValue == Screen.StartScreen.route)
+                || (backStackEntryValue == Screen.CoffeeDetailScreen.route)
                 )
     }
     if(showBottomNavState.value){

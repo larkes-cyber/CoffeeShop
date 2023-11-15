@@ -18,6 +18,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -51,10 +52,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.net.URL
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun CoffeeCart(
     coffee: Coffee,
-    getCoffeeImage:(String, MutableState<ImageBitmap?>) -> Unit
+    getCoffeeImage:(String, MutableState<ImageBitmap?>) -> Unit,
+    onClick:() -> Unit
 ) {
 
     val image = remember {
@@ -78,7 +81,10 @@ fun CoffeeCart(
 
     Card(
         backgroundColor = AppTheme.colors.thirdSubBackground,
-        shape = RoundedCornerShape(16.dp)
+        shape = RoundedCornerShape(16.dp),
+        onClick = {
+            onClick()
+        }
     ){
         Box(modifier = Modifier.fillMaxWidth()){
             Column(

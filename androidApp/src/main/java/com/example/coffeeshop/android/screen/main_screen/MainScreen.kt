@@ -45,6 +45,7 @@ import com.example.coffeeshop.android.R
 import com.example.coffeeshop.android.component.CategoryItem
 import com.example.coffeeshop.android.component.CoffeeCart
 import com.example.coffeeshop.android.component.SearchBar
+import com.example.coffeeshop.android.navigation.Screen
 import com.example.coffeeshop.android.theme.AppTheme
 import com.example.coffeeshop.android.theme.sora
 import com.example.coffeeshop.android.untils.Constants.WELCOME_TITLE
@@ -177,8 +178,13 @@ fun MainScreen(
                                 ) {
                                     coffeePair.forEach { coffee ->
                                         Box(modifier = Modifier.weight(1f)) {
-                                            CoffeeCart(coffee = coffee){id, state ->
+                                            CoffeeCart(
+                                                coffee = coffee,
+                                                getCoffeeImage = {id, state ->
                                                 viewModel.getCoffeeImage(id, state)
+                                              }
+                                            ){
+                                                navController.navigate(Screen.CoffeeDetailScreen.withArgs(coffee.id))
                                             }
                                         }
                                         if(coffeePair.size == 1){

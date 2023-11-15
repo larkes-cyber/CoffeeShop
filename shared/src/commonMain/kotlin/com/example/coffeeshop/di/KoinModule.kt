@@ -75,7 +75,7 @@ fun initKoin(
 object UseCases:KoinComponent{
     fun useAddCart() = get<UseAddCart>()
     fun useAddFavoriteCoffee() = get<UseAddFavoriteCoffee>()
-    fun useAuthUser() = get<UseEditUser>()
+    fun useAuthUser() = get<UseAuthUser>()
     fun useGetCarts() = get<UseGetCarts>()
     fun useGetCoffeeByCategory() = get<UseGetCoffeeByCategory>()
     fun useGetCoffeeCategories() = get<UseGetCoffeeCategories>()

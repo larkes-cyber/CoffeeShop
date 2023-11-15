@@ -30,7 +30,7 @@ object Constants {
     const val NOTIFICATIONS_ICON = "notifications"
     const val WELCOME_TITLE = "Welcome"
     const val SEARCH_COFFEE_TITLE = "Search coffee"
-
+    const val DETAIL_MAIN_SCREEN_TITLE = "Detail"
 
 
 }

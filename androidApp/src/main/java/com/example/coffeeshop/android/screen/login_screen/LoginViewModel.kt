@@ -3,6 +3,7 @@ package com.example.coffeeshop.android.screen.login_screen
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.coffeeshop.android.untils.Constants.REGISTRATION_MODE
 import com.example.coffeeshop.di.UseCases
 import com.example.coffeeshop.domain.model.User
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -36,19 +37,22 @@ class LoginViewModel @Inject constructor():ViewModel() {
     fun onDone(){
         viewModelScope.launch {
 
-            val res = UseCases.useRegisterUser().execute(
+            val res = if(loginUIState.value.mode == REGISTRATION_MODE) UseCases.useRegisterUser().execute(
                 User(
                     login = loginUIState.value.login,
                     password = loginUIState.value.password,
                     name = loginUIState.value.name
                 )
+            ) else  UseCases.useAuthUser().execute(
+                login = loginUIState.value.login,
+                password = loginUIState.value.password
             )
+
             if(res.message != null){
                 _loginUIState.value = loginUIState.value.copy(error = res.message!!)
             }else{
                 _loginUIState.value = loginUIState.value.copy(hasBeenDone = true)
             }
-
 
         }
     }
