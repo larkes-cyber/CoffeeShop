@@ -23,14 +23,17 @@ import com.example.coffeeshop.android.theme.sora
 @Composable
 fun CategoryItem(
     title:String,
-    isSelected:Boolean
+    isSelected:Boolean,
+    onClick:() -> Unit = {}
 ){
 
     Button(
         shape = RoundedCornerShape(12.dp),
         colors = ButtonDefaults.buttonColors(backgroundColor =  if(isSelected) AppTheme.colors.thirdBackground else AppTheme.colors.thirdSubBackground),
         elevation = ButtonDefaults.elevation(0.dp),
-        onClick = {},
+        onClick = {
+            onClick()
+        },
         contentPadding = PaddingValues(0.dp)
     ) {
         Box(

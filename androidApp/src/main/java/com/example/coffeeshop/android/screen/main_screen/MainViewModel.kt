@@ -50,6 +50,14 @@ class MainViewModel @Inject constructor():ViewModel(){
         }
     }
 
+    fun changeCategory(id:String){
+        viewModelScope.launch {
+            _mainScreenUIState.value = mainScreenUIState.value.copy(selectedCategory = id, isCoffeeLoading = true, coffee = listOf())
+            val coffee = UseCases.useGetCoffeeByCategory().execute(id).data!!
+            _mainScreenUIState.value = mainScreenUIState.value.copy(selectedCategory = id, isCoffeeLoading = false, coffee = coffee)
+        }
+    }
+
     fun prepareCoffeeData(list:List<Coffee>):List<List<Coffee>>{
 
         val pairList = mutableListOf<List<Coffee>>()

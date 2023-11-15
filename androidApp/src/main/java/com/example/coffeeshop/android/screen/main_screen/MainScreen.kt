@@ -148,7 +148,9 @@ fun MainScreen(
                             Spacer(modifier = Modifier.width(30.dp))
                         }
                         itemsIndexed(mainScreenUIState.categories) { index, item ->
-                            CategoryItem(title = item.title, isSelected = mainScreenUIState.selectedCategory == item.id)
+                            CategoryItem(title = item.title, isSelected = mainScreenUIState.selectedCategory == item.id){
+                                viewModel.changeCategory(item.id)
+                            }
                         }
                     }
                 }

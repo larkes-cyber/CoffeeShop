@@ -125,7 +125,7 @@ fun CoffeeCart(coffee: Coffee) {
                             Icon(
                                 imageVector = Icons.Default.Add,
                                 contentDescription = "",
-                                modifier = Modifier.size(10.dp),
+                                modifier = Modifier.size(15.dp),
                                 tint = AppTheme.colors.primaryTitle
                             )
                         }
