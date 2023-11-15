@@ -31,6 +31,7 @@ object Constants {
     const val WELCOME_TITLE = "Welcome"
     const val SEARCH_COFFEE_TITLE = "Search coffee"
     const val DETAIL_MAIN_SCREEN_TITLE = "Detail"
+    const val DETAIL_MAIN_SCREEN_DESCR_TITLE = "Description"
 
 
 }

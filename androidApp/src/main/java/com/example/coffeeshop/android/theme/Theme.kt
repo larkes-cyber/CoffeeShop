@@ -25,7 +25,9 @@ data class Colors(
     val thirdGradientBackground:Color,
     val secondSubtitle:Color,
     val thirdPrimaryTitle:Color,
-    val fourthPrimaryTitle:Color
+    val fourthPrimaryTitle:Color,
+    val fifthPrimaryTitle:Color,
+    val strokeColor:Color
     )
 
 private val DarkColorPalette = Colors(
@@ -46,7 +48,9 @@ private val DarkColorPalette = Colors(
     thirdGradientBackground = Color(0xFF989898),
     secondSubtitle = Color(0xFFB7B7B7),
     thirdPrimaryTitle = Color(0xFFDDDDDD),
-    fourthPrimaryTitle = Color(0xFF2F4B4E)
+    fourthPrimaryTitle = Color(0xFF2F4B4E),
+    fifthPrimaryTitle = Color(0xFF9B9B9B),
+    strokeColor = Color(0xFFEAEAEA)
 
 )
 
@@ -68,7 +72,9 @@ private val LightColorPalette = Colors(
     thirdGradientBackground = Color(0xFF989898),
     secondSubtitle = Color(0xFFB7B7B7),
     thirdPrimaryTitle = Color(0xFFDDDDDD),
-    fourthPrimaryTitle = Color(0xFF2F4B4E)
+    fourthPrimaryTitle = Color(0xFF2F4B4E),
+    fifthPrimaryTitle = Color(0xFF9B9B9B),
+    strokeColor = Color(0xFFEAEAEA)
 )
 
 object AppTheme {
