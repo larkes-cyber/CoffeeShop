@@ -11,5 +11,6 @@ interface CoffeeRepository {
     suspend fun getCoffeeDetail(id:String):DataCoffee
     suspend fun getCoffeeCategories():List<DataCoffeeCategory>
     suspend fun searchForCoffee(symbols:String):List<DataCoffee>
+    suspend fun getCoffeeImage(id:String):ByteArray
 
 }

@@ -57,6 +57,7 @@ fun MainScreen(
 ) {
 
     val mainScreenUIState by viewModel.mainScreenUIState.collectAsState()
+    val searchCoffeeUIState by viewModel.searchCoffeeUIState.collectAsState()
 
     val scrollState = rememberScrollState()
 
@@ -112,20 +113,22 @@ fun MainScreen(
             Spacer(modifier = Modifier.height(28.dp))
             SearchBar(
                 modifier = Modifier.fillMaxWidth(),
-                text = ""
+                text = searchCoffeeUIState.symbols
             ){
-
+                viewModel.searchForCoffee(it)
             }
-            Spacer(modifier = Modifier.height(24.dp))
-            Image(
-                painter = painterResource(id = R.drawable.promote),
-                contentDescription = "",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(140.dp)
-                    .clip(RoundedCornerShape(12.dp)),
-                contentScale = ContentScale.Crop
-            )
+            if(searchCoffeeUIState.searchMode.not()) {
+                Spacer(modifier = Modifier.height(24.dp))
+                Image(
+                    painter = painterResource(id = R.drawable.promote),
+                    contentDescription = "",
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(140.dp)
+                        .clip(RoundedCornerShape(12.dp)),
+                    contentScale = ContentScale.Crop
+                )
+            }
 
         }
 
@@ -134,31 +137,32 @@ fun MainScreen(
                 .fillMaxSize()
                 .background(AppTheme.colors.secondBackground)
         ) {
-            Spacer(modifier = Modifier.height(24.dp))
-            Box(
-                contentAlignment = Alignment.Center
-            ) {
-                if(mainScreenUIState.categories.isNotEmpty()) {
-                    LazyRow(
-                        modifier = Modifier
-                            .height(38.dp),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
-                    ) {
-                        item {
-                            Spacer(modifier = Modifier.width(30.dp))
-                        }
-                        itemsIndexed(mainScreenUIState.categories) { index, item ->
-                            CategoryItem(title = item.title, isSelected = mainScreenUIState.selectedCategory == item.id){
-                                viewModel.changeCategory(item.id)
+            if(searchCoffeeUIState.searchMode.not()) {
+                Spacer(modifier = Modifier.height(24.dp))
+                Box(
+                    contentAlignment = Alignment.Center
+                ) {
+                    if(mainScreenUIState.categories.isNotEmpty()) {
+                        LazyRow(
+                            modifier = Modifier
+                                .height(38.dp),
+                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            item {
+                                Spacer(modifier = Modifier.width(30.dp))
+                            }
+                            itemsIndexed(mainScreenUIState.categories) { index, item ->
+                                CategoryItem(title = item.title, isSelected = mainScreenUIState.selectedCategory == item.id){
+                                    viewModel.changeCategory(item.id)
+                                }
                             }
                         }
                     }
-                }
-                if(mainScreenUIState.isCategoriesLoading){
-                    CircularProgressIndicator()
+                    if(mainScreenUIState.isCategoriesLoading){
+                        CircularProgressIndicator()
+                    }
                 }
             }
-
             Spacer(modifier = Modifier.height(28.dp))
             Box(modifier = Modifier
                 .fillMaxWidth()
@@ -173,7 +177,9 @@ fun MainScreen(
                                 ) {
                                     coffeePair.forEach { coffee ->
                                         Box(modifier = Modifier.weight(1f)) {
-                                            CoffeeCart(coffee = coffee)
+                                            CoffeeCart(coffee = coffee){id, state ->
+                                                viewModel.getCoffeeImage(id, state)
+                                            }
                                         }
                                         if(coffeePair.size == 1){
                                             Box(modifier = Modifier.weight(1f))

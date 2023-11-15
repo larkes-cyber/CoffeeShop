@@ -17,16 +17,19 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.ImageBitmap
@@ -49,10 +52,17 @@ import kotlinx.coroutines.launch
 import java.net.URL
 
 @Composable
-fun CoffeeCart(coffee: Coffee) {
+fun CoffeeCart(
+    coffee: Coffee,
+    getCoffeeImage:(String, MutableState<ImageBitmap?>) -> Unit
+) {
 
     val image = remember {
         mutableStateOf<ImageBitmap?>(null)
+    }
+    
+    LaunchedEffect(Unit){
+        getCoffeeImage(coffee.id, image)
     }
 
     val coroutine = CoroutineScope(Dispatchers.IO)
@@ -87,6 +97,15 @@ fun CoffeeCart(coffee: Coffee) {
                             .clip(RoundedCornerShape(16.dp)),
                         contentScale = ContentScale.Crop
                     )
+                }else{
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(132.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        CircularProgressIndicator()
+                    }
                 }
                 Spacer(modifier = Modifier.height(12.dp))
                 Column(modifier = Modifier.padding(horizontal = 5.dp)) {

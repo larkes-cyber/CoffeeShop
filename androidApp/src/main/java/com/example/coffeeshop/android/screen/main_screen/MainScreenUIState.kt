@@ -8,6 +8,5 @@ data class MainScreenUIState(
     val isCoffeeLoading:Boolean = false,
     val categories:List<CoffeeCategory> = listOf(),
     val coffee:List<Coffee> = listOf(),
-    val searchMode:Boolean = false,
     val selectedCategory:String = ""
 )

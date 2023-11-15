@@ -8,6 +8,7 @@ import com.example.coffeeshop.domain.usecase.UseGetCarts
 import com.example.coffeeshop.domain.usecase.UseGetCoffeeByCategory
 import com.example.coffeeshop.domain.usecase.UseGetCoffeeCategories
 import com.example.coffeeshop.domain.usecase.UseGetCoffeeDetailById
+import com.example.coffeeshop.domain.usecase.UseGetCoffeeImage
 import com.example.coffeeshop.domain.usecase.UseGetFavoriteCoffee
 import com.example.coffeeshop.domain.usecase.UseGetOrders
 import com.example.coffeeshop.domain.usecase.UseGetUserData
@@ -45,5 +46,6 @@ fun domainModule() = module {
     single { UseGetOrders(get()) }
     single { UseGetUserData(get()) }
     single { UseGetUserData(get()) }
+    single { UseGetCoffeeImage(get()) }
 
 }

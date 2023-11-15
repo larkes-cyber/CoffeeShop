@@ -1,5 +1,10 @@
 package com.example.coffeeshop.android.screen.main_screen
 
+import android.graphics.BitmapFactory
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.State
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.coffeeshop.di.UseCases
@@ -17,6 +22,8 @@ class MainViewModel @Inject constructor():ViewModel(){
     private val _mainScreenUIState = MutableStateFlow(MainScreenUIState())
     val mainScreenUIState:StateFlow<MainScreenUIState> = _mainScreenUIState
 
+    private val _searchCoffeeUIState = MutableStateFlow(SearchCoffeeUIState())
+    val searchCoffeeUIState:StateFlow<SearchCoffeeUIState> = _searchCoffeeUIState
 
     init {
         syncCoffee()
@@ -55,6 +62,25 @@ class MainViewModel @Inject constructor():ViewModel(){
             _mainScreenUIState.value = mainScreenUIState.value.copy(selectedCategory = id, isCoffeeLoading = true, coffee = listOf())
             val coffee = UseCases.useGetCoffeeByCategory().execute(id).data!!
             _mainScreenUIState.value = mainScreenUIState.value.copy(selectedCategory = id, isCoffeeLoading = false, coffee = coffee)
+        }
+    }
+
+    fun getCoffeeImage(id:String, imageState:MutableState<ImageBitmap?>){
+        viewModelScope.launch {
+            val bytes = UseCases.useGetCoffeeImage().execute(id).data
+            val bmp = BitmapFactory.decodeByteArray(bytes, 0 , bytes!!.size)
+            imageState.value = bmp.asImageBitmap()
+        }
+    }
+
+    fun searchForCoffee(symbols:String){
+        viewModelScope.launch {
+            _searchCoffeeUIState.value = SearchCoffeeUIState(symbols = symbols, searchMode = symbols.isNotEmpty())
+            val coffee = UseCases.useSearchForCoffee().execute(symbols).data!!
+            _mainScreenUIState.value = mainScreenUIState.value.copy(coffee = coffee)
+            if(symbols.isEmpty()){
+                loadCoffee().join()
+            }
         }
     }
 

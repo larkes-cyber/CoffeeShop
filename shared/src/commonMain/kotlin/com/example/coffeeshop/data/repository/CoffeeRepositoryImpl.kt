@@ -57,4 +57,8 @@ class CoffeeRepositoryImpl(
                     ||  it.description.contains(symbols, ignoreCase = true)
         }
     }
+
+    override suspend fun getCoffeeImage(id: String): ByteArray {
+        return coffeeRemoteDataSource.getCoffeeImage(id)
+    }
 }

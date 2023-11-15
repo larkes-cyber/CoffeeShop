@@ -3,16 +3,15 @@ package com.example.coffeeshop.data.source.coffee
 import com.example.coffeeshop.data.network.model.CategoryDto
 import com.example.coffeeshop.data.network.model.CategoryListDto
 import com.example.coffeeshop.data.network.model.CoffeeDto
-import com.example.coffeeshop.data.network.model.CoffeeListDto
 import com.example.coffeeshop.data.source.coffee.CoffeeRemoteDataSource.Companion.POST_GET_COFFEE
 import com.example.coffeeshop.data.source.coffee.CoffeeRemoteDataSource.Companion.POST_GET_COFFEE_CATEGORY
 import com.example.coffeeshop.logInTerminal
+import com.example.coffeeshop.untils.Constants.COFFEE_PHOTOS_URL
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
-import io.ktor.client.request.parameter
 import io.ktor.client.request.post
 import io.ktor.client.statement.bodyAsText
-import io.ktor.client.statement.readText
+import io.ktor.client.statement.readBytes
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 
@@ -47,5 +46,10 @@ class CoffeeRemoteDataSourceImpl(
             logInTerminal(it.title)
         }
         return category.categoryList
+    }
+
+    override suspend fun getCoffeeImage(id: String): ByteArray {
+        val response = httpClient.get(COFFEE_PHOTOS_URL + id)
+        return response.readBytes()
     }
 }
