@@ -7,5 +7,6 @@ data class CoffeeDetailUIState(
     val isLoading:Boolean = false,
     val coffee:Coffee? = null,
     val error:String = "",
-    val image:ImageBitmap? = null
+    val image:ImageBitmap? = null,
+    val selectedCoffeeSize:Int = 1
 )

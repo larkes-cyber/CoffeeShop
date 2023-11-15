@@ -32,6 +32,14 @@ object Constants {
     const val SEARCH_COFFEE_TITLE = "Search coffee"
     const val DETAIL_MAIN_SCREEN_TITLE = "Detail"
     const val DETAIL_MAIN_SCREEN_DESCR_TITLE = "Description"
+    const val READ_MORE_TITLE = "Read More"
+    const val HIDE_TITLE = "Hide"
+    const val SIZE_TITLE = "Size"
+    const val SMALL_COFFEE_SIZE = "S"
+    const val MEDIUM_COFFEE_SIZE = "M"
+    const val LARGE_COFFEE_SIZE = "L"
+    const val PRICE_TITLE = "price"
+    const val BUY_NOW_TITLE = "Buy Now"
 
 
 }

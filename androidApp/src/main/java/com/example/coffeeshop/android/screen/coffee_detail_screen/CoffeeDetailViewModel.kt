@@ -42,6 +42,9 @@ class CoffeeDetailViewModel @Inject constructor(
         }
     }
 
+    fun switchCoffeeSize(index:Int){
+        _coffeeDetailUIState.value = coffeeDetailUIState.value.copy(selectedCoffeeSize = index)
+    }
 
 
 }
