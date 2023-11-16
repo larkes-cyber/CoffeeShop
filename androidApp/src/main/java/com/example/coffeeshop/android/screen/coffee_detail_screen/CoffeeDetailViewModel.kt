@@ -29,7 +29,8 @@ class CoffeeDetailViewModel @Inject constructor(
             _coffeeDetailUIState.value = CoffeeDetailUIState(isLoading = true)
             val id = savedStateHandle.get<String>("id")
             val coffee = UseCases.useGetCoffeeDetailById().execute(id!!).data
-            _coffeeDetailUIState.value = coffeeDetailUIState.value.copy(coffee = coffee, isLoading = false)
+            val checkFavoriteCoffee = UseCases.useCheckFavoriteCoffee().execute(id)
+            _coffeeDetailUIState.value = coffeeDetailUIState.value.copy(coffee = coffee, isLoading = false, coffeeIsFavorite = checkFavoriteCoffee)
         }
     }
 
@@ -46,10 +47,15 @@ class CoffeeDetailViewModel @Inject constructor(
         _coffeeDetailUIState.value = coffeeDetailUIState.value.copy(selectedCoffeeSize = index)
     }
 
-    fun makeCoffeeFavorite(){
+    fun switchCoffeeFavorite(){
         viewModelScope.launch {
-            UseCases.useAddFavoriteCoffee().execute(coffeeDetailUIState.value.coffee!!.id)
-            _coffeeDetailUIState.value = coffeeDetailUIState.value.copy(coffeeIsFavorite = true)
+            if(coffeeDetailUIState.value.coffeeIsFavorite){
+                UseCases.useRemoveFavoriteCoffee().execute(coffeeDetailUIState.value.coffee!!.id)
+            }else{
+                UseCases.useAddFavoriteCoffee().execute(coffeeDetailUIState.value.coffee!!.id)
+            }
+
+            _coffeeDetailUIState.value = coffeeDetailUIState.value.copy(coffeeIsFavorite = !coffeeDetailUIState.value.coffeeIsFavorite)
         }
     }
 

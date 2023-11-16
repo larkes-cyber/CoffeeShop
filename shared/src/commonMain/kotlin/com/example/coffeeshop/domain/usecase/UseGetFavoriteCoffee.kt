@@ -16,14 +16,12 @@ class UseGetFavoriteCoffee(
 
     suspend fun execute(): Resource<List<Coffee>> {
         return try {
-//            val favoriteCoffee = userRepository.getFavoriteCoffee()
-//            logInTerminal(favoriteCoffee.toString())
             val favoriteCoffee = userRepository.getFavoriteCoffee().map {id ->
                 coffeeRepository.getCoffeeDetail(id).toCoffee()
             }
             Resource.Success(favoriteCoffee)
         }catch (e:Exception){
-            Resource.Error(e.message!!)
+            Resource.Error(e.message.toString())
         }
     }
 

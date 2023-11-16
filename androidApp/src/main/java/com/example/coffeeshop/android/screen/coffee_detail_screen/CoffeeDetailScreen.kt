@@ -104,7 +104,7 @@ fun CoffeeDetailScreen(
                     color = AppTheme.colors.secondPrimaryTitle
                 )
                 IconButton(onClick = {
-                    viewModel.makeCoffeeFavorite()
+                    viewModel.switchCoffeeFavorite()
                 }) {
                     Icon(
                         imageVector = if(coffeeDetailUIState.coffeeIsFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,

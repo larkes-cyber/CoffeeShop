@@ -49,6 +49,7 @@ class UserRepositoryImpl(
         coffeeList.remove(id)
         user.favoriteCoffee = coffeeList.joinToString(";")
         userDiskDataSource.putUserData(user)
+        userRemoteDataSource.removeFavoriteCoffee( FavoriteCoffeeDto(session = user.session!!, coffeeId =  id))
     }
 
     override suspend fun getUser(): DataUser? = userDiskDataSource.getUserData()

@@ -28,6 +28,7 @@ import com.example.coffeeshop.domain.repository.UserRepository
 import com.example.coffeeshop.domain.usecase.UseAddCart
 import com.example.coffeeshop.domain.usecase.UseAddFavoriteCoffee
 import com.example.coffeeshop.domain.usecase.UseAuthUser
+import com.example.coffeeshop.domain.usecase.UseCheckFavoriteCoffee
 import com.example.coffeeshop.domain.usecase.UseEditUser
 import com.example.coffeeshop.domain.usecase.UseGetCarts
 import com.example.coffeeshop.domain.usecase.UseGetCoffeeByCategory
@@ -93,5 +94,6 @@ object UseCases:KoinComponent{
     fun useUploadUserPhoto() = get<UseUploadUserPhoto>()
     fun useGetUserData() = get<UseGetUserData>()
     fun useGetCoffeeImage() = get<UseGetCoffeeImage>()
+    fun useCheckFavoriteCoffee() = get<UseCheckFavoriteCoffee>()
 
 }

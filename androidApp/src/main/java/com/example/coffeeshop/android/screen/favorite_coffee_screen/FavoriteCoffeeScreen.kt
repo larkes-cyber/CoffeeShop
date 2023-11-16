@@ -1,5 +1,6 @@
 package com.example.coffeeshop.android.screen.favorite_coffee_screen
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,6 +13,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -34,6 +36,13 @@ fun FavoriteCoffeeScreen(
 ) {
 
     val favoriteCoffeeUIState by viewModel.favoriteCoffeeUIState.collectAsState()
+    val searchCoffeeUIState by viewModel.searchCoffeeUIState.collectAsState()
+
+    LaunchedEffect(Unit){
+        viewModel.getFavoriteCoffee()
+    }
+
+    Log.d("sadasdasdsdsdsadasd", favoriteCoffeeUIState.coffee.toString())
 
     Column(
         modifier = Modifier
@@ -47,7 +56,6 @@ fun FavoriteCoffeeScreen(
                     colors = listOf(
                         AppTheme.colors.secondGradientBackground,
                         AppTheme.colors.firstGradientBackground
-
                     )
                 )
             )
@@ -67,19 +75,24 @@ fun FavoriteCoffeeScreen(
                 )
                 Spacer(modifier = Modifier.height(40.dp))
                 SearchBar(
-                    text = "",
+                    text = searchCoffeeUIState.symbols,
                     modifier = Modifier.fillMaxWidth()
                 ){
+                    viewModel.onSearchText(it)
                 }
             }
         }
         Spacer(modifier = Modifier.height(19.dp))
         LazyColumn(
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 15.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 15.dp)
         ){
             itemsIndexed(favoriteCoffeeUIState.coffee){index, item ->
                 FavoriteCoffeeItem(
-                    modifier = Modifier.height(90.dp).fillMaxWidth(),
+                    modifier = Modifier
+                        .height(90.dp)
+                        .fillMaxWidth(),
                     coffee = item,
                     getCoffeeImage = {id, state ->
                         viewModel.getCoffeeImage(id, state)
@@ -88,6 +101,9 @@ fun FavoriteCoffeeScreen(
                     navController.navigate(Screen.CoffeeDetailScreen.withArgs(item.id))
                 }
                 Spacer(modifier = Modifier.height(10.dp))
+            }
+            item { 
+                Spacer(modifier = Modifier.height(100.dp))
             }
         }
     }

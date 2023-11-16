@@ -1,6 +1,7 @@
 package com.example.coffeeshop.android.screen.favorite_coffee_screen
 
 import android.graphics.BitmapFactory
+import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
@@ -16,15 +17,36 @@ import javax.inject.Inject
 @HiltViewModel
 class FavoriteCoffeeViewModel @Inject constructor():ViewModel() {
 
+
     private val _favoriteCoffeeUIState = MutableStateFlow(FavoriteCoffeeUIState())
     val favoriteCoffeeUIState:StateFlow<FavoriteCoffeeUIState> = _favoriteCoffeeUIState
 
-    init {
+    private val _searchCoffeeUIState = MutableStateFlow(SearchCoffeeUIState())
+    val searchCoffeeUIState:StateFlow<SearchCoffeeUIState> = _searchCoffeeUIState
+
+    fun getFavoriteCoffee(){
         viewModelScope.launch {
             _favoriteCoffeeUIState.value = FavoriteCoffeeUIState(isLoading = true)
-            val coffee = UseCases.useGetFavoriteCoffee().execute().data!!
-            _favoriteCoffeeUIState.value = FavoriteCoffeeUIState(coffee = coffee)
+            val coffee = UseCases.useGetFavoriteCoffee().execute().data ?: listOf()
+            _favoriteCoffeeUIState.value = FavoriteCoffeeUIState(coffee = coffee, savedCoffee = coffee)
         }
+    }
+
+    fun onSearchText(symbols:String){
+
+        _searchCoffeeUIState.value = SearchCoffeeUIState(searchMode = symbols.isNotEmpty(), symbols = symbols)
+
+        val filteredCoffee = favoriteCoffeeUIState.value.savedCoffee.filter {
+
+            it.categoryTitle.contains(symbols, ignoreCase = true) || it.subtitle.contains(symbols, ignoreCase = true)
+        }
+
+        _favoriteCoffeeUIState.value = favoriteCoffeeUIState.value.copy(coffee = filteredCoffee)
+
+        if(favoriteCoffeeUIState.value.savedCoffee.isEmpty()){
+            _favoriteCoffeeUIState.value = favoriteCoffeeUIState.value.copy(coffee = filteredCoffee)
+        }
+
     }
 
     fun getCoffeeImage(id:String, imageState: MutableState<ImageBitmap?>){
