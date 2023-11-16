@@ -50,6 +50,8 @@ import com.example.coffeeshop.android.theme.AppTheme
 import com.example.coffeeshop.android.theme.sora
 import com.example.coffeeshop.android.untils.Constants.WELCOME_TITLE
 import com.example.coffeeshop.di.UseCases
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 
 @Composable
 fun MainScreen(
@@ -62,146 +64,156 @@ fun MainScreen(
 
     val scrollState = rememberScrollState()
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(scrollState)
-    ) {
-        Column(
-            Modifier
-                .fillMaxWidth()
-                .background(
-                    brush = Brush.horizontalGradient(
-                        colors = listOf(
-                            AppTheme.colors.secondGradientBackground,
-                            AppTheme.colors.firstGradientBackground
-
-                        )
-                    )
-                )
-                .padding(horizontal = 30.dp)
-                .padding(vertical = 20.dp)
-        ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ){
-                Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                    Text(
-                        text = WELCOME_TITLE,
-                        fontFamily = sora,
-                        fontWeight = FontWeight.Normal,
-                        fontSize = 12.sp,
-                        color = AppTheme.colors.secondSubtitle
-                    )
-                    Text(
-                        text = "Lora Roberts",
-                        fontFamily = sora,
-                        fontWeight = FontWeight.SemiBold,
-                        fontSize = 14.sp,
-                        color = AppTheme.colors.thirdPrimaryTitle
-                    )
-                }
-                Image(
-                    painter = painterResource(id =R.drawable.ton_bird),
-                    contentDescription = "",
-                    modifier = Modifier
-                        .size(44.dp)
-                        .clip(RoundedCornerShape(14.dp)),
-                    contentScale = ContentScale.Crop
-                )
-            }
-            Spacer(modifier = Modifier.height(28.dp))
-            SearchBar(
-                modifier = Modifier.fillMaxWidth(),
-                text = searchCoffeeUIState.symbols
-            ){
-                viewModel.searchForCoffee(it)
-            }
-            if(searchCoffeeUIState.searchMode.not()) {
-                Spacer(modifier = Modifier.height(24.dp))
-                Image(
-                    painter = painterResource(id = R.drawable.promote),
-                    contentDescription = "",
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(140.dp)
-                        .clip(RoundedCornerShape(12.dp)),
-                    contentScale = ContentScale.Crop
-                )
-            }
-
+    SwipeRefresh(
+        state = rememberSwipeRefreshState(isRefreshing = mainScreenUIState.isCategoriesLoading || mainScreenUIState.isCoffeeLoading),
+        onRefresh = {
+            viewModel.syncCoffee()
         }
-
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(AppTheme.colors.secondBackground)
+                .verticalScroll(scrollState)
         ) {
-            if(searchCoffeeUIState.searchMode.not()) {
-                Spacer(modifier = Modifier.height(24.dp))
-                Box(
-                    contentAlignment = Alignment.Center
-                ) {
-                    if(mainScreenUIState.categories.isNotEmpty()) {
-                        LazyRow(
-                            modifier = Modifier
-                                .height(38.dp),
-                            horizontalArrangement = Arrangement.spacedBy(8.dp)
-                        ) {
-                            item {
-                                Spacer(modifier = Modifier.width(30.dp))
-                            }
-                            itemsIndexed(mainScreenUIState.categories) { index, item ->
-                                CategoryItem(title = item.title, isSelected = mainScreenUIState.selectedCategory == item.id){
-                                    viewModel.changeCategory(item.id)
-                                }
-                            }
-                        }
+            Column(
+                Modifier
+                    .fillMaxWidth()
+                    .background(
+                        brush = Brush.horizontalGradient(
+                            colors = listOf(
+                                AppTheme.colors.secondGradientBackground,
+                                AppTheme.colors.firstGradientBackground
+
+                            )
+                        )
+                    )
+                    .padding(horizontal = 30.dp)
+                    .padding(vertical = 20.dp)
+            ) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ){
+                    Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                        Text(
+                            text = WELCOME_TITLE,
+                            fontFamily = sora,
+                            fontWeight = FontWeight.Normal,
+                            fontSize = 12.sp,
+                            color = AppTheme.colors.secondSubtitle
+                        )
+                        Text(
+                            text = "Lora Roberts",
+                            fontFamily = sora,
+                            fontWeight = FontWeight.SemiBold,
+                            fontSize = 14.sp,
+                            color = AppTheme.colors.thirdPrimaryTitle
+                        )
                     }
-                    if(mainScreenUIState.isCategoriesLoading){
-                        CircularProgressIndicator()
-                    }
+                    Image(
+                        painter = painterResource(id =R.drawable.ton_bird),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .size(44.dp)
+                            .clip(RoundedCornerShape(14.dp)),
+                        contentScale = ContentScale.Crop
+                    )
                 }
+                Spacer(modifier = Modifier.height(28.dp))
+                SearchBar(
+                    modifier = Modifier.fillMaxWidth(),
+                    text = searchCoffeeUIState.symbols
+                ){
+                    viewModel.searchForCoffee(it)
+                }
+                if(searchCoffeeUIState.searchMode.not()) {
+                    Spacer(modifier = Modifier.height(24.dp))
+                    Image(
+                        painter = painterResource(id = R.drawable.promote),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(140.dp)
+                            .clip(RoundedCornerShape(12.dp)),
+                        contentScale = ContentScale.Crop
+                    )
+                }
+
             }
-            Spacer(modifier = Modifier.height(28.dp))
-            Box(modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 10.dp), contentAlignment = Alignment.Center) {
-                if(mainScreenUIState.coffee.isNotEmpty()) {
-                    Column(modifier = Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                        viewModel.prepareCoffeeData(mainScreenUIState.coffee)
-                            .forEach { coffeePair ->
-                                Row(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    horizontalArrangement = Arrangement.spacedBy(10.dp)
-                                ) {
-                                    coffeePair.forEach { coffee ->
-                                        Box(modifier = Modifier.weight(1f)) {
-                                            CoffeeCart(
-                                                coffee = coffee,
-                                                getCoffeeImage = {id, state ->
-                                                viewModel.getCoffeeImage(id, state)
-                                              }
-                                            ){
-                                                navController.navigate(Screen.CoffeeDetailScreen.withArgs(coffee.id))
-                                            }
-                                        }
-                                        if(coffeePair.size == 1){
-                                            Box(modifier = Modifier.weight(1f))
-                                        }
+
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(AppTheme.colors.secondBackground)
+            ) {
+                if(searchCoffeeUIState.searchMode.not()) {
+                    Spacer(modifier = Modifier.height(24.dp))
+                    Box(
+                        contentAlignment = Alignment.Center
+                    ) {
+                        if(mainScreenUIState.categories.isNotEmpty()) {
+                            LazyRow(
+                                modifier = Modifier
+                                    .height(38.dp),
+                                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                item {
+                                    Spacer(modifier = Modifier.width(30.dp))
+                                }
+                                itemsIndexed(mainScreenUIState.categories) { index, item ->
+                                    CategoryItem(title = item.title, isSelected = mainScreenUIState.selectedCategory == item.id){
+                                        viewModel.changeCategory(item.id)
                                     }
                                 }
                             }
+                        }
+                        if(mainScreenUIState.isCategoriesLoading){
+                            Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                                CircularProgressIndicator()
+                            }
+                        }
                     }
                 }
-                if(mainScreenUIState.isCoffeeLoading){
-                    CircularProgressIndicator()
+                Spacer(modifier = Modifier.height(28.dp))
+                Box(modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 10.dp), contentAlignment = Alignment.Center) {
+                    if(mainScreenUIState.coffee.isNotEmpty()) {
+                        Column(modifier = Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                            viewModel.prepareCoffeeData(mainScreenUIState.coffee)
+                                .forEach { coffeePair ->
+                                    Row(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        horizontalArrangement = Arrangement.spacedBy(10.dp)
+                                    ) {
+                                        coffeePair.forEach { coffee ->
+                                            Box(modifier = Modifier.weight(1f)) {
+                                                CoffeeCart(
+                                                    coffee = coffee,
+                                                    getCoffeeImage = {id, state ->
+                                                        viewModel.getCoffeeImage(id, state)
+                                                    }
+                                                ){
+                                                    navController.navigate(Screen.CoffeeDetailScreen.withArgs(coffee.id))
+                                                }
+                                            }
+                                            if(coffeePair.size == 1){
+                                                Box(modifier = Modifier.weight(1f))
+                                            }
+                                        }
+                                    }
+                                }
+                        }
+                    }
+                    if(mainScreenUIState.isCoffeeLoading){
+                        CircularProgressIndicator()
+                    }
                 }
+                Spacer(modifier = Modifier.height(150.dp))
             }
-            Spacer(modifier = Modifier.height(150.dp))
         }
     }
+
 
 
 }

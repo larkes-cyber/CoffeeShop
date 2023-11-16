@@ -36,7 +36,7 @@ class CoffeeDetailViewModel @Inject constructor(
     private fun pullCoffeeImage(){
         viewModelScope.launch {
             val id = savedStateHandle.get<String>("id")!!
-            val image = UseCases.useGetCoffeeImage().execute(id).data!!
+            val image = UseCases.useGetCoffeeImage().execute(id).data ?: return@launch
             val bmp = BitmapFactory.decodeByteArray(image, 0, image.size).asImageBitmap()
             _coffeeDetailUIState.value = coffeeDetailUIState.value.copy(image = bmp)
         }

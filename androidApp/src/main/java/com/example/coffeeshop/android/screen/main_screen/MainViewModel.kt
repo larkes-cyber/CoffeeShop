@@ -26,12 +26,18 @@ class MainViewModel @Inject constructor():ViewModel(){
     val searchCoffeeUIState:StateFlow<SearchCoffeeUIState> = _searchCoffeeUIState
 
     init {
-        syncCoffee()
+        viewModelScope.launch {
+            loadCategories().join()
+            loadCoffee().join()
+        }
     }
-
     fun syncCoffee(){
         viewModelScope.launch {
-           loadCategories().join()
+            _mainScreenUIState.value = mainScreenUIState.value.copy(isCoffeeLoading = true, categories = listOf())
+            _mainScreenUIState.value = mainScreenUIState.value.copy(isCategoriesLoading = true, coffee = listOf())
+            UseCases.useSyncCoffee().execute()
+            UseCases.useSyncCoffeeCategories().execute()
+            loadCategories().join()
             loadCoffee().join()
         }
     }
@@ -67,8 +73,8 @@ class MainViewModel @Inject constructor():ViewModel(){
 
     fun getCoffeeImage(id:String, imageState:MutableState<ImageBitmap?>){
         viewModelScope.launch {
-            val bytes = UseCases.useGetCoffeeImage().execute(id).data
-            val bmp = BitmapFactory.decodeByteArray(bytes, 0 , bytes!!.size)
+            val bytes = UseCases.useGetCoffeeImage().execute(id).data ?: return@launch
+            val bmp = BitmapFactory.decodeByteArray(bytes, 0 , bytes.size)
             imageState.value = bmp.asImageBitmap()
         }
     }

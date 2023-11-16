@@ -125,9 +125,9 @@ fun CoffeeDetailScreen(
                         .clip(RoundedCornerShape(16.dp)),
                     contentAlignment = Alignment.Center
                 ) {
-                    if(coffeeDetailUIState.isLoading){
+                    if(coffeeDetailUIState.image == null){
                         CircularProgressIndicator()
-                    }else if(coffeeDetailUIState.image != null){
+                    }else {
                         Image(
                             coffeeDetailUIState.image!!,
                             contentDescription = "",

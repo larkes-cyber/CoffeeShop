@@ -68,16 +68,6 @@ fun CoffeeCart(
         getCoffeeImage(coffee.id, image)
     }
 
-    val coroutine = CoroutineScope(Dispatchers.IO)
-
-    LaunchedEffect(Unit){
-        coroutine.launch {
-            val img = URL(COFFEE_PHOTOS_URL+coffee.id).readBytes()
-            val bmp = BitmapFactory.decodeByteArray(img, 0, img.size)
-            image.value = bmp.asImageBitmap()
-
-        }
-    }
 
     Card(
         backgroundColor = AppTheme.colors.thirdSubBackground,
