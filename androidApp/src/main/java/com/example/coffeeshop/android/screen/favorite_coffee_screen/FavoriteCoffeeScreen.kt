@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.coffeeshop.android.component.FavoriteCoffeeItem
 import com.example.coffeeshop.android.component.SearchBar
+import com.example.coffeeshop.android.navigation.Screen
 import com.example.coffeeshop.android.theme.AppTheme
 import com.example.coffeeshop.android.theme.sora
 import com.example.coffeeshop.android.untils.Constants.FAVORITE_COFFEE_TITLE
@@ -74,15 +75,18 @@ fun FavoriteCoffeeScreen(
         }
         Spacer(modifier = Modifier.height(19.dp))
         LazyColumn(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 15.dp)
         ){
             itemsIndexed(favoriteCoffeeUIState.coffee){index, item ->
                 FavoriteCoffeeItem(
+                    modifier = Modifier.height(90.dp).fillMaxWidth(),
                     coffee = item,
                     getCoffeeImage = {id, state ->
                         viewModel.getCoffeeImage(id, state)
                     }
-                )
+                ){
+                    navController.navigate(Screen.CoffeeDetailScreen.withArgs(item.id))
+                }
                 Spacer(modifier = Modifier.height(10.dp))
             }
         }

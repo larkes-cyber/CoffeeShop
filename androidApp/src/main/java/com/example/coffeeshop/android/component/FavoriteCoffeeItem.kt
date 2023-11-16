@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -26,20 +27,25 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.coffeeshop.android.theme.AppTheme
 import com.example.coffeeshop.android.theme.sora
 import com.example.coffeeshop.domain.model.Coffee
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun FavoriteCoffeeItem(
     modifier: Modifier = Modifier,
     coffee: Coffee,
-    getCoffeeImage:(String, MutableState<ImageBitmap?>) -> Unit
+    getCoffeeImage:(String, MutableState<ImageBitmap?>) -> Unit,
+    onClick:() -> Unit
     ) {
 
     val image = remember {
@@ -53,13 +59,17 @@ fun FavoriteCoffeeItem(
     Card(
         modifier = modifier,
         shape = RoundedCornerShape(16.dp),
-        backgroundColor = AppTheme.colors.thirdSubBackground
+        backgroundColor = AppTheme.colors.thirdSubBackground,
+        onClick = {
+            onClick()
+        }
         ) {
         Box(modifier = Modifier.fillMaxSize()) {
             Row(modifier = Modifier
                 .fillMaxSize()
                 .padding(top = 8.dp, start = 7.dp, bottom = 7.dp, end = 17.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.Bottom
             ) {
                 Row {
                     Box(
@@ -72,7 +82,8 @@ fun FavoriteCoffeeItem(
                             Image(
                                 image.value!!,
                                 contentDescription = "",
-                                modifier = Modifier.fillMaxSize()
+                                modifier = Modifier.fillMaxSize().clip(RoundedCornerShape(16.dp)),
+                                contentScale = ContentScale.Crop
                             )
                         }else{
                             CircularProgressIndicator()
@@ -80,7 +91,8 @@ fun FavoriteCoffeeItem(
                     }
                     Spacer(modifier = Modifier.width(8.dp))
                     Column(
-                        verticalArrangement = Arrangement.SpaceBetween
+                        verticalArrangement = Arrangement.SpaceBetween,
+                        modifier = Modifier.fillMaxHeight()
                     ) {
                         Column {
                             Text(
@@ -99,12 +111,15 @@ fun FavoriteCoffeeItem(
                                 fontWeight = FontWeight.Normal
                             )
                         }
-                        Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(4.dp),
+                            verticalAlignment = Alignment.Bottom
+                        ) {
                             Icon(
                                 imageVector = Icons.Default.Favorite,
                                 contentDescription = "",
                                 tint = Color.Red,
-                                modifier = Modifier.size(12.dp)
+                                modifier = Modifier.size(16.dp)
                             )
                             Text(
                                 text = "$${coffee.price}",
