@@ -57,17 +57,17 @@ class MainActivity : ComponentActivity() {
                                 BottomNavItem(
                                     icon = R.drawable.heart,
                                     name = FAVORITE_ICON,
-                                    route = Screen.MainScreen.route
+                                    route = Screen.FavoriteCoffeeScreen.route
                                 ),
                                 BottomNavItem(
                                     icon = R.drawable.cart,
                                     name = CART_ICON,
-                                    route = Screen.MainScreen.route
+                                    route = Screen.CartScreen.route
                                 ),
                                 BottomNavItem(
                                     icon = R.drawable.notification,
                                     name = NOTIFICATIONS_ICON,
-                                    route = Screen.MainScreen.route
+                                    route = Screen.OrdersScreen.route
                                 ),
                             ),
                             navController = navController

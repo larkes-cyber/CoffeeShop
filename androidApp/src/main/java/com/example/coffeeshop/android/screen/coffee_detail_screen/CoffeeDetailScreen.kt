@@ -22,6 +22,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.Star
@@ -102,11 +103,13 @@ fun CoffeeDetailScreen(
                     fontWeight = FontWeight.SemiBold,
                     color = AppTheme.colors.secondPrimaryTitle
                 )
-                IconButton(onClick = {  }) {
+                IconButton(onClick = {
+                    viewModel.makeCoffeeFavorite()
+                }) {
                     Icon(
-                        imageVector = Icons.Default.FavoriteBorder,
+                        imageVector = if(coffeeDetailUIState.coffeeIsFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
                         contentDescription = "",
-                        tint = AppTheme.colors.secondPrimaryTitle,
+                        tint = if(coffeeDetailUIState.coffeeIsFavorite) Color.Red else AppTheme.colors.secondPrimaryTitle,
                         modifier = Modifier.size(28.dp)
                     )
                 }

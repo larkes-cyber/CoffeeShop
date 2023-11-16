@@ -10,6 +10,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.example.coffeeshop.android.screen.coffee_detail_screen.CoffeeDetailScreen
 import com.example.coffeeshop.android.screen.coffee_detail_screen.CoffeeDetailViewModel
+import com.example.coffeeshop.android.screen.favorite_coffee_screen.FavoriteCoffeeScreen
+import com.example.coffeeshop.android.screen.favorite_coffee_screen.FavoriteCoffeeViewModel
 import com.example.coffeeshop.android.screen.login_screen.LoginScreen
 import com.example.coffeeshop.android.screen.login_screen.LoginViewModel
 import com.example.coffeeshop.android.screen.main_screen.MainScreen
@@ -57,6 +59,18 @@ fun Navigation(navController: NavHostController) {
             val id = entry.arguments!!.getString("id")!!
             val viewModel:CoffeeDetailViewModel = hiltViewModel()
             CoffeeDetailScreen(navController = navController, viewModel = viewModel, id = id)
+        }
+
+        composable(Screen.FavoriteCoffeeScreen.route){
+            val viewModel:FavoriteCoffeeViewModel = hiltViewModel()
+            FavoriteCoffeeScreen(navController = navController, viewModel = viewModel)
+        }
+        composable(Screen.OrdersScreen.route){
+
+        }
+
+        composable(Screen.CartScreen.route){
+
         }
 
     }

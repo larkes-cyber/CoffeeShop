@@ -8,5 +8,6 @@ data class CoffeeDetailUIState(
     val coffee:Coffee? = null,
     val error:String = "",
     val image:ImageBitmap? = null,
-    val selectedCoffeeSize:Int = 1
+    val selectedCoffeeSize:Int = 1,
+    val coffeeIsFavorite:Boolean = false
 )

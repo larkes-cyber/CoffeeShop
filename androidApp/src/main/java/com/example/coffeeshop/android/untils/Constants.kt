@@ -40,6 +40,7 @@ object Constants {
     const val LARGE_COFFEE_SIZE = "L"
     const val PRICE_TITLE = "price"
     const val BUY_NOW_TITLE = "Buy Now"
+    const val FAVORITE_COFFEE_TITLE = "Favorite coffee"
 
 
 }

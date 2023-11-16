@@ -15,6 +15,7 @@ import com.example.coffeeshop.data.source.user.UserRemoteDataSource.Companion.PO
 import com.example.coffeeshop.data.source.user.UserRemoteDataSource.Companion.POST_REGISTER_USER
 import com.example.coffeeshop.data.source.user.UserRemoteDataSource.Companion.POST_REMOVE_USER_INFO
 import com.example.coffeeshop.data.source.user.UserRemoteDataSource.Companion.POST_UPLOAD_PHOTO
+import com.example.coffeeshop.logInTerminal
 import io.ktor.client.HttpClient
 import io.ktor.client.request.forms.MultiPartFormDataContent
 import io.ktor.client.request.forms.formData
@@ -73,7 +74,7 @@ class UserRemoteDataSourceImpl(
     override suspend fun addFavoriteCoffee(coffeeDto: FavoriteCoffeeDto) {
         httpClient.post(POST_ADD_FAVORITE_COFFEE){
             contentType(ContentType.Application.Json)
-            body = coffeeDto
+            setBody(coffeeDto)
         }
     }
 
@@ -82,8 +83,9 @@ class UserRemoteDataSourceImpl(
     override suspend fun getUserInfo(session: String): UserDto {
         val response:HttpResponse = httpClient.post(POST_GET_USER_INFO){
             contentType(ContentType.Application.Json)
-            body = SessionDto(session)
+            setBody(SessionDto(session))
         }
+        logInTerminal(response.bodyAsText())
         return Json.decodeFromString(response.bodyAsText())
     }
 
@@ -91,7 +93,7 @@ class UserRemoteDataSourceImpl(
     override suspend fun removeFavoriteCoffee(favoriteCoffeeDto: FavoriteCoffeeDto) {
         httpClient.post(POST_REMOVE_USER_INFO){
             contentType(ContentType.Application.Json)
-            body = favoriteCoffeeDto
+            setBody(favoriteCoffeeDto)
         }
     }
 

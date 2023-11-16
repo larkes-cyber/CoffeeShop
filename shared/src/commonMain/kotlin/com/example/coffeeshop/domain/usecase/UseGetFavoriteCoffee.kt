@@ -6,6 +6,7 @@ import com.example.coffeeshop.domain.model.Coffee
 import com.example.coffeeshop.domain.model.CoffeeCategory
 import com.example.coffeeshop.domain.repository.CoffeeRepository
 import com.example.coffeeshop.domain.repository.UserRepository
+import com.example.coffeeshop.logInTerminal
 import com.example.coffeeshop.untils.Resource
 
 class UseGetFavoriteCoffee(
@@ -15,6 +16,8 @@ class UseGetFavoriteCoffee(
 
     suspend fun execute(): Resource<List<Coffee>> {
         return try {
+//            val favoriteCoffee = userRepository.getFavoriteCoffee()
+//            logInTerminal(favoriteCoffee.toString())
             val favoriteCoffee = userRepository.getFavoriteCoffee().map {id ->
                 coffeeRepository.getCoffeeDetail(id).toCoffee()
             }

@@ -129,20 +129,8 @@ fun CoffeeCart(
                             fontFamily = sora,
                             fontWeight = FontWeight.SemiBold
                         )
-                        Button(
-                            onClick = { },
-                            modifier = Modifier.size(32.dp),
-                            shape = RoundedCornerShape(10.dp),
-                            colors = ButtonDefaults.buttonColors(backgroundColor = AppTheme.colors.thirdBackground),
-                            elevation = ButtonDefaults.elevation(0.dp),
-                            contentPadding = PaddingValues(0.dp)
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.Add,
-                                contentDescription = "",
-                                modifier = Modifier.size(15.dp),
-                                tint = AppTheme.colors.primaryTitle
-                            )
+                        AddCartBtn{
+
                         }
                     }
                 }

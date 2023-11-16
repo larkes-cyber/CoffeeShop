@@ -6,6 +6,9 @@ sealed class Screen(val route:String) {
     object SplashScreen:Screen("splash_screen")
     object MainScreen:Screen("main_screen")
     object CoffeeDetailScreen:Screen("coffee_detail_screen")
+    object FavoriteCoffeeScreen:Screen("favorite_coffee_screen")
+    object CartScreen:Screen("cart_screen")
+    object OrdersScreen:Screen("orders_screen")
     fun withArgs(vararg args: String):String{
         return buildString {
             append(route)

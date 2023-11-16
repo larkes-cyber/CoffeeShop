@@ -46,5 +46,14 @@ class CoffeeDetailViewModel @Inject constructor(
         _coffeeDetailUIState.value = coffeeDetailUIState.value.copy(selectedCoffeeSize = index)
     }
 
+    fun makeCoffeeFavorite(){
+        viewModelScope.launch {
+            UseCases.useAddFavoriteCoffee().execute(coffeeDetailUIState.value.coffee!!.id)
+            _coffeeDetailUIState.value = coffeeDetailUIState.value.copy(coffeeIsFavorite = true)
+        }
+    }
+
+
+
 
 }
