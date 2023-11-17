@@ -10,13 +10,24 @@ val ktorVersion = "2.0.0"
 val koin_version= "3.3.3"
 
 
+
 kotlin {
+
     androidTarget {
         compilations.all {
             kotlinOptions {
                 jvmTarget = "1.8"
             }
         }
+
+    }
+    
+    targets.filterIsInstance<org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget>().forEach{
+        it.binaries.filterIsInstance<org.jetbrains.kotlin.gradle.plugin.mpp.Framework>()
+            .forEach { lib ->
+                lib.isStatic = false
+                lib.linkerOpts.add("-lsqlite3")
+            }
     }
     
     listOf(
@@ -31,6 +42,7 @@ kotlin {
     }
 
     sourceSets {
+
         commonMain.dependencies {
                 implementation("com.squareup.sqldelight:runtime:$sqlDelightVersion")
                 implementation("io.insert-koin:koin-core:$koin_version")
@@ -57,14 +69,19 @@ kotlin {
                 implementation ("io.ktor:ktor-client-ios:$ktorVersion")
 
         }
+
     }
+
 }
+
 
 sqldelight{
     database("CartDatabase"){
         packageName = "com.example.coffeeshop.database"
         sourceFolders = listOf("sqldelight")
+        linkSqlite = true
     }
+
 }
 
 android {

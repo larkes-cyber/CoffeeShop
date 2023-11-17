@@ -14,7 +14,7 @@ import kotlinx.serialization.json.Json
 actual class BusinessModule(private val context: Context) {
     actual fun init() {
         initKoin(
-            database = CartDatabase(AndroidSqliteDriver(CartDatabase.Schema, context, "card.db")),
+            database = CartDatabase(AndroidSqliteDriver(CartDatabase.Schema, context, "cart.db")),
             httpClient = getHttpClient()
         )
     }

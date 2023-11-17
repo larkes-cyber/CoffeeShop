@@ -12,7 +12,7 @@ import kotlinx.serialization.json.Json
 
 actual class BusinessModule {
 
-    private val driver by lazy {  NativeSqliteDriver(CartDatabase.Schema, "cart.db") }
+    private val driver by lazy {  NativeSqliteDriver(CartDatabase.Schema, "card.db") }
     actual fun init(){
         initKoin(
             database = CartDatabase(driver),

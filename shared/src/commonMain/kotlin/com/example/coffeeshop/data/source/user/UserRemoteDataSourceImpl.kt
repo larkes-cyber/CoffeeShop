@@ -40,7 +40,6 @@ import kotlinx.serialization.json.Json.Default.decodeFromString
 class UserRemoteDataSourceImpl(
     private val httpClient: HttpClient
 ):UserRemoteDataSource {
-    @OptIn(InternalAPI::class)
     override suspend fun registerUser(userDto: UserDto): UserDto {
         val response:HttpResponse = httpClient.post(POST_REGISTER_USER){
             contentType(ContentType.Application.Json)
@@ -53,24 +52,22 @@ class UserRemoteDataSourceImpl(
     }
 
 
-    @OptIn(InternalAPI::class)
     override suspend fun authUser(loginDto: LoginDto): UserDto {
         val response:HttpResponse = httpClient.post(POST_AUTH_USER){
             contentType(ContentType.Application.Json)
             setBody(loginDto)
         }
+        logInTerminal(response.bodyAsText())
         return Json.decodeFromString(response.bodyAsText())
     }
 
-    @OptIn(InternalAPI::class)
     override suspend fun editUser(userDto: UserDto) {
         httpClient.post(POST_EDIT_USER){
             contentType(ContentType.Application.Json)
-            body = userDto
+            setBody(userDto)
         }
     }
 
-    @OptIn(InternalAPI::class)
     override suspend fun addFavoriteCoffee(coffeeDto: FavoriteCoffeeDto) {
         httpClient.post(POST_ADD_FAVORITE_COFFEE){
             contentType(ContentType.Application.Json)
@@ -79,7 +76,6 @@ class UserRemoteDataSourceImpl(
     }
 
 
-    @OptIn(InternalAPI::class)
     override suspend fun getUserInfo(session: String): UserDto {
         val response:HttpResponse = httpClient.post(POST_GET_USER_INFO){
             contentType(ContentType.Application.Json)
@@ -89,7 +85,6 @@ class UserRemoteDataSourceImpl(
         return Json.decodeFromString(response.bodyAsText())
     }
 
-    @OptIn(InternalAPI::class)
     override suspend fun removeFavoriteCoffee(favoriteCoffeeDto: FavoriteCoffeeDto) {
         httpClient.post(POST_REMOVE_USER_INFO){
             contentType(ContentType.Application.Json)
