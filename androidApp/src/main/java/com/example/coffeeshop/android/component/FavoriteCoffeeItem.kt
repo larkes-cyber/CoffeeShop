@@ -58,7 +58,9 @@ fun FavoriteCoffeeItem(
         mutableStateOf<ImageBitmap?>(null)
     }
 
-    var switcher by mutableStateOf(coffee.isInCart)
+    var switcher by remember {
+        mutableStateOf(true)
+    }
 
 
 
@@ -144,7 +146,7 @@ fun FavoriteCoffeeItem(
                     }
                 }
                 IncCartBtn(if(switcher) R.drawable.add else R.drawable.minus){
-                    onIncBtnClick(!switcher)
+                    onIncBtnClick(switcher)
                     switcher = switcher.not()
                 }
             }

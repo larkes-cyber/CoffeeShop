@@ -13,7 +13,7 @@ class UseGetCoffeeByCategory(
 
     suspend fun execute(categoryId:String): Resource<List<Coffee>> {
         return try {
-            Resource.Success(coffeeRepository.getCoffeeByCategory(categoryId).map { it.toCoffee(cartRepository.getCoffeeCartAmount(it.id) == 0) })
+            Resource.Success(coffeeRepository.getCoffeeByCategory(categoryId).map { it.toCoffee() })
         }catch (e:Exception){
             Resource.Error(e.message!!)
         }

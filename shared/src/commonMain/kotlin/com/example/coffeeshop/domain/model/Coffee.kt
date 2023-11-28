@@ -10,6 +10,5 @@ data class Coffee(
     val description:String,
     val totalScore:Float,
     val scoreCount:Int,
-    val price:Float,
-    val isInCart:Boolean
+    val price:Float
 )

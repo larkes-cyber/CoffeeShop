@@ -15,7 +15,7 @@ class UseSearchForCoffee(
 
     suspend fun execute(symbols:String): Resource<List<Coffee>> {
         return try {
-            Resource.Success(coffeeRepository.searchForCoffee(symbols).map { it.toCoffee(cartRepository.getCoffeeCartAmount(it.id) != 0) })
+            Resource.Success(coffeeRepository.searchForCoffee(symbols).map { it.toCoffee() })
         }catch (e:Exception){
             Resource.Error(e.message!!)
         }

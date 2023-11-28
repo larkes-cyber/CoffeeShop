@@ -15,7 +15,7 @@ class UseGetCoffeeDetailById(
 
     suspend fun execute(id:String): Resource<Coffee> {
         return try {
-            Resource.Success(coffeeRepository.getCoffeeDetail(id).toCoffee(cartRepository.getCoffeeCartAmount(id) == 0))
+            Resource.Success(coffeeRepository.getCoffeeDetail(id).toCoffee())
         }catch (e:Exception){
             Resource.Error(e.message!!)
         }

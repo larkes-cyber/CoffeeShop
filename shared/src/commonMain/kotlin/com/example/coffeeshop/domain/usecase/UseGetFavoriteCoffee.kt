@@ -19,7 +19,7 @@ class UseGetFavoriteCoffee(
     suspend fun execute(): Resource<List<Coffee>> {
         return try {
             val favoriteCoffee = userRepository.getFavoriteCoffee().map {id ->
-                coffeeRepository.getCoffeeDetail(id).toCoffee(cartRepository.getCoffeeCartAmount(id) == 0)
+                coffeeRepository.getCoffeeDetail(id).toCoffee()
             }
             Resource.Success(favoriteCoffee)
         }catch (e:Exception){

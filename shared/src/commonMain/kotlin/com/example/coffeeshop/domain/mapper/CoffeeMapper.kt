@@ -19,7 +19,7 @@ fun Coffee.toDataCoffee():DataCoffee{
     )
 }
 
-fun DataCoffee.toCoffee(isInCart:Boolean):Coffee{
+fun DataCoffee.toCoffee():Coffee{
     return Coffee(
         id = id,
         includeBeans = includeBeans,
@@ -30,8 +30,7 @@ fun DataCoffee.toCoffee(isInCart:Boolean):Coffee{
         description = description,
         totalScore = totalScore,
         scoreCount = scoreCount,
-        price = price,
-        isInCart = isInCart
+        price = price
     )
 }
 

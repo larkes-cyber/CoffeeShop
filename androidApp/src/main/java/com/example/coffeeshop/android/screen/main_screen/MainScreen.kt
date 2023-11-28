@@ -14,11 +14,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.itemsIndexed
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -62,7 +64,6 @@ fun MainScreen(
     val mainScreenUIState by viewModel.mainScreenUIState.collectAsState()
     val searchCoffeeUIState by viewModel.searchCoffeeUIState.collectAsState()
 
-    val scrollState = rememberScrollState()
 
     LaunchedEffect(Unit){
         viewModel.loadCategories().join()
@@ -75,153 +76,158 @@ fun MainScreen(
             viewModel.syncCoffee()
         }
     ) {
-        Column(
+        LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .verticalScroll(scrollState)
+                .background(AppTheme.colors.secondBackground)
         ) {
-            Column(
-                Modifier
-                    .fillMaxWidth()
-                    .background(
-                        brush = Brush.horizontalGradient(
-                            colors = listOf(
-                                AppTheme.colors.secondGradientBackground,
-                                AppTheme.colors.firstGradientBackground
+            item{
+                Column(
+                    Modifier
+                        .fillMaxWidth()
+                        .background(
+                            brush = Brush.horizontalGradient(
+                                colors = listOf(
+                                    AppTheme.colors.secondGradientBackground,
+                                    AppTheme.colors.firstGradientBackground
 
+                                )
                             )
                         )
-                    )
-                    .padding(horizontal = 30.dp)
-                    .padding(vertical = 20.dp)
-            ) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ){
-                    Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                        Text(
-                            text = WELCOME_TITLE,
-                            fontFamily = sora,
-                            fontWeight = FontWeight.Normal,
-                            fontSize = 12.sp,
-                            color = AppTheme.colors.secondSubtitle
-                        )
-                        Text(
-                            text = "Lora Roberts",
-                            fontFamily = sora,
-                            fontWeight = FontWeight.SemiBold,
-                            fontSize = 14.sp,
-                            color = AppTheme.colors.thirdPrimaryTitle
+                        .padding(horizontal = 30.dp)
+                        .padding(vertical = 20.dp)
+                ) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ){
+                        Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                            Text(
+                                text = WELCOME_TITLE,
+                                fontFamily = sora,
+                                fontWeight = FontWeight.Normal,
+                                fontSize = 12.sp,
+                                color = AppTheme.colors.secondSubtitle
+                            )
+                            Text(
+                                text = "Lora Roberts",
+                                fontFamily = sora,
+                                fontWeight = FontWeight.SemiBold,
+                                fontSize = 14.sp,
+                                color = AppTheme.colors.thirdPrimaryTitle
+                            )
+                        }
+                        Image(
+                            painter = painterResource(id =R.drawable.ton_bird),
+                            contentDescription = "",
+                            modifier = Modifier
+                                .size(44.dp)
+                                .clip(RoundedCornerShape(14.dp)),
+                            contentScale = ContentScale.Crop
                         )
                     }
-                    Image(
-                        painter = painterResource(id =R.drawable.ton_bird),
-                        contentDescription = "",
-                        modifier = Modifier
-                            .size(44.dp)
-                            .clip(RoundedCornerShape(14.dp)),
-                        contentScale = ContentScale.Crop
-                    )
-                }
-                Spacer(modifier = Modifier.height(28.dp))
-                SearchBar(
-                    modifier = Modifier.fillMaxWidth(),
-                    text = searchCoffeeUIState.symbols
-                ){
-                    viewModel.searchForCoffee(it)
-                }
-                if(searchCoffeeUIState.searchMode.not()) {
-                    Spacer(modifier = Modifier.height(24.dp))
-                    Image(
-                        painter = painterResource(id = R.drawable.promote),
-                        contentDescription = "",
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(140.dp)
-                            .clip(RoundedCornerShape(12.dp)),
-                        contentScale = ContentScale.Crop
-                    )
-                }
+                    Spacer(modifier = Modifier.height(28.dp))
+                    SearchBar(
+                        modifier = Modifier.fillMaxWidth(),
+                        text = searchCoffeeUIState.symbols
+                    ){
+                        viewModel.searchForCoffee(it)
+                    }
+                    if(searchCoffeeUIState.searchMode.not()) {
+                        Spacer(modifier = Modifier.height(24.dp))
+                        Image(
+                            painter = painterResource(id = R.drawable.promote),
+                            contentDescription = "",
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(140.dp)
+                                .clip(RoundedCornerShape(12.dp)),
+                            contentScale = ContentScale.Crop
+                        )
+                    }
 
+                }
             }
 
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(AppTheme.colors.secondBackground)
-            ) {
-                if(searchCoffeeUIState.searchMode.not()) {
-                    Spacer(modifier = Modifier.height(24.dp))
-                    Box(
-                        contentAlignment = Alignment.Center
-                    ) {
-                        if(mainScreenUIState.categories.isNotEmpty()) {
-                            LazyRow(
-                                modifier = Modifier
-                                    .height(38.dp),
-                                horizontalArrangement = Arrangement.spacedBy(8.dp)
-                            ) {
-                                item {
-                                    Spacer(modifier = Modifier.width(30.dp))
-                                }
-                                itemsIndexed(mainScreenUIState.categories) { index, item ->
-                                    CategoryItem(title = item.title, isSelected = mainScreenUIState.selectedCategory == item.id){
-                                        viewModel.changeCategory(item.id)
+            item {
+                Column(
+                    modifier = Modifier
+                        .background(AppTheme.colors.secondBackground)
+                ) {
+                    if (searchCoffeeUIState.searchMode.not()) {
+                        Spacer(modifier = Modifier.height(24.dp))
+                        Box(
+                            contentAlignment = Alignment.Center
+                        ) {
+                            if (mainScreenUIState.categories.isNotEmpty()) {
+                                LazyRow(
+                                    modifier = Modifier
+                                        .height(38.dp),
+                                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                                ) {
+                                    item {
+                                        Spacer(modifier = Modifier.width(30.dp))
                                     }
-                                }
-                            }
-                        }
-                        if(mainScreenUIState.isCategoriesLoading){
-                            Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-                                CircularProgressIndicator()
-                            }
-                        }
-                    }
-                }
-                Spacer(modifier = Modifier.height(28.dp))
-                Box(modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 10.dp), contentAlignment = Alignment.Center) {
-                    if(mainScreenUIState.coffee.isNotEmpty()) {
-                        Column(modifier = Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                            viewModel.prepareCoffeeData(mainScreenUIState.coffee)
-                                .forEach { coffeePair ->
-                                    Row(
-                                        modifier = Modifier.fillMaxWidth(),
-                                        horizontalArrangement = Arrangement.spacedBy(10.dp)
-                                    ) {
-                                        coffeePair.forEach { coffee ->
-                                            Box(modifier = Modifier.weight(1f)) {
-                                                CoffeeCart(
-                                                    coffee = coffee,
-                                                    getCoffeeImage = {id, state ->
-                                                        viewModel.getCoffeeImage(id, state)
-                                                    },
-                                                    onIncBtnClick = {
-                                                        viewModel.addToCart(id = coffee.id, addCart = it)
-                                                    }
-                                                ){
-                                                    navController.navigate(Screen.CoffeeDetailScreen.withArgs(coffee.id))
-                                                }
-                                            }
-                                            if(coffeePair.size == 1){
-                                                Box(modifier = Modifier.weight(1f))
-                                            }
+                                    itemsIndexed(mainScreenUIState.categories) { index, item ->
+                                        CategoryItem(
+                                            title = item.title,
+                                            isSelected = mainScreenUIState.selectedCategory == item.id
+                                        ) {
+                                            viewModel.changeCategory(item.id)
                                         }
                                     }
                                 }
+                            }
+                            if (mainScreenUIState.isCategoriesLoading) {
+                                Box(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    CircularProgressIndicator()
+                                }
+                            }
                         }
                     }
-                    if(mainScreenUIState.isCoffeeLoading){
-                        CircularProgressIndicator()
+                    Spacer(modifier = Modifier.height(28.dp))
+                }
+            }
+
+            items(viewModel.prepareCoffeeData(mainScreenUIState.coffee),{it.first().id}){coffeePair ->
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 8.dp),
+                    horizontalArrangement = Arrangement.spacedBy(10.dp)
+                ) {
+                    coffeePair.forEach { coffee ->
+                        Box(modifier = Modifier.weight(1f)) {
+                            CoffeeCart(
+                                coffee = coffee,
+                                getCoffeeImage = {id, state ->
+                                    viewModel.getCoffeeImage(id, state)
+                                },
+                                onIncBtnClick = {
+                                    viewModel.addToCart(id = coffee.id, addCart = it)
+                                }
+                            ){
+                                navController.navigate(Screen.CoffeeDetailScreen.withArgs(coffee.id))
+                            }
+                        }
+                        if(coffeePair.size == 1){
+                            Box(modifier = Modifier.weight(1f))
+                        }
                     }
                 }
-                Spacer(modifier = Modifier.height(150.dp))
+                Spacer(modifier = Modifier.height(8.dp))
+            }
+            item {
+                if(mainScreenUIState.isCoffeeLoading){
+                    CircularProgressIndicator()
+                }
+            }
+            item{
+                Spacer(modifier = Modifier.height(90.dp))
             }
         }
     }
-
-
-
 }

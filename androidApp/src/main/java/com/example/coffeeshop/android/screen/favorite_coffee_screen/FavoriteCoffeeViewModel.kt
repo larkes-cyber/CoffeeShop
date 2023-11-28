@@ -51,14 +51,10 @@ class FavoriteCoffeeViewModel @Inject constructor():ViewModel() {
 
     fun onAddCartChange(id:String, addCart:Boolean){
         viewModelScope.launch {
-            if(!addCart){
-                UseCases.useAddCart().execute(CartItem(
-                    productId = id,
-                    amount = 1
-                ))
-            }else{
-                UseCases.useDeleteCart().execute(id)
-            }
+            UseCases.useAddCart().execute(CartItem(
+                productId = id,
+                amount = if(addCart) 1 else -1
+            ))
         }
     }
 

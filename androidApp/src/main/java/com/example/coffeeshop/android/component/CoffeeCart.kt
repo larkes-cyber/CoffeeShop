@@ -18,6 +18,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -50,13 +51,15 @@ fun CoffeeCart(
     val image = remember {
         mutableStateOf<ImageBitmap?>(null)
     }
-    
+
+    val switcher = remember {
+        mutableStateOf(true)
+    }
+
     LaunchedEffect(Unit){
         getCoffeeImage(coffee.id, image)
     }
 
-
-    var switcher by mutableStateOf(coffee.isInCart)
 
 
 
@@ -120,9 +123,9 @@ fun CoffeeCart(
                             fontFamily = sora,
                             fontWeight = FontWeight.SemiBold
                         )
-                        IncCartBtn(if(switcher) R.drawable.add else R.drawable.minus){
-                            onIncBtnClick(!switcher)
-                            switcher = switcher.not()
+                        IncCartBtn(if(switcher.value) R.drawable.add else R.drawable.minus){
+                            onIncBtnClick(switcher.value)
+                            switcher.value = switcher.value.not()
                         }
 
                     }
