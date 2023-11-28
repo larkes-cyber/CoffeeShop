@@ -50,6 +50,7 @@ fun BottomNavBar(
                 || (backStackEntryValue == Screen.SplashScreen.route)
                 || (backStackEntryValue == Screen.StartScreen.route)
                 || (backStackEntryValue == Screen.CoffeeDetailScreen.route)
+                || (backStackEntryValue == Screen.CartScreen.route)
                 )
     }
     if(showBottomNavState.value){

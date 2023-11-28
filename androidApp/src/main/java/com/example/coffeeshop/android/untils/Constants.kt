@@ -41,6 +41,18 @@ object Constants {
     const val PRICE_TITLE = "price"
     const val BUY_NOW_TITLE = "Buy Now"
     const val FAVORITE_COFFEE_TITLE = "Favorite coffee"
+    const val YOUR_ORDER_TITLE = "Your Order"
+    const val DELIVERY_ADDRESS_TITLE = "Delivery address"
+    const val ADD_ADDRESS_TITLE_BTN = "Add Address"
+    const val ADD_NOTE_TITLE_BTN = "Add Note"
+    const val PAYMENT_SUMMARY_TITLE = "Payment Summary"
+    const val PAYMENT_SUMMARY_SUBTITLE_PRICE = "Price"
+    const val PAYMENT_SUMMARY_SUBTITLE_DELIVERY_FEE = "Delivery Fee"
+    const val PAYMENT_SUMMARY_SUBTITLE_TOTAL_PAYMENT = "Total Payment"
+    const val ORDER_BTN_TITLE = "Order"
+    const val DELIVERY_FEE = 2.3f
+    const val DONT_HAVE_ANY_ORDERS = "You don't have any orders"
+
 
 
 }

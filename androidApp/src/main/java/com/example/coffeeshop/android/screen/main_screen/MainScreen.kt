@@ -64,6 +64,11 @@ fun MainScreen(
 
     val scrollState = rememberScrollState()
 
+    LaunchedEffect(Unit){
+        viewModel.loadCategories().join()
+        viewModel.loadCoffee().join()
+    }
+
     SwipeRefresh(
         state = rememberSwipeRefreshState(isRefreshing = mainScreenUIState.isCategoriesLoading || mainScreenUIState.isCoffeeLoading),
         onRefresh = {
@@ -192,6 +197,9 @@ fun MainScreen(
                                                     coffee = coffee,
                                                     getCoffeeImage = {id, state ->
                                                         viewModel.getCoffeeImage(id, state)
+                                                    },
+                                                    onIncBtnClick = {
+                                                        viewModel.addToCart(id = coffee.id, addCart = it)
                                                     }
                                                 ){
                                                     navController.navigate(Screen.CoffeeDetailScreen.withArgs(coffee.id))

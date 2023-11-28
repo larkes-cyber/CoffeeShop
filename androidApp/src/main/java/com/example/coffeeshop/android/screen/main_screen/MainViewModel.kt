@@ -8,6 +8,7 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.coffeeshop.di.UseCases
+import com.example.coffeeshop.domain.model.CartItem
 import com.example.coffeeshop.domain.model.Coffee
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
@@ -25,12 +26,6 @@ class MainViewModel @Inject constructor():ViewModel(){
     private val _searchCoffeeUIState = MutableStateFlow(SearchCoffeeUIState())
     val searchCoffeeUIState:StateFlow<SearchCoffeeUIState> = _searchCoffeeUIState
 
-    init {
-        viewModelScope.launch {
-            loadCategories().join()
-            loadCoffee().join()
-        }
-    }
     fun syncCoffee(){
         viewModelScope.launch {
             _mainScreenUIState.value = mainScreenUIState.value.copy(isCoffeeLoading = true, categories = listOf())
@@ -41,7 +36,7 @@ class MainViewModel @Inject constructor():ViewModel(){
             loadCoffee().join()
         }
     }
-    private fun loadCategories(): Job {
+    fun loadCategories(): Job {
         return viewModelScope.launch {
             _mainScreenUIState.value = mainScreenUIState.value.copy(isCategoriesLoading = true)
             val categories = UseCases.useGetCoffeeCategories().execute().data!!
@@ -52,7 +47,7 @@ class MainViewModel @Inject constructor():ViewModel(){
             )
         }
     }
-    private suspend fun loadCoffee(): Job{
+    fun loadCoffee(): Job{
         return viewModelScope.launch {
             _mainScreenUIState.value = mainScreenUIState.value.copy(isCoffeeLoading = true)
             val coffee = UseCases.useGetCoffeeByCategory().execute(mainScreenUIState.value.selectedCategory).data!!
@@ -89,6 +84,20 @@ class MainViewModel @Inject constructor():ViewModel(){
             }
         }
     }
+
+    fun addToCart(id:String, addCart:Boolean){
+        viewModelScope.launch {
+            if(!addCart){
+                UseCases.useAddCart().execute(CartItem(
+                    productId = id,
+                    amount = 1
+                ))
+            }else{
+                UseCases.useDeleteCart().execute(id)
+            }
+        }
+    }
+
 
     fun prepareCoffeeData(list:List<Coffee>):List<List<Coffee>>{
 

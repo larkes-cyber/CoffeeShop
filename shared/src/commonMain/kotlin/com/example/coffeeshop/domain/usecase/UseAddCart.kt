@@ -7,14 +7,20 @@ import com.example.coffeeshop.domain.repository.CartRepository
 import com.example.coffeeshop.untils.Resource
 
 class UseAddCart(
-    private val cartRepository: CartRepository
+    private val cartRepository: CartRepository,
+    private val useChangeCartAmount: UseChangeCartAmount
 ) {
     suspend fun execute(cart:CartItem):Resource<String>{
-       return try {
-           cartRepository.addCart(cart.toDataCartItem())
-           Resource.Success("success")
+        try {
+            val coffee = cartRepository.getCarts().find { it.productId == cart.productId }
+            if(coffee != null){
+                useChangeCartAmount.execute(cart.productId, cart.amount)
+                return Resource.Success("success")
+            }
+            cartRepository.addCart(cart.toDataCartItem())
+            return Resource.Success("success")
         }catch (e:Exception){
-            Resource.Error(e.message!!)
+            return Resource.Error(e.message!!)
         }
     }
 }

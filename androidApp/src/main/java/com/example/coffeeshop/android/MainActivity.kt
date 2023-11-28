@@ -3,6 +3,7 @@ package com.example.coffeeshop.android
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -31,11 +32,19 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    private val viewmodel: MainActivityViewModel by viewModels()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
 
-            BusinessModule(this).init()
+            val context = LocalContext.current
+
+            LaunchedEffect(Unit){
+                viewmodel.initKoin(context)
+            }
 
             val navController = rememberNavController()
 
@@ -63,12 +72,7 @@ class MainActivity : ComponentActivity() {
                                     icon = R.drawable.cart,
                                     name = CART_ICON,
                                     route = Screen.CartScreen.route
-                                ),
-                                BottomNavItem(
-                                    icon = R.drawable.notification,
-                                    name = NOTIFICATIONS_ICON,
-                                    route = Screen.OrdersScreen.route
-                                ),
+                                )
                             ),
                             navController = navController
                         ){

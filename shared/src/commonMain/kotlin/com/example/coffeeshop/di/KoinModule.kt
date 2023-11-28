@@ -2,34 +2,11 @@ package com.example.coffeeshop.di
 
 import com.example.coffeeshop.data.json_storage.JsonStorage
 import com.example.coffeeshop.data.json_storage.JsonStorageImpl
-import com.example.coffeeshop.data.repository.CartRepositoryImpl
-import com.example.coffeeshop.data.repository.CoffeeRepositoryImpl
-import com.example.coffeeshop.data.repository.OrderRepositoryImpl
-import com.example.coffeeshop.data.repository.UserRepositoryImpl
-import com.example.coffeeshop.data.source.cart.CartDiskDataSource
-import com.example.coffeeshop.data.source.cart.CartDiskDataSourceImpl
-import com.example.coffeeshop.data.source.coffee.CoffeeDiskDataSource
-import com.example.coffeeshop.data.source.coffee.CoffeeDiskDataSourceImpl
-import com.example.coffeeshop.data.source.coffee.CoffeeRemoteDataSource
-import com.example.coffeeshop.data.source.coffee.CoffeeRemoteDataSourceImpl
-import com.example.coffeeshop.data.source.order.OrderDiskDataSource
-import com.example.coffeeshop.data.source.order.OrderDiskDataSourceImpl
-import com.example.coffeeshop.data.source.order.OrderRemoteDataSource
-import com.example.coffeeshop.data.source.order.OrderRemoteDataSourceImpl
-import com.example.coffeeshop.data.source.user.UserDiskDataSource
-import com.example.coffeeshop.data.source.user.UserDiskDataSourceImpl
-import com.example.coffeeshop.data.source.user.UserRemoteDataSource
-import com.example.coffeeshop.data.source.user.UserRemoteDataSourceImpl
 import com.example.coffeeshop.database.CartDatabase
-import com.example.coffeeshop.domain.repository.CartRepository
-import com.example.coffeeshop.domain.repository.CoffeeRepository
-import com.example.coffeeshop.domain.repository.OrderRepository
-import com.example.coffeeshop.domain.repository.UserRepository
 import com.example.coffeeshop.domain.usecase.UseAddCart
 import com.example.coffeeshop.domain.usecase.UseAddFavoriteCoffee
 import com.example.coffeeshop.domain.usecase.UseAuthUser
 import com.example.coffeeshop.domain.usecase.UseCheckFavoriteCoffee
-import com.example.coffeeshop.domain.usecase.UseEditUser
 import com.example.coffeeshop.domain.usecase.UseGetCarts
 import com.example.coffeeshop.domain.usecase.UseGetCoffeeByCategory
 import com.example.coffeeshop.domain.usecase.UseGetCoffeeCategories
@@ -38,6 +15,9 @@ import com.example.coffeeshop.domain.usecase.UseGetCoffeeImage
 import com.example.coffeeshop.domain.usecase.UseGetFavoriteCoffee
 import com.example.coffeeshop.domain.usecase.UseGetOrders
 import com.example.coffeeshop.domain.usecase.UseGetUserData
+import com.example.coffeeshop.domain.usecase.UseChangeCartAmount
+import com.example.coffeeshop.domain.usecase.UseDeleteCart
+import com.example.coffeeshop.domain.usecase.UseGetCoffeeCartAmount
 import com.example.coffeeshop.domain.usecase.UseMakePayment
 import com.example.coffeeshop.domain.usecase.UseRegisterUser
 import com.example.coffeeshop.domain.usecase.UseRemoveFavoriteCoffee
@@ -95,5 +75,8 @@ object UseCases:KoinComponent{
     fun useGetUserData() = get<UseGetUserData>()
     fun useGetCoffeeImage() = get<UseGetCoffeeImage>()
     fun useCheckFavoriteCoffee() = get<UseCheckFavoriteCoffee>()
+    fun useChangeCartAmount() = get<UseChangeCartAmount>()
+    fun useGetCoffeeCartAmount() = get<UseGetCoffeeCartAmount>()
+    fun useDeleteCart() = get<UseDeleteCart>()
 
 }

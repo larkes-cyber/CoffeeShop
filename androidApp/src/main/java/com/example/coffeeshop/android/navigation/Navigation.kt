@@ -8,6 +8,8 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.example.coffeeshop.android.screen.cart_screen.CartScreen
+import com.example.coffeeshop.android.screen.cart_screen.CartViewModel
 import com.example.coffeeshop.android.screen.coffee_detail_screen.CoffeeDetailScreen
 import com.example.coffeeshop.android.screen.coffee_detail_screen.CoffeeDetailViewModel
 import com.example.coffeeshop.android.screen.favorite_coffee_screen.FavoriteCoffeeScreen
@@ -70,7 +72,8 @@ fun Navigation(navController: NavHostController) {
         }
 
         composable(Screen.CartScreen.route){
-
+            val viewModel:CartViewModel = hiltViewModel()
+            CartScreen(navController = navController, viewModel = viewModel)
         }
 
     }

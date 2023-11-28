@@ -1,13 +1,13 @@
 package com.example.coffeeshop.android.screen.favorite_coffee_screen
 
 import android.graphics.BitmapFactory
-import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.coffeeshop.di.UseCases
+import com.example.coffeeshop.domain.model.CartItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -47,6 +47,19 @@ class FavoriteCoffeeViewModel @Inject constructor():ViewModel() {
             _favoriteCoffeeUIState.value = favoriteCoffeeUIState.value.copy(coffee = filteredCoffee)
         }
 
+    }
+
+    fun onAddCartChange(id:String, addCart:Boolean){
+        viewModelScope.launch {
+            if(!addCart){
+                UseCases.useAddCart().execute(CartItem(
+                    productId = id,
+                    amount = 1
+                ))
+            }else{
+                UseCases.useDeleteCart().execute(id)
+            }
+        }
     }
 
     fun getCoffeeImage(id:String, imageState: MutableState<ImageBitmap?>){

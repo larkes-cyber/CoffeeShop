@@ -7,5 +7,6 @@ interface CartRepository {
     suspend fun addCart(dataCartItem: DataCartItem)
     suspend fun getCarts():List<DataCartItem>
     suspend fun deleteCart(dataCartItem: DataCartItem)
+    suspend fun getCoffeeCartAmount(id:String):Int
 
 }

@@ -13,6 +13,9 @@ import com.example.coffeeshop.domain.usecase.UseGetCoffeeImage
 import com.example.coffeeshop.domain.usecase.UseGetFavoriteCoffee
 import com.example.coffeeshop.domain.usecase.UseGetOrders
 import com.example.coffeeshop.domain.usecase.UseGetUserData
+import com.example.coffeeshop.domain.usecase.UseChangeCartAmount
+import com.example.coffeeshop.domain.usecase.UseDeleteCart
+import com.example.coffeeshop.domain.usecase.UseGetCoffeeCartAmount
 import com.example.coffeeshop.domain.usecase.UseMakePayment
 import com.example.coffeeshop.domain.usecase.UseRegisterUser
 import com.example.coffeeshop.domain.usecase.UseRemoveFavoriteCoffee
@@ -25,20 +28,20 @@ import com.example.coffeeshop.domain.usecase.UseUploadUserPhoto
 import org.koin.dsl.module
 
 fun domainModule() = module {
-    single { UseAddCart(get()) }
+    single { UseAddCart(get(), get()) }
     single { UseAddFavoriteCoffee(get()) }
     single { UseAuthUser(get()) }
     single { UseEditUser(get()) }
     single { UseGetCarts(get()) }
-    single { UseGetCoffeeByCategory(get()) }
+    single { UseGetCoffeeByCategory(get(), get()) }
     single { UseGetCoffeeCategories(get()) }
-    single { UseGetCoffeeDetailById(get()) }
-    single { UseGetFavoriteCoffee(get(), get()) }
+    single { UseGetCoffeeDetailById(get(), get()) }
+    single { UseGetFavoriteCoffee(get(), get(), get()) }
     single { UseGetOrders(get()) }
     single { UseMakePayment(get()) }
     single { UseRegisterUser(get()) }
     single { UseRemoveFavoriteCoffee(get()) }
-    single { UseSearchForCoffee(get()) }
+    single { UseSearchForCoffee(get(), get()) }
     single { UseSyncCoffee(get()) }
     single { UseSyncCoffeeCategories(get()) }
     single{ UseSyncOrders(get()) }
@@ -49,5 +52,8 @@ fun domainModule() = module {
     single { UseGetUserData(get()) }
     single { UseGetCoffeeImage(get()) }
     single { UseCheckFavoriteCoffee(get()) }
+    single { UseChangeCartAmount(get()) }
+    single { UseGetCoffeeCartAmount(get()) }
+    single { UseDeleteCart(get()) }
 
 }

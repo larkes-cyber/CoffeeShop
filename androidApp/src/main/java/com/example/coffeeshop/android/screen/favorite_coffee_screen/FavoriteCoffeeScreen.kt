@@ -94,6 +94,7 @@ fun FavoriteCoffeeScreen(
                         .height(90.dp)
                         .fillMaxWidth(),
                     coffee = item,
+                    onIncBtnClick = {amt -> viewModel.onAddCartChange(item.id, amt)},
                     getCoffeeImage = {id, state ->
                         viewModel.getCoffeeImage(id, state)
                     }
@@ -102,7 +103,7 @@ fun FavoriteCoffeeScreen(
                 }
                 Spacer(modifier = Modifier.height(10.dp))
             }
-            item { 
+            item {
                 Spacer(modifier = Modifier.height(100.dp))
             }
         }

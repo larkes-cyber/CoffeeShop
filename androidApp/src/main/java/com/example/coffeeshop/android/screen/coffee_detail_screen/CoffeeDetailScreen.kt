@@ -1,5 +1,6 @@
 package com.example.coffeeshop.android.screen.coffee_detail_screen
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -27,6 +28,7 @@ import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -65,6 +67,11 @@ fun CoffeeDetailScreen(
 
     val scrollState = rememberScrollState()
 
+    LaunchedEffect(Unit){
+        viewModel.getCoffee()
+        viewModel.pullCoffeeImage()
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -73,6 +80,7 @@ fun CoffeeDetailScreen(
             .verticalScroll(scrollState),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
+
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -249,48 +257,50 @@ fun CoffeeDetailScreen(
                 }
             }
         }
-        
-        Column {
-            Spacer(modifier = Modifier.height(15.dp))
-            Card(
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp),
-                backgroundColor = AppTheme.colors.thirdSubBackground
-            ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 30.dp)
-                        .padding(top = 16.dp, bottom = 30.dp)
+        if(coffeeDetailUIState.coffee != null){
+            Column {
+                Spacer(modifier = Modifier.height(15.dp))
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp),
+                    backgroundColor = AppTheme.colors.thirdSubBackground
                 ) {
-                    Column(
-                        verticalArrangement = Arrangement.spacedBy(8.dp),
-                        modifier = Modifier.weight(1f)
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 30.dp)
+                            .padding(top = 16.dp, bottom = 30.dp)
                     ) {
-                        Text(
-                            text = PRICE_TITLE,
-                            fontSize = 14.sp,
-                            color = AppTheme.colors.fifthPrimaryTitle,
-                            fontWeight = FontWeight.Normal,
-                            fontFamily = sora
-                        )
-                        Text(
-                            text = "$ ${coffeeDetailUIState.coffee!!.price}",
-                            fontSize = 18.sp,
-                            color = AppTheme.colors.thirdBackground,
-                            fontWeight = FontWeight.SemiBold,
-                            fontFamily = sora
-                        )
-                    }
-                    AppPrimaryButton(
-                        title = BUY_NOW_TITLE,
-                        modifier = Modifier.weight(1.4f)
-                    ){
+                        Column(
+                            verticalArrangement = Arrangement.spacedBy(8.dp),
+                            modifier = Modifier.weight(1f)
+                        ) {
+                            Text(
+                                text = PRICE_TITLE,
+                                fontSize = 14.sp,
+                                color = AppTheme.colors.fifthPrimaryTitle,
+                                fontWeight = FontWeight.Normal,
+                                fontFamily = sora
+                            )
+                            Text(
+                                text = "$ ${coffeeDetailUIState.coffee!!.price}",
+                                fontSize = 18.sp,
+                                color = AppTheme.colors.thirdBackground,
+                                fontWeight = FontWeight.SemiBold,
+                                fontFamily = sora
+                            )
+                        }
+                        AppPrimaryButton(
+                            title = BUY_NOW_TITLE,
+                            modifier = Modifier.weight(1.4f)
+                        ){
 
+                        }
                     }
                 }
             }
         }
+
 
     }
 

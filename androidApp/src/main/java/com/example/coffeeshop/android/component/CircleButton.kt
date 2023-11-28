@@ -1,37 +1,41 @@
 package com.example.coffeeshop.android.component
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.coffeeshop.android.theme.AppTheme
 
 @Composable
-fun AddCartBtn(
+fun CircleButton(
+    icon:Int,
     onClick:() -> Unit
 ) {
+
     Button(
-        onClick = {
-            onClick()
-        },
-        modifier = Modifier.size(32.dp),
-        shape = RoundedCornerShape(10.dp),
-        colors = ButtonDefaults.buttonColors(backgroundColor = AppTheme.colors.thirdBackground),
+        onClick = {onClick() },
+        modifier = Modifier.size(28.dp),
+        shape = RoundedCornerShape(100),
+        colors = ButtonDefaults.buttonColors(Color.Transparent),
         elevation = ButtonDefaults.elevation(0.dp),
-        contentPadding = PaddingValues(0.dp)
+        contentPadding = PaddingValues(6.dp),
+        border = BorderStroke(1.dp, AppTheme.colors.borderColor)
     ) {
         Icon(
-            imageVector = Icons.Default.Add,
+            painter = painterResource(id = icon),
             contentDescription = "",
-            modifier = Modifier.size(15.dp),
-            tint = AppTheme.colors.primaryTitle
+            modifier = Modifier.size(16.dp),
+            tint = AppTheme.colors.secondPrimaryTitle
         )
     }
+
 }

@@ -18,4 +18,9 @@ class CartRepositoryImpl(
     override suspend fun deleteCart(dataCartItem: DataCartItem) {
         cartDiskDataSource.deleteCart(dataCartItem)
     }
+
+    override suspend fun getCoffeeCartAmount(id: String):Int {
+        val coffee = cartDiskDataSource.getCarts().find { it.productId == id }
+        return coffee?.amount ?: 0
+    }
 }

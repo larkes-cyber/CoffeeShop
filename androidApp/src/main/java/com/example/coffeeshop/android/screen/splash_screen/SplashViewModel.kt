@@ -18,7 +18,8 @@ class SplashViewModel @Inject constructor(
 
     private val _authUIState = MutableStateFlow(AUTH_NOT_STATED)
     val authUIState:StateFlow<Int> = _authUIState
-    init {
+
+    fun init(){
         viewModelScope.launch {
             val user = UseCases.useGetUserData().execute().data
 
