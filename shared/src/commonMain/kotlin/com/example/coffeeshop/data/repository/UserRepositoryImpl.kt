@@ -56,4 +56,8 @@ class UserRepositoryImpl(
     override suspend fun uploadUserPhoto(userId: String, file: ByteArray) {
         userRemoteDataSource.uploadProfileImage(userId = userId, file = file)
     }
+
+    override suspend fun deleteUser() {
+        userDiskDataSource.deleteUser()
+    }
 }

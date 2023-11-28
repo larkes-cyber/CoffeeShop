@@ -6,6 +6,7 @@ interface UserDiskDataSource {
 
     suspend fun putUserData(dataUser: DataUser)
     suspend fun getUserData():DataUser?
+    suspend fun deleteUser()
 
 
 }

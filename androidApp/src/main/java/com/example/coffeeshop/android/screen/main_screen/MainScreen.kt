@@ -24,6 +24,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
@@ -39,6 +40,8 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -63,11 +66,19 @@ fun MainScreen(
 
     val mainScreenUIState by viewModel.mainScreenUIState.collectAsState()
     val searchCoffeeUIState by viewModel.searchCoffeeUIState.collectAsState()
-
+    val userUIState by viewModel.userUIState.collectAsState()
+    val hasBeenExit by viewModel.hasBeenExit.collectAsState()
 
     LaunchedEffect(Unit){
         viewModel.loadCategories().join()
         viewModel.loadCoffee().join()
+        viewModel.loadUserData()
+    }
+
+    LaunchedEffect(hasBeenExit){
+        if(hasBeenExit){
+            navController.navigate(Screen.SplashScreen.route)
+        }
     }
 
     SwipeRefresh(
@@ -102,20 +113,29 @@ fun MainScreen(
                         horizontalArrangement = Arrangement.SpaceBetween
                     ){
                         Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                            Text(
-                                text = WELCOME_TITLE,
-                                fontFamily = sora,
-                                fontWeight = FontWeight.Normal,
-                                fontSize = 12.sp,
-                                color = AppTheme.colors.secondSubtitle
-                            )
-                            Text(
-                                text = "Lora Roberts",
-                                fontFamily = sora,
-                                fontWeight = FontWeight.SemiBold,
-                                fontSize = 14.sp,
-                                color = AppTheme.colors.thirdPrimaryTitle
-                            )
+
+                            if(userUIState.user != null) {
+                                Text(
+                                    text = userUIState.user!!.name,
+                                    fontFamily = sora,
+                                    fontWeight = FontWeight.SemiBold,
+                                    fontSize = 14.sp,
+                                    color = AppTheme.colors.thirdPrimaryTitle
+                                )
+                                ClickableText(
+                                    text = AnnotatedString("exit"),
+                                    onClick = {
+                                        viewModel.deleteUser()
+                                    },
+                                    style = TextStyle(
+                                        fontFamily = sora,
+                                        fontWeight = FontWeight.SemiBold,
+                                        fontSize = 12.sp,
+                                        color = AppTheme.colors.thirdBackground
+                                    )
+                                )
+                            }
+
                         }
                         Image(
                             painter = painterResource(id =R.drawable.ton_bird),

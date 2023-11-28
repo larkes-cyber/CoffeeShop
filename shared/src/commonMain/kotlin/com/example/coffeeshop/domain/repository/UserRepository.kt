@@ -14,5 +14,6 @@ interface UserRepository {
     suspend fun removeFavoriteCoffee(id:String)
     suspend fun getUser():DataUser?
     suspend fun uploadUserPhoto(userId:String, file:ByteArray)
+    suspend fun deleteUser()
 
 }

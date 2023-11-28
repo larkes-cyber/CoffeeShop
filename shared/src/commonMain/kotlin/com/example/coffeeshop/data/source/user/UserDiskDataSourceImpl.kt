@@ -19,4 +19,8 @@ class UserDiskDataSourceImpl(
         val data = jsonStorage.getItemsByKey(USER_JSON_FILED)
         return if(data.isNotEmpty()) Json.decodeFromString(DataUser.serializer(), data) else null
     }
+
+    override suspend fun deleteUser() {
+        jsonStorage.putItemsToStorage(USER_JSON_FILED, "")
+    }
 }

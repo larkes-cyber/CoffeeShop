@@ -26,6 +26,25 @@ class MainViewModel @Inject constructor():ViewModel(){
     private val _searchCoffeeUIState = MutableStateFlow(SearchCoffeeUIState())
     val searchCoffeeUIState:StateFlow<SearchCoffeeUIState> = _searchCoffeeUIState
 
+    private val _userUIState = MutableStateFlow(UserUIState())
+    val userUIState:StateFlow<UserUIState> = _userUIState
+
+    private val _hasBeenExit = MutableStateFlow(false)
+    val hasBeenExit:StateFlow<Boolean> = _hasBeenExit
+
+    fun loadUserData(){
+        viewModelScope.launch {
+            _userUIState.value = UserUIState(isLoading = true)
+            _userUIState.value = UserUIState(user = UseCases.useGetUserData().execute().data)
+        }
+    }
+
+    fun deleteUser(){
+        viewModelScope.launch {
+            UseCases.useDeleteUser().execute()
+            _hasBeenExit.value = true
+        }
+    }
     fun syncCoffee(){
         viewModelScope.launch {
             _mainScreenUIState.value = mainScreenUIState.value.copy(isCoffeeLoading = true, categories = listOf())
