@@ -10,6 +10,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.coffeeshop.di.UseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -17,7 +18,10 @@ import javax.inject.Inject
 class CartViewModel @Inject constructor():ViewModel() {
 
     private val _cartUIState = MutableStateFlow(CartUIState())
-    val cartUIState = _cartUIState
+    val cartUIState:StateFlow<CartUIState> = _cartUIState
+
+    private val _showMapUIState = MutableStateFlow(false)
+    val showMapUIState:StateFlow<Boolean> = _showMapUIState
 
     fun getCartCoffee(){
         viewModelScope.launch {
@@ -67,6 +71,10 @@ class CartViewModel @Inject constructor():ViewModel() {
             sum += item.first.price * item.second.toFloat()
         }
         _cartUIState.value = cartUIState.value.copy(totalPrice = sum)
+    }
+
+    fun switchShowingMap(){
+        _showMapUIState.value = showMapUIState.value.not()
     }
 
 

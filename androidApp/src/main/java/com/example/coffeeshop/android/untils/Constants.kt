@@ -52,7 +52,8 @@ object Constants {
     const val ORDER_BTN_TITLE = "Order"
     const val DELIVERY_FEE = 2.3f
     const val DONT_HAVE_ANY_ORDERS = "You don't have any orders"
-
+    const val DELIVER_TAB_TITLE = "Deliver"
+    const val PICK_UP_TAB_TITLE = "Pick Up"
 
 
 }

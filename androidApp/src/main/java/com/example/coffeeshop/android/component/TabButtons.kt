@@ -37,7 +37,7 @@ fun TabButtons(
         titles.forEach { 
             Button(
                 onClick = {
-
+                    onTitleClick(it)
                 },
                 colors = ButtonDefaults.buttonColors(backgroundColor = if(it == currentTitle) AppTheme.colors.thirdBackground else Color.Transparent),
                 shape = RoundedCornerShape(10.dp),
