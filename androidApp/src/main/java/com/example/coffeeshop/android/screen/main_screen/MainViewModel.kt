@@ -104,11 +104,11 @@ class MainViewModel @Inject constructor():ViewModel(){
         }
     }
 
-    fun addToCart(id:String, addCart:Boolean){
+    fun addToCart(id:String){
         viewModelScope.launch {
             UseCases.useAddCart().execute(CartItem(
                 productId = id,
-                amount = if(addCart) 1 else -1
+                amount = 1
             ))
         }
     }

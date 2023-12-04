@@ -1,6 +1,10 @@
 package com.example.coffeeshop.android.component
 
 import android.annotation.SuppressLint
+import androidx.compose.animation.core.FastOutLinearInEasing
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -9,7 +13,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -21,6 +24,8 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -28,10 +33,12 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.layout.ContentScale
@@ -42,6 +49,8 @@ import com.example.coffeeshop.android.R
 import com.example.coffeeshop.android.theme.AppTheme
 import com.example.coffeeshop.android.theme.sora
 import com.example.coffeeshop.domain.model.Coffee
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @SuppressLint("UnrememberedMutableState")
 @OptIn(ExperimentalMaterialApi::class)
@@ -50,18 +59,38 @@ fun FavoriteCoffeeItem(
     modifier: Modifier = Modifier,
     coffee: Coffee,
     getCoffeeImage:(String, MutableState<ImageBitmap?>) -> Unit,
-    onIncBtnClick:(Boolean) -> Unit,
+    onCartBtnClick:() -> Unit,
     onClick:() -> Unit
     ) {
+
+    val coroutineScope = rememberCoroutineScope()
+
 
     val image = remember {
         mutableStateOf<ImageBitmap?>(null)
     }
 
-    var switcher by remember {
-        mutableStateOf(true)
+    var cartBtnHasClickedUIState by remember {
+        mutableStateOf(false)
     }
 
+    val transition = updateTransition(
+        targetState = cartBtnHasClickedUIState,
+        label = ""
+    )
+
+    val rotateCartButton by transition.animateFloat(
+        transitionSpec = {
+            tween(
+                durationMillis = 400,
+                easing = FastOutLinearInEasing
+            )
+        },
+        label = "",
+        targetValueByState = {cartHasClicked ->
+            if(cartHasClicked) 360f else 0f
+        }
+    )
 
 
     LaunchedEffect(Unit){
@@ -145,9 +174,18 @@ fun FavoriteCoffeeItem(
                         }
                     }
                 }
-                IncCartBtn(if(switcher) R.drawable.add else R.drawable.minus){
-                    onIncBtnClick(switcher)
-                    switcher = switcher.not()
+                IncCartBtn(
+                    imageVector = if(cartBtnHasClickedUIState) Icons.Default.Check else Icons.Default.Add,
+                    modifier = Modifier.rotate(rotateCartButton)
+                ){
+                    if(cartBtnHasClickedUIState.not()){
+                        coroutineScope.launch {
+                            cartBtnHasClickedUIState = true
+                            onCartBtnClick()
+                            delay(3000)
+                            cartBtnHasClickedUIState = false
+                        }
+                    }
                 }
             }
         }

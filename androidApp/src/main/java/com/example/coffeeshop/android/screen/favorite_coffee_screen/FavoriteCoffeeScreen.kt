@@ -42,8 +42,6 @@ fun FavoriteCoffeeScreen(
         viewModel.getFavoriteCoffee()
     }
 
-    Log.d("sadasdasdsdsdsadasd", favoriteCoffeeUIState.coffee.toString())
-
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -94,7 +92,7 @@ fun FavoriteCoffeeScreen(
                         .height(90.dp)
                         .fillMaxWidth(),
                     coffee = item,
-                    onIncBtnClick = {amt -> viewModel.onAddCartChange(item.id, amt)},
+                    onCartBtnClick = { viewModel.onAddCartChange(item.id) },
                     getCoffeeImage = {id, state ->
                         viewModel.getCoffeeImage(id, state)
                     }

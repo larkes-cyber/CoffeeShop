@@ -55,4 +55,6 @@ dependencies {
     implementation("io.coil-kt:coil-compose:2.0.0-rc01")
     //swipe refresh
     implementation("com.google.accompanist:accompanist-swiperefresh:0.24.13-rc")
+    implementation ("com.yandex.android:maps.mobile:4.4.0-lite")
+
 }

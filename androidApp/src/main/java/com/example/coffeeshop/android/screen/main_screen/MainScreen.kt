@@ -1,6 +1,5 @@
 package com.example.coffeeshop.android.screen.main_screen
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -16,16 +15,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 
@@ -37,7 +30,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
@@ -53,8 +45,6 @@ import com.example.coffeeshop.android.component.SearchBar
 import com.example.coffeeshop.android.navigation.Screen
 import com.example.coffeeshop.android.theme.AppTheme
 import com.example.coffeeshop.android.theme.sora
-import com.example.coffeeshop.android.untils.Constants.WELCOME_TITLE
-import com.example.coffeeshop.di.UseCases
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 
@@ -226,8 +216,8 @@ fun MainScreen(
                                 getCoffeeImage = {id, state ->
                                     viewModel.getCoffeeImage(id, state)
                                 },
-                                onIncBtnClick = {
-                                    viewModel.addToCart(id = coffee.id, addCart = it)
+                                onCartBtnClick = {
+                                    viewModel.addToCart(id = coffee.id)
                                 }
                             ){
                                 navController.navigate(Screen.CoffeeDetailScreen.withArgs(coffee.id))

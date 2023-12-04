@@ -27,6 +27,7 @@ import com.example.coffeeshop.android.untils.Constants.FAVORITE_ICON
 import com.example.coffeeshop.android.untils.Constants.HOME_ICON
 import com.example.coffeeshop.android.untils.Constants.NOTIFICATIONS_ICON
 import com.example.coffeeshop.di.UseCases
+import com.yandex.mapkit.MapKitFactory
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -39,6 +40,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+
+            MapKitFactory.setApiKey("848aefe2-e81e-4b91-b0ea-b006e36e9c52")
+
 
             val context = LocalContext.current
 
