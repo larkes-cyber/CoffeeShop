@@ -41,6 +41,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import coil.compose.AsyncImage
 import com.example.coffeeshop.android.R
 import com.example.coffeeshop.android.component.AppPrimaryButton
 import com.example.coffeeshop.android.component.CoffeeSizeBtn
@@ -55,6 +56,7 @@ import com.example.coffeeshop.android.untils.Constants.MEDIUM_COFFEE_SIZE
 import com.example.coffeeshop.android.untils.Constants.PRICE_TITLE
 import com.example.coffeeshop.android.untils.Constants.SIZE_TITLE
 import com.example.coffeeshop.android.untils.Constants.SMALL_COFFEE_SIZE
+import com.example.coffeeshop.untils.Constants
 
 @Composable
 fun CoffeeDetailScreen(
@@ -129,24 +131,12 @@ fun CoffeeDetailScreen(
                     .fillMaxWidth()
                     .padding(horizontal = 30.dp)
             ) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(226.dp)
-                        .clip(RoundedCornerShape(16.dp)),
-                    contentAlignment = Alignment.Center
-                ) {
-                    if(coffeeDetailUIState.image == null){
-                        CircularProgressIndicator()
-                    }else {
-                        Image(
-                            coffeeDetailUIState.image!!,
-                            contentDescription = "",
-                            modifier = Modifier.fillMaxSize(),
-                            contentScale = ContentScale.Crop
-                        )
-                    }
-                }
+                AsyncImage(
+                    model = Constants.COFFEE_PHOTOS_URL + id,
+                    contentDescription = "",
+                    modifier = Modifier.fillMaxWidth().height(226.dp).clip(RoundedCornerShape(16.dp)),
+                    contentScale = ContentScale.Crop
+                )
             }
             Spacer(modifier = Modifier.height(20.dp))
             if(coffeeDetailUIState.coffee != null){

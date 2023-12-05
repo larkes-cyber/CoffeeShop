@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -45,10 +46,12 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
 import com.example.coffeeshop.android.R
 import com.example.coffeeshop.android.theme.AppTheme
 import com.example.coffeeshop.android.theme.sora
 import com.example.coffeeshop.domain.model.Coffee
+import com.example.coffeeshop.untils.Constants
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -58,17 +61,12 @@ import kotlinx.coroutines.launch
 fun FavoriteCoffeeItem(
     modifier: Modifier = Modifier,
     coffee: Coffee,
-    getCoffeeImage:(String, MutableState<ImageBitmap?>) -> Unit,
     onCartBtnClick:() -> Unit,
     onClick:() -> Unit
     ) {
 
     val coroutineScope = rememberCoroutineScope()
 
-
-    val image = remember {
-        mutableStateOf<ImageBitmap?>(null)
-    }
 
     var cartBtnHasClickedUIState by remember {
         mutableStateOf(false)
@@ -93,9 +91,6 @@ fun FavoriteCoffeeItem(
     )
 
 
-    LaunchedEffect(Unit){
-        getCoffeeImage(coffee.id, image)
-    }
 
     Card(
         modifier = modifier,
@@ -113,25 +108,15 @@ fun FavoriteCoffeeItem(
                 verticalAlignment = Alignment.Bottom
             ) {
                 Row {
-                    Box(
+                    AsyncImage(
+                        model = Constants.COFFEE_PHOTOS_URL + coffee.id,
+                        contentDescription = "",
                         modifier = Modifier
                             .fillMaxHeight()
-                            .width(120.dp),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        if(image.value != null){
-                            Image(
-                                image.value!!,
-                                contentDescription = "",
-                                modifier = Modifier
-                                    .fillMaxSize()
-                                    .clip(RoundedCornerShape(16.dp)),
-                                contentScale = ContentScale.Crop
-                            )
-                        }else{
-                            CircularProgressIndicator()
-                        }
-                    }
+                            .width(120.dp)
+                            .clip(RoundedCornerShape(16.dp)),
+                        contentScale = ContentScale.Crop
+                    )
                     Spacer(modifier = Modifier.width(8.dp))
                     Column(
                         verticalArrangement = Arrangement.SpaceBetween,

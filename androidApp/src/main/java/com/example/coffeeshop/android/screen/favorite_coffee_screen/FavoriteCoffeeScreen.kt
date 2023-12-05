@@ -92,10 +92,7 @@ fun FavoriteCoffeeScreen(
                         .height(90.dp)
                         .fillMaxWidth(),
                     coffee = item,
-                    onCartBtnClick = { viewModel.onAddCartChange(item.id) },
-                    getCoffeeImage = {id, state ->
-                        viewModel.getCoffeeImage(id, state)
-                    }
+                    onCartBtnClick = { viewModel.onAddCartChange(item.id) }
                 ){
                     navController.navigate(Screen.CoffeeDetailScreen.withArgs(item.id))
                 }

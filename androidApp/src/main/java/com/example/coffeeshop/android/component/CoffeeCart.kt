@@ -39,9 +39,11 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
 import com.example.coffeeshop.android.theme.AppTheme
 import com.example.coffeeshop.android.theme.sora
 import com.example.coffeeshop.domain.model.Coffee
+import com.example.coffeeshop.untils.Constants.COFFEE_PHOTOS_URL
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -50,15 +52,11 @@ import kotlinx.coroutines.launch
 @Composable
 fun CoffeeCart(
     coffee: Coffee,
-    getCoffeeImage:(String, MutableState<ImageBitmap?>) -> Unit,
     onCartBtnClick:() -> Unit,
     onClick:() -> Unit
 ) {
     val coroutineScope = rememberCoroutineScope()
 
-    val image = remember {
-        mutableStateOf<ImageBitmap?>(null)
-    }
 
     var cartBtnHasClickedUIState by remember {
         mutableStateOf(false)
@@ -82,10 +80,6 @@ fun CoffeeCart(
         }
     )
 
-    LaunchedEffect(Unit){
-        getCoffeeImage(coffee.id, image)
-    }
-
 
     Card(
         backgroundColor = AppTheme.colors.thirdSubBackground,
@@ -101,26 +95,16 @@ fun CoffeeCart(
                     .padding(horizontal = 4.dp)
                     .padding(top = 4.dp, bottom = 12.dp)
             ) {
-                if(image.value != null) {
-                    Image(
-                        image.value!!,
-                        contentDescription = "",
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(132.dp)
-                            .clip(RoundedCornerShape(16.dp)),
-                        contentScale = ContentScale.Crop
-                    )
-                }else{
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(132.dp),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        CircularProgressIndicator()
-                    }
-                }
+                AsyncImage(
+                    model = COFFEE_PHOTOS_URL + coffee.id,
+                    contentDescription = "",
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(132.dp)
+                        .clip(RoundedCornerShape(16.dp)),
+                    contentScale = ContentScale.Crop
+                )
+
                 Spacer(modifier = Modifier.height(12.dp))
                 Column(modifier = Modifier.padding(horizontal = 5.dp)) {
                     Text(

@@ -166,7 +166,6 @@ fun CartScreen(
                             Column(modifier = Modifier.padding(top = 20.dp)) {
                                 CartItem(
                                     coffee = cartUIState.coffee[index].first,
-                                    getCoffeeImage = {id, state -> viewModel.getCoffeeImage(id, state) },
                                     amount = cartUIState.coffee[index].second,
                                     modifier = Modifier.fillMaxWidth(),
                                     onPlusClick = {

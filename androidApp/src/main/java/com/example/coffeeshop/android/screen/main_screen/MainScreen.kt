@@ -213,9 +213,6 @@ fun MainScreen(
                         Box(modifier = Modifier.weight(1f)) {
                             CoffeeCart(
                                 coffee = coffee,
-                                getCoffeeImage = {id, state ->
-                                    viewModel.getCoffeeImage(id, state)
-                                },
                                 onCartBtnClick = {
                                     viewModel.addToCart(id = coffee.id)
                                 }
