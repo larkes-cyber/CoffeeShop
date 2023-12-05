@@ -2,9 +2,11 @@ package com.example.coffeeshop.data.source.user
 
 import com.example.coffeeshop.data.model.DataCoffee
 import com.example.coffeeshop.data.model.DataUser
+import com.example.coffeeshop.data.network.model.CategoryListDto
 import com.example.coffeeshop.data.network.model.CoffeeDto
 import com.example.coffeeshop.data.network.model.CoffeeListDto
 import com.example.coffeeshop.data.network.model.FavoriteCoffeeDto
+import com.example.coffeeshop.data.network.model.LocationDto
 import com.example.coffeeshop.data.network.model.LoginDto
 import com.example.coffeeshop.data.network.model.SessionDto
 import com.example.coffeeshop.data.network.model.UserDto
@@ -16,10 +18,14 @@ import com.example.coffeeshop.data.source.user.UserRemoteDataSource.Companion.PO
 import com.example.coffeeshop.data.source.user.UserRemoteDataSource.Companion.POST_REMOVE_USER_INFO
 import com.example.coffeeshop.data.source.user.UserRemoteDataSource.Companion.POST_UPLOAD_PHOTO
 import com.example.coffeeshop.logInTerminal
+import com.example.coffeeshop.untils.Constants.YANDEX_GEOCODE_API
+import com.example.coffeeshop.untils.Constants.YANDEX_GEOCODE_API_KEY
 import io.ktor.client.HttpClient
 import io.ktor.client.request.forms.MultiPartFormDataContent
 import io.ktor.client.request.forms.formData
 import io.ktor.client.request.forms.submitFormWithBinaryData
+import io.ktor.client.request.get
+import io.ktor.client.request.parameter
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.client.statement.HttpResponse
@@ -107,5 +113,26 @@ class UserRemoteDataSourceImpl(
                  )
             )
         }
+    }
+
+    override suspend fun getAddress(points: Pair<Float, Float>): String? {
+        println("dfdffdfffsdfsdfsdf dddddddddd")
+        logInTerminal("started")
+        val response = httpClient.get(YANDEX_GEOCODE_API){
+            url {
+                parameters.append("apikey", YANDEX_GEOCODE_API_KEY)
+                parameters.append("geocode", "${points.first},${points.second}")
+                parameters.append("format","json")
+                parameters.append("result", "1")
+            }
+        }
+        logInTerminal("requeist has been ended")
+        println("dfdffdfffsdfsdfsdf dddddddddd")
+        val location = Json.decodeFromString<LocationDto>(response.bodyAsText())
+
+        val address =  location.response?.geoObjectCollection?.featureMember?.get(0)?.geoObject?.metaDataProperty?.geocoderMetaData?.text
+
+
+        return address
     }
 }

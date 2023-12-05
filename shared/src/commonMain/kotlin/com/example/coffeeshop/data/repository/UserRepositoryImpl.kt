@@ -60,4 +60,8 @@ class UserRepositoryImpl(
     override suspend fun deleteUser() {
         userDiskDataSource.deleteUser()
     }
+
+    override suspend fun getAddress(points: Pair<Float, Float>): String? {
+        return userRemoteDataSource.getAddress(points)
+    }
 }

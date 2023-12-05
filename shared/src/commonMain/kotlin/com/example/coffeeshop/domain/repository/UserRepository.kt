@@ -1,6 +1,5 @@
 package com.example.coffeeshop.domain.repository
 
-import com.example.coffeeshop.data.model.DataCoffee
 import com.example.coffeeshop.data.model.DataUser
 
 interface UserRepository {
@@ -15,5 +14,6 @@ interface UserRepository {
     suspend fun getUser():DataUser?
     suspend fun uploadUserPhoto(userId:String, file:ByteArray)
     suspend fun deleteUser()
+    suspend fun getAddress(points:Pair<Float, Float>):String?
 
 }

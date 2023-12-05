@@ -1,7 +1,4 @@
 package com.example.coffeeshop.data.source.user
-import com.example.coffeeshop.data.model.DataCoffee
-import com.example.coffeeshop.data.model.DataUser
-import com.example.coffeeshop.data.network.model.CoffeeDto
 import com.example.coffeeshop.data.network.model.FavoriteCoffeeDto
 import com.example.coffeeshop.data.network.model.LoginDto
 import com.example.coffeeshop.data.network.model.UserDto
@@ -16,6 +13,7 @@ interface UserRemoteDataSource {
     suspend fun getUserInfo(session:String):UserDto
     suspend fun removeFavoriteCoffee(favoriteCoffeeDto: FavoriteCoffeeDto)
     suspend fun uploadProfileImage(userId:String, file:ByteArray)
+    suspend fun getAddress(points:Pair<Float, Float>):String?
 
     companion object{
 

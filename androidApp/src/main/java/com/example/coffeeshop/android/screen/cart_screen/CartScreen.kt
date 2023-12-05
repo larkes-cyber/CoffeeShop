@@ -54,6 +54,7 @@ import com.example.coffeeshop.android.untils.Constants.PAYMENT_SUMMARY_SUBTITLE_
 import com.example.coffeeshop.android.untils.Constants.PAYMENT_SUMMARY_SUBTITLE_TOTAL_PAYMENT
 import com.example.coffeeshop.android.untils.Constants.PAYMENT_SUMMARY_TITLE
 import com.example.coffeeshop.android.untils.Constants.PICK_UP_TAB_TITLE
+import com.example.coffeeshop.android.untils.Constants.SELECT_ADDRESS_TITLE
 import com.example.coffeeshop.android.untils.Constants.YOUR_ORDER_TITLE
 
 @Composable
@@ -64,6 +65,7 @@ fun CartScreen(
 
     val cartUIState by viewModel.cartUIState.collectAsState()
     val showMapUIState by viewModel.showMapUIState.collectAsState()
+    val selectedAddressUIState by viewModel.selectedAddressUIState.collectAsState()
     
     val scrollState = rememberScrollState()
 
@@ -272,13 +274,40 @@ fun CartScreen(
 
         }
     }else{
+        Log.d("sdfsdfsdfsdf","######################")
+
         Box(modifier = Modifier.fillMaxSize()) {
             MapView(
                 onMapChange = {pair ->
-
+                    viewModel.getAddress(pair)
                 },
                 modifier = Modifier.fillMaxSize()
             )
+//            Column(
+//                modifier = Modifier
+//                    .fillMaxWidth()
+//                    .background(AppTheme.colors.secondBackground)
+//                    .padding(vertical = 16.dp),
+//                horizontalAlignment = Alignment.CenterHorizontally
+//            ) {
+////                Text(
+////                    text = SELECT_ADDRESS_TITLE,
+////                    fontSize = 18.sp,
+////                    color = AppTheme.colors.secondPrimaryTitle,
+////                    fontFamily = sora,
+////                    fontWeight = FontWeight.SemiBold
+////                )
+////                if(selectedAddressUIState.isNotEmpty()) {
+////                    Spacer(modifier = Modifier.height(10.dp))
+////                    Text(
+////                        text = selectedAddressUIState,
+////                        fontSize = 16.sp,
+////                        color = AppTheme.colors.secondPrimaryTitle,
+////                        fontFamily = sora,
+////                        fontWeight = FontWeight.Normal
+////                    )
+////                }
+//            }
         }
     }
 

@@ -54,6 +54,8 @@ object Constants {
     const val DONT_HAVE_ANY_ORDERS = "You don't have any orders"
     const val DELIVER_TAB_TITLE = "Deliver"
     const val PICK_UP_TAB_TITLE = "Pick Up"
+    const val SELECT_ADDRESS_TITLE = "Select the address"
+    const val SELECTED_ADDRESS_TITLE = "Selected address"
 
 
 }

@@ -18,6 +18,7 @@ import com.example.coffeeshop.domain.usecase.UseGetUserData
 import com.example.coffeeshop.domain.usecase.UseChangeCartAmount
 import com.example.coffeeshop.domain.usecase.UseDeleteCart
 import com.example.coffeeshop.domain.usecase.UseDeleteUserData
+import com.example.coffeeshop.domain.usecase.UseGetAddress
 import com.example.coffeeshop.domain.usecase.UseGetCoffeeCartAmount
 import com.example.coffeeshop.domain.usecase.UseMakePayment
 import com.example.coffeeshop.domain.usecase.UseRegisterUser
@@ -80,5 +81,6 @@ object UseCases:KoinComponent{
     fun useGetCoffeeCartAmount() = get<UseGetCoffeeCartAmount>()
     fun useDeleteCart() = get<UseDeleteCart>()
     fun useDeleteUser() = get<UseDeleteUserData>()
+    fun useGetAddress() = get<UseGetAddress>()
 
 }

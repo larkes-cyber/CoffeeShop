@@ -1,6 +1,7 @@
 package com.example.coffeeshop.android
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -40,6 +41,8 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            Log.d("sdfsdfsdfsdf","######################")
+
 
             MapKitFactory.setApiKey("848aefe2-e81e-4b91-b0ea-b006e36e9c52")
 

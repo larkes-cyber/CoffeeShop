@@ -9,8 +9,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.coffeeshop.di.UseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -22,6 +26,9 @@ class CartViewModel @Inject constructor():ViewModel() {
 
     private val _showMapUIState = MutableStateFlow(false)
     val showMapUIState:StateFlow<Boolean> = _showMapUIState
+
+    private val _selectedAddressUIState = MutableStateFlow("")
+    val selectedAddressUIState:StateFlow<String> = _selectedAddressUIState
 
     fun getCartCoffee(){
         viewModelScope.launch {
@@ -63,6 +70,14 @@ class CartViewModel @Inject constructor():ViewModel() {
             UseCases.useChangeCartAmount().execute(item.first.id, amount)
 
         }
+    }
+
+    fun getAddress(points:Pair<Float, Float>){
+             UseCases.useGetAddress().invoke(points).onEach {
+                 Log.d("sdfsddfdfdffsdfddd",it.data.toString())
+
+             }.launchIn(CoroutineScope(Dispatchers.IO))
+           // if(address.data != null) _selectedAddressUIState.value = address.data!!
     }
 
     private fun checkAmount(){
