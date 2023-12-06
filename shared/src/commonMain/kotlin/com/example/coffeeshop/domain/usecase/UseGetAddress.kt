@@ -10,13 +10,14 @@ class UseGetAddress(
     private val userRepository: UserRepository
 ) {
 
-    operator fun invoke(points:Pair<Float, Float>): Flow<Resource<String>> = flow {
-        try {
-            val addr = userRepository.getAddress(points)
-            emit(Resource.Success(addr ?: ""))
-        }catch (e:Exception){
-
-        }
-    }
+   suspend fun execute(points:Pair<Float, Float>):Resource<String>{
+       return try {
+           val addr = userRepository.getAddress(points) ?: ""
+           Resource.Success(addr)
+       }catch (e:Exception){
+           logInTerminal(e.toString())
+           Resource.Error(e.message.toString())
+       }
+   }
 
 }

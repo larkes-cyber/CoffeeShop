@@ -11,6 +11,7 @@ import com.example.coffeeshop.di.UseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn
@@ -73,11 +74,10 @@ class CartViewModel @Inject constructor():ViewModel() {
     }
 
     fun getAddress(points:Pair<Float, Float>){
-             UseCases.useGetAddress().invoke(points).onEach {
-                 Log.d("sdfsddfdfdffsdfddd",it.data.toString())
-
-             }.launchIn(CoroutineScope(Dispatchers.IO))
-           // if(address.data != null) _selectedAddressUIState.value = address.data!!
+        CoroutineScope(Dispatchers.IO).launch {
+            val address = UseCases.useGetAddress().execute(points)
+            if(address.data != null) _selectedAddressUIState.value = address.data!!
+        }
     }
 
     private fun checkAmount(){

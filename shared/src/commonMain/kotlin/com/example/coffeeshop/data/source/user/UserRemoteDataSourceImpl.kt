@@ -38,6 +38,7 @@ import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.contentType
 import io.ktor.util.InternalAPI
+import kotlinx.coroutines.delay
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.Json.Default.decodeFromString
@@ -116,8 +117,8 @@ class UserRemoteDataSourceImpl(
     }
 
     override suspend fun getAddress(points: Pair<Float, Float>): String? {
-        println("dfdffdfffsdfsdfsdf dddddddddd")
-        logInTerminal("started")
+//        println("dfdffdfffsdfsdfsdf dddddddddd")
+//        logInTerminal("started")
         val response = httpClient.get(YANDEX_GEOCODE_API){
             url {
                 parameters.append("apikey", YANDEX_GEOCODE_API_KEY)
@@ -126,12 +127,10 @@ class UserRemoteDataSourceImpl(
                 parameters.append("result", "1")
             }
         }
-        logInTerminal("requeist has been ended")
-        println("dfdffdfffsdfsdfsdf dddddddddd")
+
         val location = Json.decodeFromString<LocationDto>(response.bodyAsText())
-
+//
         val address =  location.response?.geoObjectCollection?.featureMember?.get(0)?.geoObject?.metaDataProperty?.geocoderMetaData?.text
-
 
         return address
     }

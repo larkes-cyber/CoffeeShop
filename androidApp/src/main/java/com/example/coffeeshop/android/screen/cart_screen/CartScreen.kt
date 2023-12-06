@@ -282,31 +282,31 @@ fun CartScreen(
                 },
                 modifier = Modifier.fillMaxSize()
             )
-//            Column(
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .background(AppTheme.colors.secondBackground)
-//                    .padding(vertical = 16.dp),
-//                horizontalAlignment = Alignment.CenterHorizontally
-//            ) {
-////                Text(
-////                    text = SELECT_ADDRESS_TITLE,
-////                    fontSize = 18.sp,
-////                    color = AppTheme.colors.secondPrimaryTitle,
-////                    fontFamily = sora,
-////                    fontWeight = FontWeight.SemiBold
-////                )
-////                if(selectedAddressUIState.isNotEmpty()) {
-////                    Spacer(modifier = Modifier.height(10.dp))
-////                    Text(
-////                        text = selectedAddressUIState,
-////                        fontSize = 16.sp,
-////                        color = AppTheme.colors.secondPrimaryTitle,
-////                        fontFamily = sora,
-////                        fontWeight = FontWeight.Normal
-////                    )
-////                }
-//            }
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(AppTheme.colors.secondBackground)
+                    .padding(vertical = 16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = SELECT_ADDRESS_TITLE,
+                    fontSize = 18.sp,
+                    color = AppTheme.colors.secondPrimaryTitle,
+                    fontFamily = sora,
+                    fontWeight = FontWeight.SemiBold
+                )
+                if(selectedAddressUIState.isNotEmpty()) {
+                    Spacer(modifier = Modifier.height(10.dp))
+                    Text(
+                        text = selectedAddressUIState,
+                        fontSize = 16.sp,
+                        color = AppTheme.colors.secondPrimaryTitle,
+                        fontFamily = sora,
+                        fontWeight = FontWeight.Normal
+                    )
+                }
+            }
         }
     }
 
