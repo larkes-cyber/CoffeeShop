@@ -273,8 +273,6 @@ fun CartScreen(
 
         }
     }else{
-        Log.d("sdfsdfsdfsdf","######################")
-
         Box(modifier = Modifier.fillMaxSize()) {
             MapView(
                 onMapChange = {pair ->
@@ -303,7 +301,8 @@ fun CartScreen(
                         fontSize = 16.sp,
                         color = AppTheme.colors.secondPrimaryTitle,
                         fontFamily = sora,
-                        fontWeight = FontWeight.Normal
+                        fontWeight = FontWeight.Normal,
+                        modifier = Modifier.padding(horizontal = 15.dp)
                     )
                 }
             }
