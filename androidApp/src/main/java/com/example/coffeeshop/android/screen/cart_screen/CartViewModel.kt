@@ -1,21 +1,12 @@
 package com.example.coffeeshop.android.screen.cart_screen
 
-import android.graphics.BitmapFactory
-import android.util.Log
-import androidx.compose.runtime.MutableState
-import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.graphics.asImageBitmap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.coffeeshop.android.untils.Constants.DELIVER_TAB_TITLE
 import com.example.coffeeshop.di.UseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -25,11 +16,11 @@ class CartViewModel @Inject constructor():ViewModel() {
     private val _cartUIState = MutableStateFlow(CartUIState())
     val cartUIState:StateFlow<CartUIState> = _cartUIState
 
-    private val _showMapUIState = MutableStateFlow(false)
-    val showMapUIState:StateFlow<Boolean> = _showMapUIState
+    private val _addressUIState = MutableStateFlow(AddressUIState())
+    val addressUIState:StateFlow<AddressUIState> = _addressUIState
 
-    private val _selectedAddressUIState = MutableStateFlow("")
-    val selectedAddressUIState:StateFlow<String> = _selectedAddressUIState
+    private val _receiveOrderModeUIState = MutableStateFlow(DELIVER_TAB_TITLE)
+    val receiveOrderModeUIState:StateFlow<String> = _receiveOrderModeUIState
 
     fun getCartCoffee(){
         viewModelScope.launch {
@@ -49,14 +40,6 @@ class CartViewModel @Inject constructor():ViewModel() {
         }
     }
 
-    fun getCoffeeImage(id:String, imageState: MutableState<ImageBitmap?>){
-        viewModelScope.launch {
-            val bytes = UseCases.useGetCoffeeImage().execute(id).data ?: return@launch
-            val bmp = BitmapFactory.decodeByteArray(bytes, 0 , bytes.size)
-            imageState.value = bmp.asImageBitmap()
-        }
-    }
-
     fun changeAmount(index:Int, amount:Int){
         viewModelScope.launch {
             val coffeeList = cartUIState.value.coffee.toMutableList()
@@ -73,11 +56,9 @@ class CartViewModel @Inject constructor():ViewModel() {
         }
     }
 
-    fun getAddress(points:Pair<Float, Float>){
-        CoroutineScope(Dispatchers.IO).launch {
-            val address = UseCases.useGetAddress().execute(points)
-            if(address.data != null) _selectedAddressUIState.value = address.data!!
-        }
+    private suspend fun getAddress(points:Pair<Float, Float>):String{
+        _addressUIState.value = addressUIState.value.copy(isLoading = true)
+        return UseCases.useGetAddress().execute(points).data!!
     }
 
     private fun checkAmount(){
@@ -88,9 +69,21 @@ class CartViewModel @Inject constructor():ViewModel() {
         _cartUIState.value = cartUIState.value.copy(totalPrice = sum)
     }
 
-    fun switchShowingMap(){
-        _showMapUIState.value = showMapUIState.value.not()
+    fun closeMap(){
+        _addressUIState.value = AddressUIState()
+    }
+    fun changeMapActive(active:Boolean){
+        _addressUIState.value = addressUIState.value.copy(showingMap = active)
+    }
+    fun onAddressChange(points:Pair<Float, Float>){
+        viewModelScope.launch {
+            val address = getAddress(points)
+            _addressUIState.value = addressUIState.value.copy(selectedAddress = address, isLoading = false)
+        }
     }
 
+    fun onReceiveModeChange(title:String){
+        _receiveOrderModeUIState.value = title
+    }
 
 }

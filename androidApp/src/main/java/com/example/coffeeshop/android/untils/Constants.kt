@@ -56,6 +56,7 @@ object Constants {
     const val PICK_UP_TAB_TITLE = "Pick Up"
     const val SELECT_ADDRESS_TITLE = "Select the address"
     const val SELECTED_ADDRESS_TITLE = "Selected address"
+    const val SELECT_ADDRESS_BTN_TITLE = "Select"
 
 
 }
