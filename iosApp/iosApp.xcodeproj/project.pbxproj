@@ -11,7 +11,14 @@
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
-		FA8500022B0767EB00D9465B /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8500012B0767EB00D9465B /* ViewModel.swift */; };
+		FA08ADF42B27A021005269F2 /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA08ADF32B27A021005269F2 /* CircularProgressBar.swift */; };
+		FACD83DE2B272F27004F2414 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACD83DD2B272F27004F2414 /* SplashScreen.swift */; };
+		FACD83E12B2732EA004F2414 /* color-converter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACD83E02B2732EA004F2414 /* color-converter.swift */; };
+		FACD83E42B275150004F2414 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACD83E32B275150004F2414 /* LoginScreen.swift */; };
+		FACD83E62B275171004F2414 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACD83E52B275171004F2414 /* LoginViewModel.swift */; };
+		FACD83E92B276319004F2414 /* LoginTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACD83E82B276319004F2414 /* LoginTextField.swift */; };
+		FACD83EB2B276761004F2414 /* AppPrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACD83EA2B276761004F2414 /* AppPrimaryButton.swift */; };
+		FACD83ED2B276A5A004F2414 /* PasswordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACD83EC2B276A5A004F2414 /* PasswordTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -34,7 +41,14 @@
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FA8500012B0767EB00D9465B /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		FA08ADF32B27A021005269F2 /* CircularProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressBar.swift; sourceTree = "<group>"; };
+		FACD83DD2B272F27004F2414 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
+		FACD83E02B2732EA004F2414 /* color-converter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "color-converter.swift"; sourceTree = "<group>"; };
+		FACD83E32B275150004F2414 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
+		FACD83E52B275171004F2414 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		FACD83E82B276319004F2414 /* LoginTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextField.swift; sourceTree = "<group>"; };
+		FACD83EA2B276761004F2414 /* AppPrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPrimaryButton.swift; sourceTree = "<group>"; };
+		FACD83EC2B276A5A004F2414 /* PasswordTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,8 +90,11 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				FACD83E72B276307004F2414 /* views */,
+				FACD83E22B275113004F2414 /* login_screen */,
+				FACD83DF2B2732D9004F2414 /* untils */,
+				FACD83DC2B272EFC004F2414 /* splash_screen */,
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
-				FA8500012B0767EB00D9465B /* ViewModel.swift */,
 				7555FF82242A565900829871 /* ContentView.swift */,
 				7555FF8C242A565B00829871 /* Info.plist */,
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,
@@ -91,6 +108,42 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FACD83DC2B272EFC004F2414 /* splash_screen */ = {
+			isa = PBXGroup;
+			children = (
+				FACD83DD2B272F27004F2414 /* SplashScreen.swift */,
+			);
+			path = splash_screen;
+			sourceTree = "<group>";
+		};
+		FACD83DF2B2732D9004F2414 /* untils */ = {
+			isa = PBXGroup;
+			children = (
+				FACD83E02B2732EA004F2414 /* color-converter.swift */,
+			);
+			path = untils;
+			sourceTree = "<group>";
+		};
+		FACD83E22B275113004F2414 /* login_screen */ = {
+			isa = PBXGroup;
+			children = (
+				FACD83E32B275150004F2414 /* LoginScreen.swift */,
+				FACD83E52B275171004F2414 /* LoginViewModel.swift */,
+			);
+			path = login_screen;
+			sourceTree = "<group>";
+		};
+		FACD83E72B276307004F2414 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				FACD83E82B276319004F2414 /* LoginTextField.swift */,
+				FACD83EA2B276761004F2414 /* AppPrimaryButton.swift */,
+				FACD83EC2B276A5A004F2414 /* PasswordTextField.swift */,
+				FA08ADF32B27A021005269F2 /* CircularProgressBar.swift */,
+			);
+			path = views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -185,9 +238,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FACD83E12B2732EA004F2414 /* color-converter.swift in Sources */,
+				FACD83DE2B272F27004F2414 /* SplashScreen.swift in Sources */,
+				FACD83ED2B276A5A004F2414 /* PasswordTextField.swift in Sources */,
+				FACD83EB2B276761004F2414 /* AppPrimaryButton.swift in Sources */,
+				FACD83E62B275171004F2414 /* LoginViewModel.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
-				FA8500022B0767EB00D9465B /* ViewModel.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
+				FACD83E42B275150004F2414 /* LoginScreen.swift in Sources */,
+				FACD83E92B276319004F2414 /* LoginTextField.swift in Sources */,
+				FA08ADF42B27A021005269F2 /* CircularProgressBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,13 +378,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
+				DEVELOPMENT_TEAM = 3XU5RDW35H;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
 				);
 				INFOPLIST_FILE = iosApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				INFOPLIST_KEY_CFBundleDisplayName = CoffeeShop;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -334,7 +397,7 @@
 					"-framework",
 					shared,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = orgIdentifier.iosApp;
+				PRODUCT_BUNDLE_IDENTIFIER = larkes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -347,13 +410,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
+				DEVELOPMENT_TEAM = 3XU5RDW35H;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
 				);
 				INFOPLIST_FILE = iosApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				INFOPLIST_KEY_CFBundleDisplayName = CoffeeShop;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -363,7 +429,7 @@
 					"-framework",
 					shared,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = orgIdentifier.iosApp;
+				PRODUCT_BUNDLE_IDENTIFIER = larkes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
