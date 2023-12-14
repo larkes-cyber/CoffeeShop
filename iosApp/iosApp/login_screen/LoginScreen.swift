@@ -14,7 +14,7 @@ struct LoginScreen: View {
     
     var body: some View {
         VStack{
-            NavigationLink(destination:SplashScreen(), isActive: $loginViewModel.isSucceed){
+            NavigationLink(destination:MainScreen(), isActive: $loginViewModel.isSucceed){
                   EmptyView()
               }.hidden()
               .navigationBarHidden(true)
@@ -56,7 +56,9 @@ struct LoginScreen: View {
                         if(loginViewModel.isLoading){
                             HStack(alignment: .center){
                                 ZStack{
-                                    CircularProgressBar()
+                                    CircularProgressBar(
+                                        size: 50, fontSize: 14
+                                    )
                                 }
                                 .padding(.top, 10)
                             }
@@ -83,6 +85,7 @@ struct LoginScreen: View {
                 .padding(.horizontal, 30)
             }
         }
+        .ignoresSafeArea()
     }
 }
 

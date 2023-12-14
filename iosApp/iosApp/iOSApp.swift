@@ -12,7 +12,7 @@ struct iOSApp: App {
         
 		WindowGroup {
             NavigationView(){
-                LoginScreen()
+                SplashScreen()
             }
 		}
 	}

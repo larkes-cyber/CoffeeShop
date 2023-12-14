@@ -10,9 +10,13 @@
 		058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557BA273AAA24004C7B11 /* Assets.xcassets */; };
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
-		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 		FA08ADF42B27A021005269F2 /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA08ADF32B27A021005269F2 /* CircularProgressBar.swift */; };
-		FACD83DE2B272F27004F2414 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACD83DD2B272F27004F2414 /* SplashScreen.swift */; };
+		FA08ADF72B2974E4005269F2 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA08ADF62B2974E4005269F2 /* SplashScreen.swift */; };
+		FA08ADF92B29760C005269F2 /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA08ADF82B29760C005269F2 /* SplashViewModel.swift */; };
+		FA08ADFC2B297891005269F2 /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA08ADFB2B297891005269F2 /* MainScreen.swift */; };
+		FA08ADFE2B2B19C4005269F2 /* MainScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA08ADFD2B2B19C4005269F2 /* MainScreenViewModel.swift */; };
+		FA08AE002B2B22D0005269F2 /* AppSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA08ADFF2B2B22D0005269F2 /* AppSearchBar.swift */; };
+		FACD83DE2B272F27004F2414 /* StartScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACD83DD2B272F27004F2414 /* StartScreen.swift */; };
 		FACD83E12B2732EA004F2414 /* color-converter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACD83E02B2732EA004F2414 /* color-converter.swift */; };
 		FACD83E42B275150004F2414 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACD83E32B275150004F2414 /* LoginScreen.swift */; };
 		FACD83E62B275171004F2414 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACD83E52B275171004F2414 /* LoginViewModel.swift */; };
@@ -39,10 +43,14 @@
 		058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA08ADF32B27A021005269F2 /* CircularProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressBar.swift; sourceTree = "<group>"; };
-		FACD83DD2B272F27004F2414 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
+		FA08ADF62B2974E4005269F2 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
+		FA08ADF82B29760C005269F2 /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
+		FA08ADFB2B297891005269F2 /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
+		FA08ADFD2B2B19C4005269F2 /* MainScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewModel.swift; sourceTree = "<group>"; };
+		FA08ADFF2B2B22D0005269F2 /* AppSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSearchBar.swift; sourceTree = "<group>"; };
+		FACD83DD2B272F27004F2414 /* StartScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreen.swift; sourceTree = "<group>"; };
 		FACD83E02B2732EA004F2414 /* color-converter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "color-converter.swift"; sourceTree = "<group>"; };
 		FACD83E32B275150004F2414 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		FACD83E52B275171004F2414 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -90,12 +98,13 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				FA08ADFA2B29787D005269F2 /* main_screen */,
+				FA08ADF52B2974C9005269F2 /* splash_screen */,
 				FACD83E72B276307004F2414 /* views */,
 				FACD83E22B275113004F2414 /* login_screen */,
 				FACD83DF2B2732D9004F2414 /* untils */,
-				FACD83DC2B272EFC004F2414 /* splash_screen */,
+				FACD83DC2B272EFC004F2414 /* start_screen */,
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
-				7555FF82242A565900829871 /* ContentView.swift */,
 				7555FF8C242A565B00829871 /* Info.plist */,
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,
 				058557D7273AAEEB004C7B11 /* Preview Content */,
@@ -110,12 +119,30 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		FACD83DC2B272EFC004F2414 /* splash_screen */ = {
+		FA08ADF52B2974C9005269F2 /* splash_screen */ = {
 			isa = PBXGroup;
 			children = (
-				FACD83DD2B272F27004F2414 /* SplashScreen.swift */,
+				FA08ADF62B2974E4005269F2 /* SplashScreen.swift */,
+				FA08ADF82B29760C005269F2 /* SplashViewModel.swift */,
 			);
 			path = splash_screen;
+			sourceTree = "<group>";
+		};
+		FA08ADFA2B29787D005269F2 /* main_screen */ = {
+			isa = PBXGroup;
+			children = (
+				FA08ADFB2B297891005269F2 /* MainScreen.swift */,
+				FA08ADFD2B2B19C4005269F2 /* MainScreenViewModel.swift */,
+			);
+			path = main_screen;
+			sourceTree = "<group>";
+		};
+		FACD83DC2B272EFC004F2414 /* start_screen */ = {
+			isa = PBXGroup;
+			children = (
+				FACD83DD2B272F27004F2414 /* StartScreen.swift */,
+			);
+			path = start_screen;
 			sourceTree = "<group>";
 		};
 		FACD83DF2B2732D9004F2414 /* untils */ = {
@@ -142,6 +169,7 @@
 				FACD83EA2B276761004F2414 /* AppPrimaryButton.swift */,
 				FACD83EC2B276A5A004F2414 /* PasswordTextField.swift */,
 				FA08ADF32B27A021005269F2 /* CircularProgressBar.swift */,
+				FA08ADFF2B2B22D0005269F2 /* AppSearchBar.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -238,13 +266,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA08ADFC2B297891005269F2 /* MainScreen.swift in Sources */,
 				FACD83E12B2732EA004F2414 /* color-converter.swift in Sources */,
-				FACD83DE2B272F27004F2414 /* SplashScreen.swift in Sources */,
+				FACD83DE2B272F27004F2414 /* StartScreen.swift in Sources */,
+				FA08AE002B2B22D0005269F2 /* AppSearchBar.swift in Sources */,
 				FACD83ED2B276A5A004F2414 /* PasswordTextField.swift in Sources */,
 				FACD83EB2B276761004F2414 /* AppPrimaryButton.swift in Sources */,
+				FA08ADF92B29760C005269F2 /* SplashViewModel.swift in Sources */,
 				FACD83E62B275171004F2414 /* LoginViewModel.swift in Sources */,
+				FA08ADFE2B2B19C4005269F2 /* MainScreenViewModel.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
-				7555FF83242A565900829871 /* ContentView.swift in Sources */,
+				FA08ADF72B2974E4005269F2 /* SplashScreen.swift in Sources */,
 				FACD83E42B275150004F2414 /* LoginScreen.swift in Sources */,
 				FACD83E92B276319004F2414 /* LoginTextField.swift in Sources */,
 				FA08ADF42B27A021005269F2 /* CircularProgressBar.swift in Sources */,
