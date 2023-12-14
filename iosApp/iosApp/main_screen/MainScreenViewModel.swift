@@ -18,6 +18,8 @@ class MainScreenViewModel:ObservableObject{
     
     @Published var user:User? = nil
     
+    @Published var isActive =  false
+    
     init() {
         refreash()
     }
@@ -46,5 +48,8 @@ class MainScreenViewModel:ObservableObject{
         
     }
     
+    func onFilter(str:String){
+        
+    }
     
 }
