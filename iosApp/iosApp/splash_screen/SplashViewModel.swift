@@ -15,16 +15,22 @@ class SplashViewModel:ObservableObject{
     @Published var auth_failure = false
     
     init() {
-        UseCases().useGetUserData().execute(completionHandler: {res, err in
+        UseCases().useGetUserData().execute(completionHandler: {user, err in
             
-            if(res?.data != nil){
-                UseCases().useSyncCoffeeCategories().execute(completionHandler: {_,_ in })
-                UseCases().useSyncCoffee().execute(completionHandler: {_,_ in })
-                UseCases().useSyncUserData().execute(completionHandler: {_,_ in })
-                UseCases().useSyncOrders().execute(completionHandler: {_,_ in })
+            if(user?.data != nil){
+                UseCases().useSyncCoffeeCategories().execute(completionHandler: {_,_ in
+                    UseCases().useSyncCoffee().execute(completionHandler: {_,_ in
+                        UseCases().useSyncUserData().execute(completionHandler: {_,_ in
+                            UseCases().useSyncOrders().execute(completionHandler: {_,_ in
+                                self.auth_succeed = user?.data != nil
+                                self.auth_failure = user?.data == nil
+                            })
+                        })
+
+                    })
+
+                })
             }
-            self.auth_succeed = res?.data != nil
-            self.auth_failure = res?.data == nil
         })
     }
     
