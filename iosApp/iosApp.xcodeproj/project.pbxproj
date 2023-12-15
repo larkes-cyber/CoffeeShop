@@ -16,6 +16,10 @@
 		FA08ADFC2B297891005269F2 /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA08ADFB2B297891005269F2 /* MainScreen.swift */; };
 		FA08ADFE2B2B19C4005269F2 /* MainScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA08ADFD2B2B19C4005269F2 /* MainScreenViewModel.swift */; };
 		FA08AE002B2B22D0005269F2 /* AppSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA08ADFF2B2B22D0005269F2 /* AppSearchBar.swift */; };
+		FAAFD9FB2B2C4F7D00FC4B39 /* CategoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFD9FA2B2C4F7D00FC4B39 /* CategoryItem.swift */; };
+		FAAFD9FF2B2C5A2100FC4B39 /* IdentifiableCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFD9FE2B2C5A2100FC4B39 /* IdentifiableCategory.swift */; };
+		FAAFDA012B2C5E7800FC4B39 /* CoffeeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFDA002B2C5E7800FC4B39 /* CoffeeCard.swift */; };
+		FAAFDA032B2C62D600FC4B39 /* IdentifiableCoffee.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFDA022B2C62D600FC4B39 /* IdentifiableCoffee.swift */; };
 		FACD83DE2B272F27004F2414 /* StartScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACD83DD2B272F27004F2414 /* StartScreen.swift */; };
 		FACD83E12B2732EA004F2414 /* color-converter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACD83E02B2732EA004F2414 /* color-converter.swift */; };
 		FACD83E42B275150004F2414 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACD83E32B275150004F2414 /* LoginScreen.swift */; };
@@ -50,6 +54,10 @@
 		FA08ADFB2B297891005269F2 /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
 		FA08ADFD2B2B19C4005269F2 /* MainScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewModel.swift; sourceTree = "<group>"; };
 		FA08ADFF2B2B22D0005269F2 /* AppSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSearchBar.swift; sourceTree = "<group>"; };
+		FAAFD9FA2B2C4F7D00FC4B39 /* CategoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryItem.swift; sourceTree = "<group>"; };
+		FAAFD9FE2B2C5A2100FC4B39 /* IdentifiableCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableCategory.swift; sourceTree = "<group>"; };
+		FAAFDA002B2C5E7800FC4B39 /* CoffeeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeCard.swift; sourceTree = "<group>"; };
+		FAAFDA022B2C62D600FC4B39 /* IdentifiableCoffee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableCoffee.swift; sourceTree = "<group>"; };
 		FACD83DD2B272F27004F2414 /* StartScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreen.swift; sourceTree = "<group>"; };
 		FACD83E02B2732EA004F2414 /* color-converter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "color-converter.swift"; sourceTree = "<group>"; };
 		FACD83E32B275150004F2414 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
@@ -133,6 +141,8 @@
 			children = (
 				FA08ADFB2B297891005269F2 /* MainScreen.swift */,
 				FA08ADFD2B2B19C4005269F2 /* MainScreenViewModel.swift */,
+				FAAFD9FE2B2C5A2100FC4B39 /* IdentifiableCategory.swift */,
+				FAAFDA022B2C62D600FC4B39 /* IdentifiableCoffee.swift */,
 			);
 			path = main_screen;
 			sourceTree = "<group>";
@@ -170,6 +180,8 @@
 				FACD83EC2B276A5A004F2414 /* PasswordTextField.swift */,
 				FA08ADF32B27A021005269F2 /* CircularProgressBar.swift */,
 				FA08ADFF2B2B22D0005269F2 /* AppSearchBar.swift */,
+				FAAFD9FA2B2C4F7D00FC4B39 /* CategoryItem.swift */,
+				FAAFDA002B2C5E7800FC4B39 /* CoffeeCard.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -269,6 +281,7 @@
 				FA08ADFC2B297891005269F2 /* MainScreen.swift in Sources */,
 				FACD83E12B2732EA004F2414 /* color-converter.swift in Sources */,
 				FACD83DE2B272F27004F2414 /* StartScreen.swift in Sources */,
+				FAAFD9FF2B2C5A2100FC4B39 /* IdentifiableCategory.swift in Sources */,
 				FA08AE002B2B22D0005269F2 /* AppSearchBar.swift in Sources */,
 				FACD83ED2B276A5A004F2414 /* PasswordTextField.swift in Sources */,
 				FACD83EB2B276761004F2414 /* AppPrimaryButton.swift in Sources */,
@@ -278,7 +291,10 @@
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				FA08ADF72B2974E4005269F2 /* SplashScreen.swift in Sources */,
 				FACD83E42B275150004F2414 /* LoginScreen.swift in Sources */,
+				FAAFDA032B2C62D600FC4B39 /* IdentifiableCoffee.swift in Sources */,
+				FAAFDA012B2C5E7800FC4B39 /* CoffeeCard.swift in Sources */,
 				FACD83E92B276319004F2414 /* LoginTextField.swift in Sources */,
+				FAAFD9FB2B2C4F7D00FC4B39 /* CategoryItem.swift in Sources */,
 				FA08ADF42B27A021005269F2 /* CircularProgressBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -419,7 +435,7 @@
 				INFOPLIST_FILE = iosApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = CoffeeShop;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -451,7 +467,7 @@
 				INFOPLIST_FILE = iosApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = CoffeeShop;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

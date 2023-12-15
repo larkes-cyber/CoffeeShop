@@ -11,14 +11,16 @@ import shared
 
 class MainScreenViewModel:ObservableObject{
     
-    private var oldCoffeeCards = [Coffee]()
+    private var oldCoffeeCards = [IdentifiableCoffee]()
     
-    @Published var coffeeCategories = [CoffeeCategory]()
-    @Published var coffeeCards = [Coffee]()
+    @Published var coffeeCategories = [IdentifiableCategory]()
+    @Published var coffeeCards = [IdentifiableCoffee]()
     
     @Published var user:User? = nil
     
     @Published var isActive =  false
+    
+    @Published var activeCategory:String? = nil
     
     init() {
         refreash()
@@ -29,18 +31,12 @@ class MainScreenViewModel:ObservableObject{
         UseCases().useGetCoffeeCategories().execute(completionHandler: {res, err in
             if(res?.data != nil){
                 let categories = res?.data as! [CoffeeCategory]
-                self.coffeeCategories = categories
-                categories.forEach{category in
-                    UseCases().useGetCoffeeByCategory().execute(categoryId: category.id, completionHandler: {res, err in
-                        let coffee = res?.data as! [Coffee]
-                        coffee.forEach{coffee in
-                            self.oldCoffeeCards.append(coffee)
-                            self.coffeeCards.append(coffee)
-                        }
-                    })
-                }
+                self.coffeeCategories = categories.map({coffee in coffee.toIndCoffeeCategory()})
+                self.activeCategory = categories[0].id
+                self.refreashCoffee()
             }
         })
+        
         
         UseCases().useGetUserData().execute(completionHandler: { res, err in
             self.user = res?.data
@@ -48,8 +44,33 @@ class MainScreenViewModel:ObservableObject{
         
     }
     
+    func refreashCoffee(){
+        UseCases().useGetCoffeeByCategory().execute(categoryId: activeCategory ?? "", completionHandler: {res, err in
+            let coffee = res?.data as! [Coffee]
+            self.coffeeCards = []
+            self.oldCoffeeCards = []
+            coffee.forEach{coffee in
+                self.oldCoffeeCards.append(coffee.toIndCoffee())
+                self.coffeeCards.append(coffee.toIndCoffee())
+            }
+        })
+    }
+    
+    func changeCategory(id:String){
+        activeCategory = id
+        refreashCoffee()
+    }
+    
     func onFilter(str:String){
-        
+        print(str)
+        if(str.isEmpty){
+            refreashCoffee()
+        }else{
+            UseCases().useSearchForCoffee().execute(symbols: str, completionHandler: {res, err in
+                let coffee = res?.data  as! [Coffee]
+                self.coffeeCards = coffee.map({coffee in coffee.toIndCoffee()})
+            })
+        }
     }
     
 }

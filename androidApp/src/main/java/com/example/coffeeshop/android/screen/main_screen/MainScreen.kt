@@ -40,7 +40,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.coffeeshop.android.R
 import com.example.coffeeshop.android.component.CategoryItem
-import com.example.coffeeshop.android.component.CoffeeCart
+import com.example.coffeeshop.android.component.CoffeeCard
 import com.example.coffeeshop.android.component.SearchBar
 import com.example.coffeeshop.android.navigation.Screen
 import com.example.coffeeshop.android.theme.AppTheme
@@ -211,7 +211,7 @@ fun MainScreen(
                 ) {
                     coffeePair.forEach { coffee ->
                         Box(modifier = Modifier.weight(1f)) {
-                            CoffeeCart(
+                            CoffeeCard(
                                 coffee = coffee,
                                 onCartBtnClick = {
                                     viewModel.addToCart(id = coffee.id)

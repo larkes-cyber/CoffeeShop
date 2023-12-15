@@ -14,13 +14,14 @@ struct AppSearchBar: View {
     let callback:(String) -> Void
     
     @State var text = "" {
+        
         didSet{
             callback(text)
         }
     }
     
     var body: some View {
-        ZStack{
+        ZStack(alignment: .leading){
             Color(hexStringToUIColor(hex: "313131"))
         
             HStack{
@@ -33,11 +34,10 @@ struct AppSearchBar: View {
                 Spacer()
             }
             
-            HStack(spacing: 12){
-                Image("magnifyingglass")
-                    .foregroundColor(Color(hexStringToUIColor(hex: "FFFFFF")))
-                    .frame(width: 20, height: 20)
-            }
+            Image(systemName: "magnifyingglass")
+                .foregroundColor(Color(hexStringToUIColor(hex: "FFFFFF")))
+                .frame(width: 20, height: 20)
+                .padding(.leading, 15)
             
             TextField("",text: $text)
                 .foregroundColor(Color(hexStringToUIColor(hex: "DDDDDD")))
