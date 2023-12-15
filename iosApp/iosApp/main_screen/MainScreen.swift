@@ -80,6 +80,8 @@ struct MainScreen: View {
                                     .padding(.horizontal, 4)
                             }
                         }
+                        Spacer()
+                            .frame( height: 70)
                     }
                     .padding(.horizontal, 15)
                     .frame(maxHeight: .infinity)

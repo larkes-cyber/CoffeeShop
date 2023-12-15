@@ -13,12 +13,7 @@ struct AppSearchBar: View {
     
     let callback:(String) -> Void
     
-    @State var text = "" {
-        
-        didSet{
-            callback(text)
-        }
-    }
+    @State var text = ""
     
     var body: some View {
         ZStack(alignment: .leading){
@@ -42,6 +37,9 @@ struct AppSearchBar: View {
             TextField("",text: $text)
                 .foregroundColor(Color(hexStringToUIColor(hex: "DDDDDD")))
                 .padding(.leading, 40)
+                .onChange(of: text){value in
+                    callback(text)
+                }
 
             
         }
