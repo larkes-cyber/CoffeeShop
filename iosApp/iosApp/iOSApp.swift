@@ -11,8 +11,19 @@ struct iOSApp: App {
 	var body: some Scene {
         
 		WindowGroup {
-            NavigationView(){
+            TabView {
+
+                StartScreen()
+                    .tabItem {
+                        Image(systemName: "heart.fill")
+                        Text("Favourites")
+                }
+                
                 SplashScreen()
+                    .tabItem {
+                        Image(systemName: "person.fill")
+                        Text("Friends")
+                }
             }
 		}
 	}

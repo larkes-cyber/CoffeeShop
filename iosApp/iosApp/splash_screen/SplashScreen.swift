@@ -14,22 +14,24 @@ struct SplashScreen: View {
     
     var body: some View {
         
-        VStack{
-            NavigationLink(destination:MainScreen(), isActive: $viewModel.auth_succeed){
-                  EmptyView()
-              }.hidden()
-              .navigationBarHidden(true)
-            
-            NavigationLink(destination:StartScreen(), isActive: $viewModel.auth_failure){
-                  EmptyView()
-              }.hidden()
-              .navigationBarHidden(true)
-            ZStack{
-                Color(hexStringToUIColor(hex: "131313"))
-                CircularProgressBar(size: 75, fontSize: 16)
+        NavigationView{
+            VStack{
+                NavigationLink(destination:MainScreen(), isActive: $viewModel.auth_succeed){
+                      EmptyView()
+                  }.hidden()
+                  .navigationBarHidden(true)
+                
+                NavigationLink(destination:StartScreen(), isActive: $viewModel.auth_failure){
+                      EmptyView()
+                  }.hidden()
+                  .navigationBarHidden(true)
+                ZStack{
+                    Color(hexStringToUIColor(hex: "131313"))
+                    CircularProgressBar(size: 75, fontSize: 16)
+                }
             }
+            .ignoresSafeArea()
         }
-        .ignoresSafeArea()
     }
 }
 
