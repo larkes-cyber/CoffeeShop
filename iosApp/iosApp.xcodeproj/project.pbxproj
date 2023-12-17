@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -27,6 +27,9 @@
 		FACD83E92B276319004F2414 /* LoginTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACD83E82B276319004F2414 /* LoginTextField.swift */; };
 		FACD83EB2B276761004F2414 /* AppPrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACD83EA2B276761004F2414 /* AppPrimaryButton.swift */; };
 		FACD83ED2B276A5A004F2414 /* PasswordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACD83EC2B276A5A004F2414 /* PasswordTextField.swift */; };
+		FAFD26372B2F744300BD031B /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = FAFD26362B2F744300BD031B /* SwiftUIIntrospect */; };
+		FAFD263F2B2F74A200BD031B /* FavoriteScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFD263E2B2F74A200BD031B /* FavoriteScreen.swift */; };
+		FAFD26412B2F757800BD031B /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = FAFD26402B2F757800BD031B /* SwiftUIIntrospect */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -65,6 +68,7 @@
 		FACD83E82B276319004F2414 /* LoginTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextField.swift; sourceTree = "<group>"; };
 		FACD83EA2B276761004F2414 /* AppPrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPrimaryButton.swift; sourceTree = "<group>"; };
 		FACD83EC2B276A5A004F2414 /* PasswordTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTextField.swift; sourceTree = "<group>"; };
+		FAFD263E2B2F74A200BD031B /* FavoriteScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +76,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAFD26372B2F744300BD031B /* SwiftUIIntrospect in Frameworks */,
+				FAFD26412B2F757800BD031B /* SwiftUIIntrospect in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,6 +112,7 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				FAFD263D2B2F748400BD031B /* favorite_screen */,
 				FA08ADFA2B29787D005269F2 /* main_screen */,
 				FA08ADF52B2974C9005269F2 /* splash_screen */,
 				FACD83E72B276307004F2414 /* views */,
@@ -186,6 +193,14 @@
 			path = views;
 			sourceTree = "<group>";
 		};
+		FAFD263D2B2F748400BD031B /* favorite_screen */ = {
+			isa = PBXGroup;
+			children = (
+				FAFD263E2B2F74A200BD031B /* FavoriteScreen.swift */,
+			);
+			path = favorite_screen;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -204,6 +219,10 @@
 			dependencies = (
 			);
 			name = iosApp;
+			packageProductDependencies = (
+				FAFD26362B2F744300BD031B /* SwiftUIIntrospect */,
+				FAFD26402B2F757800BD031B /* SwiftUIIntrospect */,
+			);
 			productName = iosApp;
 			productReference = 7555FF7B242A565900829871 /* iosApp.app */;
 			productType = "com.apple.product-type.application";
@@ -232,6 +251,9 @@
 				Base,
 			);
 			mainGroup = 7555FF72242A565900829871;
+			packageReferences = (
+				FAFD26352B2F744300BD031B /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
+			);
 			productRefGroup = 7555FF7C242A565900829871 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -279,6 +301,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA08ADFC2B297891005269F2 /* MainScreen.swift in Sources */,
+				FAFD263F2B2F74A200BD031B /* FavoriteScreen.swift in Sources */,
 				FACD83E12B2732EA004F2414 /* color-converter.swift in Sources */,
 				FACD83DE2B272F27004F2414 /* StartScreen.swift in Sources */,
 				FAAFD9FF2B2C5A2100FC4B39 /* IdentifiableCategory.swift in Sources */,
@@ -506,6 +529,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FAFD26352B2F744300BD031B /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FAFD26362B2F744300BD031B /* SwiftUIIntrospect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FAFD26352B2F744300BD031B /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = SwiftUIIntrospect;
+		};
+		FAFD26402B2F757800BD031B /* SwiftUIIntrospect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FAFD26352B2F744300BD031B /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = SwiftUIIntrospect;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7555FF73242A565900829871 /* Project object */;
 }

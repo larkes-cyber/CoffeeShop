@@ -11,6 +11,8 @@ import SwiftUI
 struct SplashScreen: View {
     
     @StateObject private var viewModel = SplashViewModel()
+    @State var uiTabarController: UITabBarController?
+
     
     var body: some View {
         
@@ -20,7 +22,8 @@ struct SplashScreen: View {
                       EmptyView()
                   }.hidden()
                   .navigationBarHidden(true)
-                
+                let _ = print(viewModel.auth_succeed)
+                let _ = print(viewModel.auth_failure)
                 NavigationLink(destination:StartScreen(), isActive: $viewModel.auth_failure){
                       EmptyView()
                   }.hidden()
@@ -31,7 +34,12 @@ struct SplashScreen: View {
                 }
             }
             .ignoresSafeArea()
+            
         }
+        .hiddenTabBar()
+        .navigationBarHidden(true)
+
+        
     }
 }
 

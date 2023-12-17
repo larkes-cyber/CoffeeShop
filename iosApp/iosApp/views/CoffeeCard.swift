@@ -13,12 +13,12 @@ struct CoffeeCard: View {
     
     let coffee:IdentifiableCoffee
     let callback:() -> Void
-    
+    //url: URL(string: Constants().COFFEE_PHOTOS_URL + coffee.id)
     var body: some View {
         ZStack(alignment: .topLeading){
             Color.white
             VStack{
-                AsyncImage(url: URL(string: Constants().COFFEE_PHOTOS_URL + coffee.id))
+                Image("coffee_background_image")
                     .frame(width: 141, height: 132)
                     .clipShape(RoundedRectangle(cornerRadius: 16.0))
                 Text(coffee.categoryTitle)
@@ -89,4 +89,8 @@ struct RoundedCorner: Shape {
         let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
         return Path(path.cgPath)
     }
+}
+
+#Preview {
+    CoffeeCard(coffee: IdentifiableCoffee(includeBeans: true, includeMilk: true, categoryId: "Cappucino", categoryTitle: "Cappucino", subtitle: "with nuts", description: "soome", totalScore: 3.5, scoreCount: 25, price: 3.2, id: "skjfsdfsdsdf"), callback: {})
 }

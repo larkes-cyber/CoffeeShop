@@ -16,84 +16,81 @@ struct MainScreen: View {
        ]
     
     var body: some View {
-        
-        NavigationView(){
-            NavigationLink(destination:EmptyView(), isActive: $viewModel.isActive){
-                EmptyView()
-            }.hidden()
-                .navigationBarHidden(true)
-           
-            ScrollView(.vertical){
-                ZStack(alignment: .top){
-                    Color(hexStringToUIColor(hex: "F9F9F9"))
-                    VStack{
-                        ZStack(alignment: .top){
-                            LinearGradient(gradient: Gradient(colors: [Color(hexStringToUIColor(hex: "131313")), Color(hexStringToUIColor(hex: "313131"))]), startPoint: .leading, endPoint: .trailing)
-                            VStack(spacing: 28){
-                                HStack(){
-                                    VStack(alignment: .leading, spacing: 3){
-                                        Text("Welcome")
-                                            .font(.system(size: 14, weight:.regular))
-                                            .foregroundColor(Color(hexStringToUIColor(hex: "B7B7B7")))
-                                        Text(viewModel.user?.name ?? "")
-                                            .font(.system(size: 16, weight:.semibold))
-                                            .foregroundColor(Color(hexStringToUIColor(hex: "DDDDDD")))
-                                    }
-                                    Spacer()
-                                    Image("coffee_background_image")
-                                        .frame(width: 44, height: 44)
-                                        .clipShape(RoundedRectangle(cornerRadius: 14.0))
+        NavigationLink(destination:EmptyView(), isActive: $viewModel.isActive){
+            EmptyView()
+        }.hidden()
+            .navigationBarHidden(true)
+       
+        ScrollView(.vertical){
+            ZStack(alignment: .top){
+                Color(hexStringToUIColor(hex: "F9F9F9"))
+                VStack{
+                    ZStack(alignment: .top){
+                        LinearGradient(gradient: Gradient(colors: [Color(hexStringToUIColor(hex: "131313")), Color(hexStringToUIColor(hex: "313131"))]), startPoint: .leading, endPoint: .trailing)
+                        VStack(spacing: 28){
+                            HStack(){
+                                VStack(alignment: .leading, spacing: 3){
+                                    Text("Welcome")
+                                        .font(.system(size: 14, weight:.regular))
+                                        .foregroundColor(Color(hexStringToUIColor(hex: "B7B7B7")))
+                                    Text(viewModel.user?.name ?? "")
+                                        .font(.system(size: 16, weight:.semibold))
+                                        .foregroundColor(Color(hexStringToUIColor(hex: "DDDDDD")))
                                 }
-                                
-                                AppSearchBar(callback: {str in
-                                    viewModel.onFilter(str: str)
-                                })
-                                
-                                Image("promo_photo")
-                                    .resizable()
-                                    .frame(height: 140)
+                                Spacer()
+                                Image("coffee_background_image")
+                                    .frame(width: 44, height: 44)
                                     .clipShape(RoundedRectangle(cornerRadius: 14.0))
-                                
                             }
-                            .padding(.horizontal, 30)
-                            .padding(.top, 63)
-                            .padding(.bottom, 24)
-                        }
-                        .frame(maxHeight: .infinity)
-
-                        
-                        VStack{
-                            ScrollView(.horizontal, showsIndicators: false){
-                                HStack(spacing: 6){
-                                    ForEach(viewModel.coffeeCategories, id: \.self.id){item in
-                                        CategoryItem(category: item.title, callback: {
-                                            viewModel.changeCategory(id: item.id)
-                                        }, isActive: item.id == viewModel.activeCategory)
-                                    }
-                                }
-                            }
-                            .statusBarHidden()
-                            .padding(.top, 30)
-                            .padding(.bottom, 15)
                             
-                            LazyVGrid(columns: columns, spacing: 20){
-                                ForEach(viewModel.coffeeCards, id: \.self.id){ item in
-                                    CoffeeCard(coffee: item, callback: {})
-                                        .padding(.horizontal, 4)
+                            AppSearchBar(callback: {str in
+                                viewModel.onFilter(str: str)
+                            })
+                            
+                            Image("promo_photo")
+                                .resizable()
+                                .frame(height: 140)
+                                .clipShape(RoundedRectangle(cornerRadius: 14.0))
+                            
+                        }
+                        .padding(.horizontal, 30)
+                        .padding(.top, 63)
+                        .padding(.bottom, 24)
+                    }
+                    .frame(maxHeight: .infinity)
+
+                    
+                    VStack{
+                        ScrollView(.horizontal, showsIndicators: false){
+                            HStack(spacing: 6){
+                                ForEach(viewModel.coffeeCategories, id: \.self.id){item in
+                                    CategoryItem(category: item.title, callback: {
+                                        viewModel.changeCategory(id: item.id)
+                                    }, isActive: item.id == viewModel.activeCategory)
                                 }
                             }
-                            Spacer()
-                                .frame( height: 70)
                         }
-                        .padding(.horizontal, 15)
-                        .frame(maxHeight: .infinity)
+                        .statusBarHidden()
+                        .padding(.top, 30)
+                        .padding(.bottom, 15)
+                        
+                        LazyVGrid(columns: columns, spacing: 20){
+                            ForEach(viewModel.coffeeCards, id: \.self.id){ item in
+                                CoffeeCard(coffee: item, callback: {})
+                                    .padding(.horizontal, 4)
+                            }
+                        }
+                        Spacer()
+                            .frame( height: 70)
                     }
+                    .padding(.horizontal, 15)
+                    .frame(maxHeight: .infinity)
                 }
             }
-            .ignoresSafeArea()
         }
+        .ignoresSafeArea()
+        .showTabBar()
     }
 }
-
 
 

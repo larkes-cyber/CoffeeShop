@@ -11,9 +11,10 @@ import SwiftUI
 struct StartScreen: View {
     
     @State var hasBeenClicked = false
+
     
     var body: some View {
-        NavigationView{
+   
             VStack{
                 NavigationLink(destination:LoginScreen(), isActive: $hasBeenClicked){
                       EmptyView()
@@ -21,13 +22,11 @@ struct StartScreen: View {
                   .navigationBarHidden(true)
                 
                 ZStack{
-                    Color(hexStringToUIColor(hex: "000000")).ignoresSafeArea(.all)
+                    Color.black
                     VStack{
                         Image("coffee_background_image")
                             .frame(maxHeight: .infinity)
-                        VStack{
-                            
-                        }
+                       Spacer()
                         .frame(maxHeight: .infinity)
                     }
                     VStack{
@@ -64,8 +63,8 @@ struct StartScreen: View {
                 }.frame(maxWidth: .infinity)
             }
             .ignoresSafeArea()
-            
-        }
+            .hiddenTabBar()
+
     }
 }
 
