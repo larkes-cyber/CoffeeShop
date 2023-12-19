@@ -21,9 +21,18 @@ struct CoffeeCard: View {
             ZStack(alignment: .topLeading){
                 Color.white
                 VStack{
-                    AsyncImage(url: URL(string: Constants().COFFEE_PHOTOS_URL + coffee.id))
-                        .frame(width: 141, height: 132)
-                        .clipShape(RoundedRectangle(cornerRadius: 16.0))
+                    AsyncImage(url: URL(string: Constants().COFFEE_PHOTOS_URL + coffee.id)){image in
+                        image
+                            .resizable()
+                            
+                    }placeholder: {
+                        ZStack(alignment: .center){
+                            ProgressView()
+                        }
+                    }
+                    .frame(width: 141, height: 132)
+                    .clipShape(RoundedRectangle(cornerRadius: 16.0))
+
                     Text(coffee.categoryTitle)
                         .font(.system(size: 16, weight:.semibold))
                         .foregroundColor(Color(hexStringToUIColor(hex: "2F2D2C")))

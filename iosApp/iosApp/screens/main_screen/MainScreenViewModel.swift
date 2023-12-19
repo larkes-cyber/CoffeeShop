@@ -25,12 +25,23 @@ class MainScreenViewModel:ObservableObject{
     @Published var isCoffeeDetailSelected:Bool = false
     @Published var selectedCoffeeId:String? = nil
     
+    @Published var isLoading = false
+    
     init() {
         refreash()
     }
     
        
-    func refreash(){
+    func syncCoffee(){
+        self.isLoading = true
+        UseCases().useSyncCoffeeCategories().execute(completionHandler: { res, err in
+            UseCases().useSyncCoffee().execute(completionHandler: {res, err in
+                self.refreash()
+            })
+        })
+    }
+    
+    private func refreash(){
         UseCases().useGetCoffeeCategories().execute(completionHandler: {res, err in
             if(res?.data != nil){
                 let categories = res?.data as! [CoffeeCategory]
@@ -38,6 +49,7 @@ class MainScreenViewModel:ObservableObject{
                 self.activeCategory = categories[0].id
                 self.refreashCoffee()
             }
+            self.isLoading = false
         })
         
         

@@ -75,6 +75,11 @@ struct MainScreen: View {
                         .padding(.top, 30)
                         .padding(.bottom, 15)
                         
+                        if(viewModel.isLoading){
+                            ZStack(alignment: .center){
+                                ProgressView()
+                            }
+                        }
                         LazyVGrid(columns: columns, spacing: 20){
                             ForEach(viewModel.coffeeCards, id: \.self.id){ item in
                                 CoffeeCard(coffee: item, callback: {
@@ -83,6 +88,7 @@ struct MainScreen: View {
                                 .padding(.horizontal, 4)
                             }
                         }
+                     
                         Spacer()
                             .frame( height: 70)
                     }
@@ -91,8 +97,12 @@ struct MainScreen: View {
                 }
             }
         }
-        .ignoresSafeArea()
         .showTabBar()
+        .refreshable {
+            viewModel.syncCoffee()
+        }
+        .ignoresSafeArea()
+       
     }
 }
 
