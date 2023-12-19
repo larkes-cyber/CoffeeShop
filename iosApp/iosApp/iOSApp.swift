@@ -14,15 +14,28 @@ struct iOSApp: App {
             TabView {
                 SplashScreen()
                     .tabItem {
-                        Image(systemName: "heart.fill")
-                        Text("Favourites")
+                        Image(systemName: "house.fill")
+                     //   Text("Home")
                 }
                 
                 FavoriteScreen()
                     .tabItem {
-                        Image(systemName: "person.fill")
-                        Text("Friends")
+                        Image(systemName: "heart.fill")
+                      //  Text("Favorite")
                 }
+                
+                CartScreen()
+                    .tabItem {
+                        Image(systemName: "handbag.fill")
+                    //    Text("Cart")
+                    }
+                
+                OrdersScreen()
+                .tabItem {
+                    Image(systemName: "bell.fill")
+                  //  Text("Cart")
+                }
+                
             }
 		}
 	}

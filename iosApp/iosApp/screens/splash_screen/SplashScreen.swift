@@ -30,7 +30,8 @@ struct SplashScreen: View {
                   .navigationBarHidden(true)
                 ZStack{
                     Color(hexStringToUIColor(hex: "131313"))
-                    CircularProgressBar(size: 75, fontSize: 16)
+                   // CircularProgressBar(size: 75, fontSize: 16)
+                    ProgressView()
                 }
             }
             .ignoresSafeArea()

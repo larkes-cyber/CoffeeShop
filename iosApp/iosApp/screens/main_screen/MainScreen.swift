@@ -16,10 +16,11 @@ struct MainScreen: View {
        ]
     
     var body: some View {
-        NavigationLink(destination:EmptyView(), isActive: $viewModel.isActive){
+        NavigationLink(destination:CoffeeDetailScreen(id: self.viewModel.selectedCoffeeId ?? ""), isActive: $viewModel.isCoffeeDetailSelected){
             EmptyView()
         }.hidden()
             .navigationBarHidden(true)
+        
        
         ScrollView(.vertical){
             ZStack(alignment: .top){
@@ -76,8 +77,10 @@ struct MainScreen: View {
                         
                         LazyVGrid(columns: columns, spacing: 20){
                             ForEach(viewModel.coffeeCards, id: \.self.id){ item in
-                                CoffeeCard(coffee: item, callback: {})
-                                    .padding(.horizontal, 4)
+                                CoffeeCard(coffee: item, callback: {
+                                    viewModel.selectCoffee(id: item.id)
+                                })
+                                .padding(.horizontal, 4)
                             }
                         }
                         Spacer()

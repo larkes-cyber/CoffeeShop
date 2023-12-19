@@ -30,6 +30,10 @@
 		FAFD26372B2F744300BD031B /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = FAFD26362B2F744300BD031B /* SwiftUIIntrospect */; };
 		FAFD263F2B2F74A200BD031B /* FavoriteScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFD263E2B2F74A200BD031B /* FavoriteScreen.swift */; };
 		FAFD26412B2F757800BD031B /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = FAFD26402B2F757800BD031B /* SwiftUIIntrospect */; };
+		FAFD264B2B31A04200BD031B /* OrdersScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFD264A2B31A04200BD031B /* OrdersScreen.swift */; };
+		FAFD264D2B31A05000BD031B /* CartScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFD264C2B31A05000BD031B /* CartScreen.swift */; };
+		FAFD26512B31A46F00BD031B /* CoffeeDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFD26502B31A46F00BD031B /* CoffeeDetailScreen.swift */; };
+		FAFD26552B31A4A900BD031B /* CoffeeDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFD26542B31A4A900BD031B /* CoffeeDetailViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -69,6 +73,10 @@
 		FACD83EA2B276761004F2414 /* AppPrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPrimaryButton.swift; sourceTree = "<group>"; };
 		FACD83EC2B276A5A004F2414 /* PasswordTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTextField.swift; sourceTree = "<group>"; };
 		FAFD263E2B2F74A200BD031B /* FavoriteScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteScreen.swift; sourceTree = "<group>"; };
+		FAFD264A2B31A04200BD031B /* OrdersScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersScreen.swift; sourceTree = "<group>"; };
+		FAFD264C2B31A05000BD031B /* CartScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartScreen.swift; sourceTree = "<group>"; };
+		FAFD26502B31A46F00BD031B /* CoffeeDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeDetailScreen.swift; sourceTree = "<group>"; };
+		FAFD26542B31A4A900BD031B /* CoffeeDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeDetailViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,13 +120,9 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
-				FAFD263D2B2F748400BD031B /* favorite_screen */,
-				FA08ADFA2B29787D005269F2 /* main_screen */,
-				FA08ADF52B2974C9005269F2 /* splash_screen */,
+				FAFD264E2B31A3CC00BD031B /* screens */,
 				FACD83E72B276307004F2414 /* views */,
-				FACD83E22B275113004F2414 /* login_screen */,
 				FACD83DF2B2732D9004F2414 /* untils */,
-				FACD83DC2B272EFC004F2414 /* start_screen */,
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
 				7555FF8C242A565B00829871 /* Info.plist */,
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,
@@ -199,6 +203,46 @@
 				FAFD263E2B2F74A200BD031B /* FavoriteScreen.swift */,
 			);
 			path = favorite_screen;
+			sourceTree = "<group>";
+		};
+		FAFD26462B319FD400BD031B /* cart_screen */ = {
+			isa = PBXGroup;
+			children = (
+				FAFD264C2B31A05000BD031B /* CartScreen.swift */,
+			);
+			path = cart_screen;
+			sourceTree = "<group>";
+		};
+		FAFD26492B31A01100BD031B /* orders_screen */ = {
+			isa = PBXGroup;
+			children = (
+				FAFD264A2B31A04200BD031B /* OrdersScreen.swift */,
+			);
+			path = orders_screen;
+			sourceTree = "<group>";
+		};
+		FAFD264E2B31A3CC00BD031B /* screens */ = {
+			isa = PBXGroup;
+			children = (
+				FAFD264F2B31A42200BD031B /* coffee_detail_screen */,
+				FACD83DC2B272EFC004F2414 /* start_screen */,
+				FACD83E22B275113004F2414 /* login_screen */,
+				FA08ADF52B2974C9005269F2 /* splash_screen */,
+				FA08ADFA2B29787D005269F2 /* main_screen */,
+				FAFD263D2B2F748400BD031B /* favorite_screen */,
+				FAFD26462B319FD400BD031B /* cart_screen */,
+				FAFD26492B31A01100BD031B /* orders_screen */,
+			);
+			path = screens;
+			sourceTree = "<group>";
+		};
+		FAFD264F2B31A42200BD031B /* coffee_detail_screen */ = {
+			isa = PBXGroup;
+			children = (
+				FAFD26502B31A46F00BD031B /* CoffeeDetailScreen.swift */,
+				FAFD26542B31A4A900BD031B /* CoffeeDetailViewModel.swift */,
+			);
+			path = coffee_detail_screen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -302,12 +346,14 @@
 			files = (
 				FA08ADFC2B297891005269F2 /* MainScreen.swift in Sources */,
 				FAFD263F2B2F74A200BD031B /* FavoriteScreen.swift in Sources */,
+				FAFD26512B31A46F00BD031B /* CoffeeDetailScreen.swift in Sources */,
 				FACD83E12B2732EA004F2414 /* color-converter.swift in Sources */,
 				FACD83DE2B272F27004F2414 /* StartScreen.swift in Sources */,
 				FAAFD9FF2B2C5A2100FC4B39 /* IdentifiableCategory.swift in Sources */,
 				FA08AE002B2B22D0005269F2 /* AppSearchBar.swift in Sources */,
 				FACD83ED2B276A5A004F2414 /* PasswordTextField.swift in Sources */,
 				FACD83EB2B276761004F2414 /* AppPrimaryButton.swift in Sources */,
+				FAFD264B2B31A04200BD031B /* OrdersScreen.swift in Sources */,
 				FA08ADF92B29760C005269F2 /* SplashViewModel.swift in Sources */,
 				FACD83E62B275171004F2414 /* LoginViewModel.swift in Sources */,
 				FA08ADFE2B2B19C4005269F2 /* MainScreenViewModel.swift in Sources */,
@@ -317,6 +363,8 @@
 				FAAFDA032B2C62D600FC4B39 /* IdentifiableCoffee.swift in Sources */,
 				FAAFDA012B2C5E7800FC4B39 /* CoffeeCard.swift in Sources */,
 				FACD83E92B276319004F2414 /* LoginTextField.swift in Sources */,
+				FAFD26552B31A4A900BD031B /* CoffeeDetailViewModel.swift in Sources */,
+				FAFD264D2B31A05000BD031B /* CartScreen.swift in Sources */,
 				FAAFD9FB2B2C4F7D00FC4B39 /* CategoryItem.swift in Sources */,
 				FA08ADF42B27A021005269F2 /* CircularProgressBar.swift in Sources */,
 			);
@@ -329,6 +377,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -391,6 +440,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -447,6 +497,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
 				DEVELOPMENT_TEAM = 3XU5RDW35H;
@@ -479,6 +530,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
 				DEVELOPMENT_TEAM = 3XU5RDW35H;

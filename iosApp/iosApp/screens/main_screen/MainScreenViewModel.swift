@@ -22,6 +22,9 @@ class MainScreenViewModel:ObservableObject{
     
     @Published var activeCategory:String? = nil
     
+    @Published var isCoffeeDetailSelected:Bool = false
+    @Published var selectedCoffeeId:String? = nil
+    
     init() {
         refreash()
     }
@@ -71,6 +74,11 @@ class MainScreenViewModel:ObservableObject{
                 self.coffeeCards = coffee.map({coffee in coffee.toIndCoffee()})
             })
         }
+    }
+    
+    func selectCoffee(id:String){
+        isCoffeeDetailSelected = true
+        selectedCoffeeId = id
     }
     
 }
