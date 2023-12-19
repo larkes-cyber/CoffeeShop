@@ -34,6 +34,7 @@
 		FAFD264D2B31A05000BD031B /* CartScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFD264C2B31A05000BD031B /* CartScreen.swift */; };
 		FAFD26512B31A46F00BD031B /* CoffeeDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFD26502B31A46F00BD031B /* CoffeeDetailScreen.swift */; };
 		FAFD26552B31A4A900BD031B /* CoffeeDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFD26542B31A4A900BD031B /* CoffeeDetailViewModel.swift */; };
+		FAFD26572B31C02D00BD031B /* SmallTabButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFD26562B31C02D00BD031B /* SmallTabButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -77,6 +78,7 @@
 		FAFD264C2B31A05000BD031B /* CartScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartScreen.swift; sourceTree = "<group>"; };
 		FAFD26502B31A46F00BD031B /* CoffeeDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeDetailScreen.swift; sourceTree = "<group>"; };
 		FAFD26542B31A4A900BD031B /* CoffeeDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeDetailViewModel.swift; sourceTree = "<group>"; };
+		FAFD26562B31C02D00BD031B /* SmallTabButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallTabButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +195,7 @@
 				FA08ADFF2B2B22D0005269F2 /* AppSearchBar.swift */,
 				FAAFD9FA2B2C4F7D00FC4B39 /* CategoryItem.swift */,
 				FAAFDA002B2C5E7800FC4B39 /* CoffeeCard.swift */,
+				FAFD26562B31C02D00BD031B /* SmallTabButton.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -355,6 +358,7 @@
 				FACD83EB2B276761004F2414 /* AppPrimaryButton.swift in Sources */,
 				FAFD264B2B31A04200BD031B /* OrdersScreen.swift in Sources */,
 				FA08ADF92B29760C005269F2 /* SplashViewModel.swift in Sources */,
+				FAFD26572B31C02D00BD031B /* SmallTabButton.swift in Sources */,
 				FACD83E62B275171004F2414 /* LoginViewModel.swift in Sources */,
 				FA08ADFE2B2B19C4005269F2 /* MainScreenViewModel.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,

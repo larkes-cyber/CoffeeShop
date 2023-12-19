@@ -30,7 +30,7 @@ struct CoffeeDetailScreen: View {
             })
         }
         
-        ZStack{
+        ZStack(alignment: .bottom){
             Color.white
             ScrollView(.vertical){
                 VStack(alignment: .leading){
@@ -43,6 +43,7 @@ struct CoffeeDetailScreen: View {
                     }
                     .frame(height: 226)
                     .padding(.bottom, 18)
+                    .padding(.top, 82)
                     VStack(alignment:.leading){
                         Text(viewModel.coffee?.categoryTitle ?? "")
                             .font(.system(size: 22, weight:.semibold))
@@ -97,7 +98,7 @@ struct CoffeeDetailScreen: View {
                     Text(viewModel.coffee?.description_ ?? "")
                         .font(.system(size: 16, weight:.semibold))
                         .foregroundColor(Color(hexStringToUIColor(hex: "9B9B9B")))
-                        .padding(.bottom, 8)
+                        .padding(.bottom, 11)
                         .frame(alignment: .leading)
 
                     Text("Size")
@@ -106,14 +107,50 @@ struct CoffeeDetailScreen: View {
                         .padding(.bottom, 8)
                         .frame(alignment: .leading)
                     
-                    
-                    
+                    HStack{
+                        SmallTabButton(text: "S", isSelected: viewModel.selectedTitle == 0, callback: {
+                            viewModel.selectTitle(index: 0)
+                        })
+                        SmallTabButton(text: "M", isSelected: viewModel.selectedTitle == 1, callback: {
+                            viewModel.selectTitle(index: 1)
+                        })
+                        SmallTabButton(text: "L", isSelected: viewModel.selectedTitle == 2, callback: {
+                            viewModel.selectTitle(index: 2)
+                        })
+                    }
+                    .padding(.bottom, 14)
                 }
-                .padding(.top, 25)
                 .padding(.horizontal, 40)
-                .frame(maxWidth: .infinity)
             }
+            .padding(.top, 25)
+            .frame(maxWidth: .infinity)
+            
+            ZStack{
+                Color.white
+                HStack{
+                    VStack{
+                        Text("Price")
+                            .foregroundColor(Color(hexStringToUIColor(hex: "989898")))
+                            .font(.system(size: 14, weight: .regular))
+                            .padding(.bottom, 8)
+                        Text(String(format: "$ %.2f", viewModel.coffee?.price ?? 0))
+                            .foregroundColor(Color(hexStringToUIColor(hex: "C67C4E")))
+                            .font(.system(size: 20, weight: .semibold))
+                    }.padding(.trailing, 40)
+                    AppPrimaryButton(callback: {}, title: "Buy Now")
+                }
+                .padding(.bottom, 20)
+                .padding(.horizontal, 30)
+            }
+            .overlay(
+                RoundedRectangle(cornerRadius: 24)
+                    .stroke(Color(hexStringToUIColor(hex: "F1F1F1")), lineWidth: 1)
+            )
+            .frame(maxHeight: 114, alignment: .bottom)
+    
         }
+        .ignoresSafeArea()
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .hiddenTabBar()
         .onAppear(perform: {
             viewModel.getCoffee(id: id)

@@ -11,7 +11,14 @@ import shared
 class CoffeeDetailViewModel:ObservableObject{
     
     private var id:String? = nil
+    
     @Published var coffee:Coffee? = nil
+    @Published var selectedTitle:Int = 0
+    
+    
+    func selectTitle(index:Int){
+        selectedTitle = index
+    }
     
     
     func getCoffee(id:String){
