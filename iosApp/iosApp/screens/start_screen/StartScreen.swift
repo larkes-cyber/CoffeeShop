@@ -50,12 +50,11 @@ struct StartScreen: View {
                             .multilineTextAlignment(.center)
                             .padding(.bottom, 24)
                         
-                        AppPrimaryButton(callback: {
+                        AppPrimaryButton(title: "Get started"){
                             hasBeenClicked = true
-                        }, title: "Get started")
-                            .padding(.horizontal, 30)
-                            .padding(.bottom, 40)
-                        
+                        }
+                        .padding(.horizontal, 30)
+                        .padding(.bottom, 40)
                     }
                     .frame(alignment: .bottom)
                         

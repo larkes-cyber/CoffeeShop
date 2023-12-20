@@ -18,6 +18,8 @@
 		FA08AE002B2B22D0005269F2 /* AppSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA08ADFF2B2B22D0005269F2 /* AppSearchBar.swift */; };
 		FA0D5E332B32E27000D681CF /* FavoriteCoffeeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0D5E322B32E27000D681CF /* FavoriteCoffeeCard.swift */; };
 		FA0D5E362B32EB5900D681CF /* FavoriteScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0D5E352B32EB5900D681CF /* FavoriteScreenViewModel.swift */; };
+		FA0D5E382B33072200D681CF /* OutlineButtonWithCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0D5E372B33072200D681CF /* OutlineButtonWithCheck.swift */; };
+		FA131A6D2B330D5800A2823F /* SmallActionBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA131A6C2B330D5800A2823F /* SmallActionBtn.swift */; };
 		FAAFD9FB2B2C4F7D00FC4B39 /* CategoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFD9FA2B2C4F7D00FC4B39 /* CategoryItem.swift */; };
 		FAAFD9FF2B2C5A2100FC4B39 /* IdentifiableCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFD9FE2B2C5A2100FC4B39 /* IdentifiableCategory.swift */; };
 		FAAFDA012B2C5E7800FC4B39 /* CoffeeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFDA002B2C5E7800FC4B39 /* CoffeeCard.swift */; };
@@ -66,6 +68,8 @@
 		FA08ADFF2B2B22D0005269F2 /* AppSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSearchBar.swift; sourceTree = "<group>"; };
 		FA0D5E322B32E27000D681CF /* FavoriteCoffeeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCoffeeCard.swift; sourceTree = "<group>"; };
 		FA0D5E352B32EB5900D681CF /* FavoriteScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteScreenViewModel.swift; sourceTree = "<group>"; };
+		FA0D5E372B33072200D681CF /* OutlineButtonWithCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineButtonWithCheck.swift; sourceTree = "<group>"; };
+		FA131A6C2B330D5800A2823F /* SmallActionBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallActionBtn.swift; sourceTree = "<group>"; };
 		FAAFD9FA2B2C4F7D00FC4B39 /* CategoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryItem.swift; sourceTree = "<group>"; };
 		FAAFD9FE2B2C5A2100FC4B39 /* IdentifiableCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableCategory.swift; sourceTree = "<group>"; };
 		FAAFDA002B2C5E7800FC4B39 /* CoffeeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeCard.swift; sourceTree = "<group>"; };
@@ -209,6 +213,8 @@
 				FAAFDA002B2C5E7800FC4B39 /* CoffeeCard.swift */,
 				FAFD26562B31C02D00BD031B /* SmallTabButton.swift */,
 				FA0D5E322B32E27000D681CF /* FavoriteCoffeeCard.swift */,
+				FA0D5E372B33072200D681CF /* OutlineButtonWithCheck.swift */,
+				FA131A6C2B330D5800A2823F /* SmallActionBtn.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -371,11 +377,13 @@
 				FA08AE002B2B22D0005269F2 /* AppSearchBar.swift in Sources */,
 				FACD83ED2B276A5A004F2414 /* PasswordTextField.swift in Sources */,
 				FACD83EB2B276761004F2414 /* AppPrimaryButton.swift in Sources */,
+				FA0D5E382B33072200D681CF /* OutlineButtonWithCheck.swift in Sources */,
 				FAFD264B2B31A04200BD031B /* OrdersScreen.swift in Sources */,
 				FA08ADF92B29760C005269F2 /* SplashViewModel.swift in Sources */,
 				FAFD26572B31C02D00BD031B /* SmallTabButton.swift in Sources */,
 				FACD83E62B275171004F2414 /* LoginViewModel.swift in Sources */,
 				FA08ADFE2B2B19C4005269F2 /* MainScreenViewModel.swift in Sources */,
+				FA131A6D2B330D5800A2823F /* SmallActionBtn.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				FA08ADF72B2974E4005269F2 /* SplashScreen.swift in Sources */,
 				FACD83E42B275150004F2414 /* LoginScreen.swift in Sources */,

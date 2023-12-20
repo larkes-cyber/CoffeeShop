@@ -139,7 +139,16 @@ struct CoffeeDetailScreen: View {
                             .foregroundColor(Color(hexStringToUIColor(hex: "C67C4E")))
                             .font(.system(size: 20, weight: .semibold))
                     }.padding(.trailing, 40)
-                    AppPrimaryButton(callback: {}, title: "Buy Now")
+                    
+                    if(viewModel.hasBeenAddedToCart){
+                        OutlineButtonWithCheck(title: "Added to cart"){
+                            viewModel.switchCartBtnMode()
+                        }
+                    }else{
+                        AppPrimaryButton(title: "Buy Now"){
+                            viewModel.switchCartBtnMode()
+                        }
+                    }
                 }
                 .padding(.bottom, 20)
                 .padding(.horizontal, 30)

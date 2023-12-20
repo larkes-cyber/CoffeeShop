@@ -15,6 +15,7 @@ class CoffeeDetailViewModel:ObservableObject{
     @Published var coffee:Coffee? = nil
     @Published var selectedTitle:Int = 0
     @Published var isFavorite:Bool = false
+    @Published var hasBeenAddedToCart:Bool = false
     
     
     func selectTitle(index:Int){
@@ -44,6 +45,22 @@ class CoffeeDetailViewModel:ObservableObject{
         }
         isFavorite = !isFavorite
     }
+    
+    
+    func switchCartBtnMode(){
+        self.hasBeenAddedToCart = !self.hasBeenAddedToCart
+        
+        if(self.hasBeenAddedToCart){
+            UseCases().useAddCart().execute(cart: CartItem(id: nil, amount: 1, productId: coffee?.id ?? ""), completionHandler: {res, err in
+                
+            })
+        }else{
+            UseCases().useDeleteCart().execute(productId: coffee?.id ?? "", completionHandler: {err in
+                
+            })
+        }
+    }
+    
     
 
     

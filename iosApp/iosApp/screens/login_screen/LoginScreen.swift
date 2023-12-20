@@ -65,9 +65,9 @@ struct LoginScreen: View {
                         }
                     }
                     .padding(.bottom, 70)
-                    AppPrimaryButton(callback: {
+                    AppPrimaryButton(title: "Continue"){
                         loginViewModel.onContinue()
-                    }, title: "Continue")
+                    }
                     
                     HStack{
                         Text(loginViewModel.loginMode == "login" ? "Already have an account?" : "Don’t have an account?")

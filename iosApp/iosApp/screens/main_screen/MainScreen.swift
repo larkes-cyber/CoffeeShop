@@ -82,9 +82,14 @@ struct MainScreen: View {
                         }
                         LazyVGrid(columns: columns, spacing: 20){
                             ForEach(viewModel.coffeeCards, id: \.self.id){ item in
-                                CoffeeCard(coffee: item, callback: {
-                                    viewModel.selectCoffee(id: item.id)
-                                })
+                                CoffeeCard(
+                                    coffee: item,
+                                    adddedToCartCallback: {str in
+                                        
+                                    }, callback: {
+                                        viewModel.selectCoffee(id: item.id)
+                                    }
+                                )
                                 .padding(.horizontal, 4)
                             }
                         }

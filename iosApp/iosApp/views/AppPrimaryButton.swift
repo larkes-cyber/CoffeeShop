@@ -10,8 +10,9 @@ import SwiftUI
 
 struct AppPrimaryButton: View {
     
-    var callback: () -> Void
-    var title:String
+    let title:String
+    let callback: () -> Void
+
     
     var body: some View {
         Button(action: {

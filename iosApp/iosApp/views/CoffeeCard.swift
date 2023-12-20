@@ -11,9 +11,12 @@ import shared
 
 struct CoffeeCard: View {
     
+    @State var hasBeenAddedToCart = false
+    
     let coffee:IdentifiableCoffee
+    let adddedToCartCallback:(Bool) -> Void
     let callback:() -> Void
-    //
+    
     var body: some View {
         Button(action: {
             callback()
@@ -49,15 +52,18 @@ struct CoffeeCard: View {
                             .font(.system(size: 18, weight:.semibold))
                             .foregroundColor(Color(hexStringToUIColor(hex: "2F4B4E")))
                         Spacer()
-                        Button(action: {}, label: {
-                            ZStack{
-                                Color(hexStringToUIColor(hex: "C67C4E"))
-                                Image(systemName: "plus")
-                                    .foregroundColor(.white)
-                            }
-                        })
-                        .frame(width: 32, height: 32)
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                        let _ = print("$$$$$$ \(self.hasBeenAddedToCart)")
+                        if(self.hasBeenAddedToCart){
+                            SmallActionBtn(iconSystemName: "minus", callback: {
+                                self.hasBeenAddedToCart = !self.hasBeenAddedToCart
+                                self.adddedToCartCallback(self.hasBeenAddedToCart)
+                            })
+                        }else{
+                            SmallActionBtn(iconSystemName: "plus", callback: {
+                                self.hasBeenAddedToCart = !self.hasBeenAddedToCart
+                                self.adddedToCartCallback(self.hasBeenAddedToCart)
+                            })
+                        }
                     }
                 }
                 .padding()
@@ -104,6 +110,3 @@ struct RoundedCorner: Shape {
     }
 }
 
-#Preview {
-    CoffeeCard(coffee: IdentifiableCoffee(includeBeans: true, includeMilk: true, categoryId: "Cappucino", categoryTitle: "Cappucino", subtitle: "with nuts", description: "soome", totalScore: 3.5, scoreCount: 25, price: 3.2, id: "skjfsdfsdsdf"), callback: {})
-}
