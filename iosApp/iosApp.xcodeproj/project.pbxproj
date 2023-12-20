@@ -21,6 +21,10 @@
 		FA0D5E382B33072200D681CF /* OutlineButtonWithCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0D5E372B33072200D681CF /* OutlineButtonWithCheck.swift */; };
 		FA131A6D2B330D5800A2823F /* SmallActionBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA131A6C2B330D5800A2823F /* SmallActionBtn.swift */; };
 		FA131A6F2B3319D300A2823F /* TabsRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA131A6E2B3319D300A2823F /* TabsRow.swift */; };
+		FA131A712B3361AC00A2823F /* MiddleActionBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA131A702B3361AC00A2823F /* MiddleActionBtn.swift */; };
+		FA131A732B336BFB00A2823F /* CartScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA131A722B336BFB00A2823F /* CartScreenViewModel.swift */; };
+		FA131A752B336D1F00A2823F /* CoffeeCart.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA131A742B336D1F00A2823F /* CoffeeCart.swift */; };
+		FA131A772B336E8800A2823F /* CoffeeCartCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA131A762B336E8800A2823F /* CoffeeCartCard.swift */; };
 		FAAFD9FB2B2C4F7D00FC4B39 /* CategoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFD9FA2B2C4F7D00FC4B39 /* CategoryItem.swift */; };
 		FAAFD9FF2B2C5A2100FC4B39 /* IdentifiableCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFD9FE2B2C5A2100FC4B39 /* IdentifiableCategory.swift */; };
 		FAAFDA012B2C5E7800FC4B39 /* CoffeeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFDA002B2C5E7800FC4B39 /* CoffeeCard.swift */; };
@@ -72,6 +76,10 @@
 		FA0D5E372B33072200D681CF /* OutlineButtonWithCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineButtonWithCheck.swift; sourceTree = "<group>"; };
 		FA131A6C2B330D5800A2823F /* SmallActionBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallActionBtn.swift; sourceTree = "<group>"; };
 		FA131A6E2B3319D300A2823F /* TabsRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabsRow.swift; sourceTree = "<group>"; };
+		FA131A702B3361AC00A2823F /* MiddleActionBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiddleActionBtn.swift; sourceTree = "<group>"; };
+		FA131A722B336BFB00A2823F /* CartScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartScreenViewModel.swift; sourceTree = "<group>"; };
+		FA131A742B336D1F00A2823F /* CoffeeCart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeCart.swift; sourceTree = "<group>"; };
+		FA131A762B336E8800A2823F /* CoffeeCartCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeCartCard.swift; sourceTree = "<group>"; };
 		FAAFD9FA2B2C4F7D00FC4B39 /* CategoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryItem.swift; sourceTree = "<group>"; };
 		FAAFD9FE2B2C5A2100FC4B39 /* IdentifiableCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableCategory.swift; sourceTree = "<group>"; };
 		FAAFDA002B2C5E7800FC4B39 /* CoffeeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeCard.swift; sourceTree = "<group>"; };
@@ -218,6 +226,8 @@
 				FA0D5E372B33072200D681CF /* OutlineButtonWithCheck.swift */,
 				FA131A6C2B330D5800A2823F /* SmallActionBtn.swift */,
 				FA131A6E2B3319D300A2823F /* TabsRow.swift */,
+				FA131A702B3361AC00A2823F /* MiddleActionBtn.swift */,
+				FA131A762B336E8800A2823F /* CoffeeCartCard.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -235,6 +245,8 @@
 			isa = PBXGroup;
 			children = (
 				FAFD264C2B31A05000BD031B /* CartScreen.swift */,
+				FA131A722B336BFB00A2823F /* CartScreenViewModel.swift */,
+				FA131A742B336D1F00A2823F /* CoffeeCart.swift */,
 			);
 			path = cart_screen;
 			sourceTree = "<group>";
@@ -377,6 +389,7 @@
 				FAFD26512B31A46F00BD031B /* CoffeeDetailScreen.swift in Sources */,
 				FACD83E12B2732EA004F2414 /* color-converter.swift in Sources */,
 				FACD83DE2B272F27004F2414 /* StartScreen.swift in Sources */,
+				FA131A772B336E8800A2823F /* CoffeeCartCard.swift in Sources */,
 				FAAFD9FF2B2C5A2100FC4B39 /* IdentifiableCategory.swift in Sources */,
 				FA08AE002B2B22D0005269F2 /* AppSearchBar.swift in Sources */,
 				FACD83ED2B276A5A004F2414 /* PasswordTextField.swift in Sources */,
@@ -387,7 +400,9 @@
 				FAFD26572B31C02D00BD031B /* SmallTabButton.swift in Sources */,
 				FACD83E62B275171004F2414 /* LoginViewModel.swift in Sources */,
 				FA08ADFE2B2B19C4005269F2 /* MainScreenViewModel.swift in Sources */,
+				FA131A712B3361AC00A2823F /* MiddleActionBtn.swift in Sources */,
 				FA131A6D2B330D5800A2823F /* SmallActionBtn.swift in Sources */,
+				FA131A732B336BFB00A2823F /* CartScreenViewModel.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				FA08ADF72B2974E4005269F2 /* SplashScreen.swift in Sources */,
 				FACD83E42B275150004F2414 /* LoginScreen.swift in Sources */,
@@ -397,6 +412,7 @@
 				FAFD26552B31A4A900BD031B /* CoffeeDetailViewModel.swift in Sources */,
 				FAFD264D2B31A05000BD031B /* CartScreen.swift in Sources */,
 				FAAFD9FB2B2C4F7D00FC4B39 /* CategoryItem.swift in Sources */,
+				FA131A752B336D1F00A2823F /* CoffeeCart.swift in Sources */,
 				FA08ADF42B27A021005269F2 /* CircularProgressBar.swift in Sources */,
 				FA0D5E332B32E27000D681CF /* FavoriteCoffeeCard.swift in Sources */,
 			);

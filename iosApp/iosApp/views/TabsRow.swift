@@ -39,6 +39,7 @@ struct TabsRow: View {
             }
             .padding(4)
         }
+        .cornerRadius(10)
     }
     
 }

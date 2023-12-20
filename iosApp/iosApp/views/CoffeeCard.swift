@@ -23,7 +23,7 @@ struct CoffeeCard: View {
         }, label: {
             ZStack(alignment: .topLeading){
                 Color.white
-                VStack{
+                VStack(alignment: .leading){
                     AsyncImage(url: URL(string: Constants().COFFEE_PHOTOS_URL + coffee.id)){image in
                         image
                             .resizable()
@@ -35,7 +35,7 @@ struct CoffeeCard: View {
                     }
                     .frame(width: 141, height: 132)
                     .clipShape(RoundedRectangle(cornerRadius: 16.0))
-
+          
                     Text(coffee.categoryTitle)
                         .font(.system(size: 16, weight:.semibold))
                         .foregroundColor(Color(hexStringToUIColor(hex: "2F2D2C")))
@@ -46,6 +46,7 @@ struct CoffeeCard: View {
                         .font(.system(size: 12, weight:.regular))
                         .foregroundColor(Color(hexStringToUIColor(hex: "9B9B9B")))
                         .padding(.bottom, 12)
+
                     
                     HStack{
                         Text(String(format: "$ %.2f", coffee.price))

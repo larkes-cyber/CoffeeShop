@@ -95,7 +95,7 @@ class MainScreenViewModel:ObservableObject{
     
     func addToCart(id:String){
         UseCases().useAddCart().execute(cart: CartItem(id: nil, amount: 1, productId: id), completionHandler: {res, err in
-            
+            print("\(res?.message) llllfllv")
         })
     }
     
