@@ -25,8 +25,10 @@ struct CoffeeDetailScreen: View {
         })
         .navigationTitle("Detail")
         .toolbar{
-            Button(action: {}, label: {
-                Image(systemName: "suit.heart")
+            Button(action: {
+                viewModel.switchFavoriteCoffee()
+            }, label: {
+                Image(systemName: viewModel.isFavorite ? "suit.heart.fill" : "suit.heart")
             })
         }
         

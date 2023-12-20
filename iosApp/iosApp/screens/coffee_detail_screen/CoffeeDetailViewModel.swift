@@ -14,6 +14,7 @@ class CoffeeDetailViewModel:ObservableObject{
     
     @Published var coffee:Coffee? = nil
     @Published var selectedTitle:Int = 0
+    @Published var isFavorite:Bool = false
     
     
     func selectTitle(index:Int){
@@ -25,8 +26,25 @@ class CoffeeDetailViewModel:ObservableObject{
         UseCases().useGetCoffeeDetailById().execute(id: id, completionHandler: {res, err in
             let coffee = res?.data
             self.coffee = coffee
+            UseCases().useCheckFavoriteCoffee().execute(coffeeId: coffee?.id ?? "", completionHandler: {res, err in
+                self.isFavorite = res?.boolValue ?? false
+            })
         })
     }
     
+    func switchFavoriteCoffee(){
+        if(isFavorite){
+            UseCases().useRemoveFavoriteCoffee().execute(id: coffee?.id ?? "", completionHandler: {res, err in
+                
+            })
+        }else{
+            UseCases().useAddFavoriteCoffee().execute(id: coffee?.id ?? "", completionHandler: {res, err in
+                
+            })
+        }
+        isFavorite = !isFavorite
+    }
+    
+
     
 }

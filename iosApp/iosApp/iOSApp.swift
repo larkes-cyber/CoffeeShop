@@ -18,10 +18,12 @@ struct iOSApp: App {
                      //   Text("Home")
                 }
                 
-                FavoriteScreen()
-                    .tabItem {
-                        Image(systemName: "heart.fill")
-                      //  Text("Favorite")
+                NavigationView{
+                    FavoriteScreen()
+                }
+                .tabItem {
+                    Image(systemName: "heart.fill")
+                  //  Text("Favorite")
                 }
                 
                 CartScreen()
