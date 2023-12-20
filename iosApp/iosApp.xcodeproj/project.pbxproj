@@ -20,6 +20,7 @@
 		FA0D5E362B32EB5900D681CF /* FavoriteScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0D5E352B32EB5900D681CF /* FavoriteScreenViewModel.swift */; };
 		FA0D5E382B33072200D681CF /* OutlineButtonWithCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0D5E372B33072200D681CF /* OutlineButtonWithCheck.swift */; };
 		FA131A6D2B330D5800A2823F /* SmallActionBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA131A6C2B330D5800A2823F /* SmallActionBtn.swift */; };
+		FA131A6F2B3319D300A2823F /* TabsRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA131A6E2B3319D300A2823F /* TabsRow.swift */; };
 		FAAFD9FB2B2C4F7D00FC4B39 /* CategoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFD9FA2B2C4F7D00FC4B39 /* CategoryItem.swift */; };
 		FAAFD9FF2B2C5A2100FC4B39 /* IdentifiableCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFD9FE2B2C5A2100FC4B39 /* IdentifiableCategory.swift */; };
 		FAAFDA012B2C5E7800FC4B39 /* CoffeeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFDA002B2C5E7800FC4B39 /* CoffeeCard.swift */; };
@@ -70,6 +71,7 @@
 		FA0D5E352B32EB5900D681CF /* FavoriteScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteScreenViewModel.swift; sourceTree = "<group>"; };
 		FA0D5E372B33072200D681CF /* OutlineButtonWithCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineButtonWithCheck.swift; sourceTree = "<group>"; };
 		FA131A6C2B330D5800A2823F /* SmallActionBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallActionBtn.swift; sourceTree = "<group>"; };
+		FA131A6E2B3319D300A2823F /* TabsRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabsRow.swift; sourceTree = "<group>"; };
 		FAAFD9FA2B2C4F7D00FC4B39 /* CategoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryItem.swift; sourceTree = "<group>"; };
 		FAAFD9FE2B2C5A2100FC4B39 /* IdentifiableCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableCategory.swift; sourceTree = "<group>"; };
 		FAAFDA002B2C5E7800FC4B39 /* CoffeeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeCard.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 				FA0D5E322B32E27000D681CF /* FavoriteCoffeeCard.swift */,
 				FA0D5E372B33072200D681CF /* OutlineButtonWithCheck.swift */,
 				FA131A6C2B330D5800A2823F /* SmallActionBtn.swift */,
+				FA131A6E2B3319D300A2823F /* TabsRow.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -369,6 +372,7 @@
 			files = (
 				FA0D5E362B32EB5900D681CF /* FavoriteScreenViewModel.swift in Sources */,
 				FA08ADFC2B297891005269F2 /* MainScreen.swift in Sources */,
+				FA131A6F2B3319D300A2823F /* TabsRow.swift in Sources */,
 				FAFD263F2B2F74A200BD031B /* FavoriteScreen.swift in Sources */,
 				FAFD26512B31A46F00BD031B /* CoffeeDetailScreen.swift in Sources */,
 				FACD83E12B2732EA004F2414 /* color-converter.swift in Sources */,

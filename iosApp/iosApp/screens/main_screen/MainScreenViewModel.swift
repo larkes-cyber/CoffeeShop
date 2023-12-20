@@ -93,4 +93,16 @@ class MainScreenViewModel:ObservableObject{
         selectedCoffeeId = id
     }
     
+    func addToCart(id:String){
+        UseCases().useAddCart().execute(cart: CartItem(id: nil, amount: 1, productId: id), completionHandler: {res, err in
+            
+        })
+    }
+    
+    func removeFromCart(id:String){
+        UseCases().useDeleteCart().execute(productId: id, completionHandler: { err in
+            
+        })
+    }
+    
 }

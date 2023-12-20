@@ -10,7 +10,21 @@ import SwiftUI
 
 struct CartScreen: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack{
+            NavigationLink(destination:EmptyView(), label: {
+             
+            })
+            .navigationTitle("Your Order")
+            
+            ZStack{
+                Color.white
+                ScrollView(.vertical){
+                    VStack{
+                        
+                    }
+                }
+            }
+        }
     }
 }
 

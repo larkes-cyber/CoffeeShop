@@ -23,15 +23,14 @@ struct iOSApp: App {
                 }
                 .tabItem {
                     Image(systemName: "heart.fill")
-                  //  Text("Favorite")
                 }
-                
-                CartScreen()
-                    .tabItem {
-                        Image(systemName: "handbag.fill")
-                    //    Text("Cart")
-                    }
-                
+                NavigationView(){
+                    CartScreen()
+                        
+                }
+                .tabItem {
+                    Image(systemName: "bag")
+                }
                 OrdersScreen()
                 .tabItem {
                     Image(systemName: "bell.fill")
