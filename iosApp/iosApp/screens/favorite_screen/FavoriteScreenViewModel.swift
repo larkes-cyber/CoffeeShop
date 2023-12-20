@@ -11,6 +11,8 @@ import shared
 
 class FavoriteScreenViewModel:ObservableObject{
     
+    private var oldCoffee:[IdentifiableCoffee] = []
+    
     @Published var coffee:[IdentifiableCoffee] = []
     @Published var isTransferToDetailScreenActive = false
     @Published var selectedCoffeeToTranfer = ""
@@ -23,6 +25,7 @@ class FavoriteScreenViewModel:ObservableObject{
         UseCases().useGetFavoriteCoffee().execute(completionHandler: { res, err in
             let coffee = res?.data ?? []
             self.coffee = (coffee as! [Coffee]).map{$0.toIndCoffee()}
+            self.oldCoffee = self.coffee
         })
     }
     
@@ -31,5 +34,12 @@ class FavoriteScreenViewModel:ObservableObject{
         self.selectedCoffeeToTranfer = id
     }
 
+    func onSearch(text:String){
+        if(text.isEmpty){
+            self.coffee = oldCoffee
+            return
+        }
+        self.coffee = oldCoffee.filter{$0.categoryTitle.lowercased().range(of:text.lowercased()) != nil || $0.subtitle.lowercased().range(of:text.lowercased()) != nil}
+    }
     
 }

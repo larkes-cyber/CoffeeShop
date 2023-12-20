@@ -31,6 +31,7 @@ struct FavoriteScreen: View {
                                 .foregroundColor(Color(hexStringToUIColor(hex: "DDDDDD")))
                             Spacer()
                             AppSearchBar(callback: {str in
+                                viewModel.onSearch(text: str)
                             })
                         }
                         .padding(.horizontal, 30)
@@ -53,10 +54,10 @@ struct FavoriteScreen: View {
             }
             .frame(maxHeight: .infinity)
             .ignoresSafeArea()
-            .showTabBar()
             .onAppear{
                 viewModel.fetchCoffee()
             }
+            .showTabBar()
         }
         
     }
