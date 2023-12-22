@@ -13,6 +13,7 @@ class CartScreenViewModel:ObservableObject{
     
     @Published var cartList:[CoffeeCart] = []
     @Published var price:Float = 0
+    @Published var showMap = false
     let fee:Float = 1.0
     
    
@@ -53,6 +54,10 @@ class CartScreenViewModel:ObservableObject{
             
         })
         countPrice()
+    }
+    
+    func switchShowingMap(){
+        self.showMap = !self.showMap
     }
     
     

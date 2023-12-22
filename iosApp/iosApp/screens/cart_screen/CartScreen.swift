@@ -15,10 +15,23 @@ struct CartScreen: View {
     var body: some View {
         VStack{
             NavigationLink(destination:EmptyView(), label: {
-             
+                HStack(alignment: .center){
+                    Text(viewModel.showMap ? "Select location" :"Your Order")
+                        .font(.system(size: 22, weight: .semibold))
+                        .foregroundColor(Color(hexStringToUIColor(hex: "2F2D2C")))
+                    Spacer()
+                    if viewModel.showMap{
+                        Button(action: {
+                            viewModel.switchShowingMap()
+                        }, label: {
+                            Text("Done")
+                        })
+                    }
+                }
+                .padding(.horizontal, 30)
+                .padding(.top, 10)
             })
-            .navigationTitle("Your Order")
- 
+        
             ZStack{
                 Color.white
                 ScrollView(.vertical){
@@ -35,7 +48,7 @@ struct CartScreen: View {
                                 .padding(.bottom, 16)
                             HStack{
                                 MiddleActionBtn(iconName: "edit_icon", title: "Add Address"){
-                                    
+                                    viewModel.switchShowingMap()
                                 }
                                 MiddleActionBtn(iconName: "doc_icon", title: "Add Note"){
                                     
@@ -95,6 +108,11 @@ struct CartScreen: View {
                         }
                         .padding(.horizontal, 30)
                         
+                    }
+                }
+                if(viewModel.showMap){
+                    AppMap(){
+                        viewModel.switchShowingMap()
                     }
                 }
             }
