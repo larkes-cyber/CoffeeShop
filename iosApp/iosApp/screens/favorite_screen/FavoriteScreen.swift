@@ -42,13 +42,21 @@ struct FavoriteScreen: View {
                     ScrollView(.vertical){
                         VStack(spacing: 10){
                             ForEach(viewModel.coffee, id:\.self.id){item in
-                                FavoriteCoffeeCard(coffee: item, height: 96){
-                                    viewModel.transferToDetail(id: item.id)
-                                }
+                                FavoriteCoffeeCard(
+                                    coffee: item,
+                                    height: 96,
+                                    callback: {
+                                        viewModel.transferToDetail(id: item.id)
+                                    },
+                                    cartCallback: {
+                                        viewModel.addToCart(id: item.id)
+                                    }
+                                )
                             }
                         }
                         .padding(.horizontal, 15)
                         .padding(.top, 20)
+                        .padding(.bottom, 120)
                     }
                 }
             }

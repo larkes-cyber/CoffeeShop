@@ -12,10 +12,20 @@ import shared
 struct CoffeeCard: View {
     
     @State var hasBeenAddedToCart = false
+    @State var delay = false
     
     let coffee:IdentifiableCoffee
-    let adddedToCartCallback:(Bool) -> Void
+    let adddedToCartCallback:() -> Void
     let callback:() -> Void
+    var timer = Timer()
+
+    
+    func delayAction(){
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.delay = false
+            self.hasBeenAddedToCart = !self.hasBeenAddedToCart
+        }
+    }
     
     var body: some View {
         Button(action: {
@@ -53,18 +63,16 @@ struct CoffeeCard: View {
                             .font(.system(size: 18, weight:.semibold))
                             .foregroundColor(Color(hexStringToUIColor(hex: "2F4B4E")))
                         Spacer()
-                        let _ = print("$$$$$$ \(self.hasBeenAddedToCart)")
-                        if(self.hasBeenAddedToCart){
-                            SmallActionBtn(iconSystemName: "minus", callback: {
-                                self.hasBeenAddedToCart = !self.hasBeenAddedToCart
-                                self.adddedToCartCallback(self.hasBeenAddedToCart)
-                            })
-                        }else{
-                            SmallActionBtn(iconSystemName: "plus", callback: {
-                                self.hasBeenAddedToCart = !self.hasBeenAddedToCart
-                                self.adddedToCartCallback(self.hasBeenAddedToCart)
-                            })
-                        }
+                        SmallActionBtn(iconSystemName:self.hasBeenAddedToCart ? "checkmark" : "plus", callback: {
+                            if(!self.delay){
+                                withAnimation{
+                                    self.delay = true
+                                    self.hasBeenAddedToCart = !self.hasBeenAddedToCart
+                                    self.adddedToCartCallback()
+                                    self.delayAction()
+                                }
+                            }
+                        })
                     }
                 }
                 .padding()

@@ -14,6 +14,18 @@ struct FavoriteCoffeeCard: View {
     let coffee:IdentifiableCoffee
     let height:Float
     let callback:() -> Void
+    let cartCallback:() -> Void
+    @State var delay = false
+    @State var hasBeenAddedToCart = false
+
+    
+    func delayAction(){
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.delay = false
+            self.hasBeenAddedToCart = !self.hasBeenAddedToCart
+        }
+    }
+    
     
     var body: some View {
         Button(action: {
@@ -77,15 +89,17 @@ struct FavoriteCoffeeCard: View {
                         .frame(height: 25)
                         .cornerRadius(16, corners: [.bottomLeft, .topRight])
                         Spacer()
-                        Button(action: {}, label: {
-                            ZStack{
-                                Color(hexStringToUIColor(hex: "C67C4E"))
-                                Image(systemName: "plus")
-                                    .foregroundColor(.white)
+                        
+                        SmallActionBtn(iconSystemName:self.hasBeenAddedToCart ? "checkmark" : "plus", callback: {
+                            if(!self.delay){
+                                withAnimation{
+                                    self.delay = true
+                                    self.hasBeenAddedToCart = !self.hasBeenAddedToCart
+                                    self.cartCallback()
+                                    self.delayAction()
+                                }
                             }
                         })
-                        .frame(width: 32, height: 32)
-                        .cornerRadius(10)
                     }
                     .padding(.bottom, 8)
                     

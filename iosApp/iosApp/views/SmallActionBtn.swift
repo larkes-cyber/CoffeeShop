@@ -25,6 +25,8 @@ struct SmallActionBtn: View {
         })
         .frame(width: 32, height: 32)
         .cornerRadius(10)
+        .rotationEffect(.degrees(360))
+
     }
 }
 

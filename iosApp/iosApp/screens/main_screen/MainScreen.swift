@@ -84,12 +84,8 @@ struct MainScreen: View {
                             ForEach(viewModel.coffeeCards, id: \.self.id){ item in
                                 CoffeeCard(
                                     coffee: item,
-                                    adddedToCartCallback: {hasAdded in
-                                        if(hasAdded){
-                                            viewModel.addToCart(id: item.id)
-                                        }else{
-                                            viewModel.removeFromCart(id: item.id)
-                                        }
+                                    adddedToCartCallback: {
+                                        viewModel.addToCart(id: item.id)
                                     }, callback: {
                                         viewModel.selectCoffee(id: item.id)
                                     }

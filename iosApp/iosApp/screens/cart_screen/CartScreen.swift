@@ -91,6 +91,7 @@ struct CartScreen: View {
                                 
                             }
                             .padding(.top, 16)
+                            .padding(.bottom, 30)
                         }
                         .padding(.horizontal, 30)
                         

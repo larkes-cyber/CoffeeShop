@@ -42,4 +42,10 @@ class FavoriteScreenViewModel:ObservableObject{
         self.coffee = oldCoffee.filter{$0.categoryTitle.lowercased().range(of:text.lowercased()) != nil || $0.subtitle.lowercased().range(of:text.lowercased()) != nil}
     }
     
+    func addToCart(id:String){
+        UseCases().useAddCart().execute(cart: CartItem(id: nil, amount: 1, productId: id), completionHandler: {res, err in
+        })
+    }
+    
+    
 }
