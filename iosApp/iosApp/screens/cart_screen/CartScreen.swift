@@ -73,12 +73,34 @@ struct CartScreen: View {
                         }
                         .frame(maxWidth: .infinity)
                         .frame(height: 4)
+                        
+                        VStack(alignment:.leading, spacing: 16){
+                            Text("Payment Summary")
+                                .font(.system(size: 18, weight: .semibold))
+                                .foregroundColor(Color(hexStringToUIColor(hex:"2f2d2c")))
+                                .padding(.top, 33)
+                                .padding(.bottom, 16)
+                            PaymentRow(title: "Price", price: viewModel.price)
+                            PaymentRow(title: "Delivery Fee", price: viewModel.fee)
+                            Divider()
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 1)
+                                .foregroundColor(Color(hexStringToUIColor(hex: "EAEAEA")))
+                            PaymentRow(title: "Total Payment", price: viewModel.fee + viewModel.price)
+                            AppPrimaryButton(title: "Order"){
+                                
+                            }
+                            .padding(.top, 16)
+                        }
+                        .padding(.horizontal, 30)
+                        
                     }
                 }
             }
         }
         .onAppear{
             viewModel.fetchCoffee()
+            viewModel.countPrice()
         }
     }
 }

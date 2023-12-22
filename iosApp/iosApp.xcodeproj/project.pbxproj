@@ -25,6 +25,7 @@
 		FA131A732B336BFB00A2823F /* CartScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA131A722B336BFB00A2823F /* CartScreenViewModel.swift */; };
 		FA131A752B336D1F00A2823F /* CoffeeCart.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA131A742B336D1F00A2823F /* CoffeeCart.swift */; };
 		FA131A772B336E8800A2823F /* CoffeeCartCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA131A762B336E8800A2823F /* CoffeeCartCard.swift */; };
+		FA2C9A9D2B3593130098ECC9 /* PaymentRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2C9A9C2B3593130098ECC9 /* PaymentRow.swift */; };
 		FAAFD9FB2B2C4F7D00FC4B39 /* CategoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFD9FA2B2C4F7D00FC4B39 /* CategoryItem.swift */; };
 		FAAFD9FF2B2C5A2100FC4B39 /* IdentifiableCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFD9FE2B2C5A2100FC4B39 /* IdentifiableCategory.swift */; };
 		FAAFDA012B2C5E7800FC4B39 /* CoffeeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFDA002B2C5E7800FC4B39 /* CoffeeCard.swift */; };
@@ -80,6 +81,7 @@
 		FA131A722B336BFB00A2823F /* CartScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartScreenViewModel.swift; sourceTree = "<group>"; };
 		FA131A742B336D1F00A2823F /* CoffeeCart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeCart.swift; sourceTree = "<group>"; };
 		FA131A762B336E8800A2823F /* CoffeeCartCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeCartCard.swift; sourceTree = "<group>"; };
+		FA2C9A9C2B3593130098ECC9 /* PaymentRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRow.swift; sourceTree = "<group>"; };
 		FAAFD9FA2B2C4F7D00FC4B39 /* CategoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryItem.swift; sourceTree = "<group>"; };
 		FAAFD9FE2B2C5A2100FC4B39 /* IdentifiableCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableCategory.swift; sourceTree = "<group>"; };
 		FAAFDA002B2C5E7800FC4B39 /* CoffeeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeCard.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				FACD83E82B276319004F2414 /* LoginTextField.swift */,
+				FA2C9A9C2B3593130098ECC9 /* PaymentRow.swift */,
 				FACD83EA2B276761004F2414 /* AppPrimaryButton.swift */,
 				FACD83EC2B276A5A004F2414 /* PasswordTextField.swift */,
 				FA08ADF32B27A021005269F2 /* CircularProgressBar.swift */,
@@ -397,6 +400,7 @@
 				FA0D5E382B33072200D681CF /* OutlineButtonWithCheck.swift in Sources */,
 				FAFD264B2B31A04200BD031B /* OrdersScreen.swift in Sources */,
 				FA08ADF92B29760C005269F2 /* SplashViewModel.swift in Sources */,
+				FA2C9A9D2B3593130098ECC9 /* PaymentRow.swift in Sources */,
 				FAFD26572B31C02D00BD031B /* SmallTabButton.swift in Sources */,
 				FACD83E62B275171004F2414 /* LoginViewModel.swift in Sources */,
 				FA08ADFE2B2B19C4005269F2 /* MainScreenViewModel.swift in Sources */,

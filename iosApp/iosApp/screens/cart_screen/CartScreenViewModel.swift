@@ -12,6 +12,8 @@ import shared
 class CartScreenViewModel:ObservableObject{
     
     @Published var cartList:[CoffeeCart] = []
+    @Published var price:Float = 0
+    let fee:Float = 1.0
     
    
     func fetchCoffee(){
@@ -20,7 +22,6 @@ class CartScreenViewModel:ObservableObject{
             
             let carts = res?.data as! [CartItem]
             
-            print(carts)
             
             carts.forEach{item in
                 UseCases().useGetCoffeeDetailById().execute(id: item.productId, completionHandler: {res, err in
@@ -30,6 +31,13 @@ class CartScreenViewModel:ObservableObject{
             }
             
         })
+    }
+    
+    func countPrice(){
+        self.price = 0
+        cartList.forEach{item in
+            price += (item.coffee?.price ?? 0) * Float(item.amount)
+        }
     }
     
     func changeAmount(index:Int, amount:Int){
@@ -44,6 +52,7 @@ class CartScreenViewModel:ObservableObject{
         UseCases().useChangeCartAmount().execute(id: currentCart.coffee?.id ?? "", amount: Int32(amount), completionHandler: {err in
             
         })
+        countPrice()
     }
     
     
