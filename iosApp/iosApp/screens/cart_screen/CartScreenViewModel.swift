@@ -8,6 +8,7 @@
 
 import SwiftUI
 import shared
+import MapKit
 
 class CartScreenViewModel:ObservableObject{
     
@@ -15,6 +16,13 @@ class CartScreenViewModel:ObservableObject{
     @Published var price:Float = 0
     @Published var showMap = false
     let fee:Float = 1.0
+    @Published var deliveryMode = "Pick Up"
+    @Published var selectedLocation:Location? = nil
+    
+    let coords = [
+        Location(name: "Buckingham Palace", coordinate: CLLocationCoordinate2D(latitude: 51.501, longitude: -0.141)),
+        Location(name: "Tower of London", coordinate: CLLocationCoordinate2D(latitude: 51.508, longitude: -0.076))
+    ]
     
    
     func fetchCoffee(){
@@ -60,5 +68,11 @@ class CartScreenViewModel:ObservableObject{
         self.showMap = !self.showMap
     }
     
+    func onDeliveryModeChange(mode:String){
+        self.deliveryMode = mode
+    }
     
+    func selectLocation(location:Location){
+        self.selectedLocation = location
+    }
 }

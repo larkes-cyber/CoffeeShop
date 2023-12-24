@@ -59,5 +59,6 @@ fun domainModule() = module {
     single { UseDeleteCart(get()) }
     single { UseDeleteUserData(get(), get()) }
     single { UseGetAddress(get()) }
+    single { UseEditUser(get()) }
 
 }

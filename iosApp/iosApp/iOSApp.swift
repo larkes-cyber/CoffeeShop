@@ -31,9 +31,9 @@ struct iOSApp: App {
                 .tabItem {
                     Image(systemName: "bag")
                 }
-                OrdersScreen()
+                UserScreen()
                 .tabItem {
-                    Image(systemName: "bell.fill")
+                    Image(systemName: "person.crop.circle")
                   //  Text("Cart")
                 }
                 

@@ -7,10 +7,14 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct CartScreen: View {
     
     @StateObject private var viewModel = CartScreenViewModel()
+    
+    @State private var mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 51.5, longitude: -0.12), span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
+
     
     var body: some View {
         VStack{
@@ -37,25 +41,38 @@ struct CartScreen: View {
                 ScrollView(.vertical){
                     VStack{
                         VStack(alignment:.leading){
-                            TabsRow(titles: ["Deliver", "Pick Up"], selectedTitle: "Deliver", callback: {str in
-                                
+                            TabsRow(titles: ["Pick Up", "Deliver"], selectedTitle: viewModel.deliveryMode, callback: {str in
+                                viewModel.onDeliveryModeChange(mode: str)
                             })
                             .padding(.top, 21)
                             .padding(.bottom, 24)
-                            Text("Delivery Address")
-                                .font(.system(size: 18, weight:.semibold))
-                                .foregroundColor(Color(hexStringToUIColor(hex: "2F2D2C")))
-                                .padding(.bottom, 16)
-                            HStack{
-                                MiddleActionBtn(iconName: "edit_icon", title: "Add Address"){
-                                    viewModel.switchShowingMap()
+                            if(viewModel.deliveryMode == "Deliver"){
+                                Text("Delivery Address")
+                                    .font(.system(size: 18, weight:.semibold))
+                                    .foregroundColor(Color(hexStringToUIColor(hex: "2F2D2C")))
+                                    .padding(.bottom, 16)
+                                HStack{
+                                    MiddleActionBtn(iconName: "edit_icon", title: "Add Address"){
+                                        viewModel.switchShowingMap()
+                                    }
+                                    MiddleActionBtn(iconName: "doc_icon", title: "Add Note"){
+                                        
+                                    }
                                 }
-                                MiddleActionBtn(iconName: "doc_icon", title: "Add Note"){
-                                    
+                            }else{
+                                if(viewModel.selectedLocation != nil){
+                                    Text("Sected pick up location: \(viewModel.selectedLocation?.name ?? "")")
+                                        .font(.system(size: 18, weight: .medium))
                                 }
+                                
+                                AppMap(coords: viewModel.coords, callback: {coords in
+                                    viewModel.selectLocation(location: coords)
+                                })
+                                .frame(minHeight: 300)
+                                .cornerRadius(14)
                             }
-                            .padding(.bottom, 34)
                         }
+                        .padding(.bottom, 34)
                         .padding(.horizontal, 23)
                         ScrollView(.vertical){
                             VStack(spacing:20){
@@ -111,9 +128,9 @@ struct CartScreen: View {
                     }
                 }
                 if(viewModel.showMap){
-                    AppMap(){
-                        viewModel.switchShowingMap()
-                    }
+                    AppMap(coords: viewModel.coords, callback: {coords in
+                        viewModel.selectLocation(location: coords)
+                    })
                 }
             }
         }

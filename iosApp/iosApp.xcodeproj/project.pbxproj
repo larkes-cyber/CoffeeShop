@@ -27,6 +27,7 @@
 		FA131A772B336E8800A2823F /* CoffeeCartCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA131A762B336E8800A2823F /* CoffeeCartCard.swift */; };
 		FA2C9A9D2B3593130098ECC9 /* PaymentRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2C9A9C2B3593130098ECC9 /* PaymentRow.swift */; };
 		FA2C9A9F2B35A37C0098ECC9 /* AppMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2C9A9E2B35A37C0098ECC9 /* AppMap.swift */; };
+		FA8EA2592B382555004B81F5 /* UserScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8EA2582B382555004B81F5 /* UserScreenViewModel.swift */; };
 		FAAFD9FB2B2C4F7D00FC4B39 /* CategoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFD9FA2B2C4F7D00FC4B39 /* CategoryItem.swift */; };
 		FAAFD9FF2B2C5A2100FC4B39 /* IdentifiableCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFD9FE2B2C5A2100FC4B39 /* IdentifiableCategory.swift */; };
 		FAAFDA012B2C5E7800FC4B39 /* CoffeeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFDA002B2C5E7800FC4B39 /* CoffeeCard.swift */; };
@@ -41,7 +42,7 @@
 		FAFD26372B2F744300BD031B /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = FAFD26362B2F744300BD031B /* SwiftUIIntrospect */; };
 		FAFD263F2B2F74A200BD031B /* FavoriteScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFD263E2B2F74A200BD031B /* FavoriteScreen.swift */; };
 		FAFD26412B2F757800BD031B /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = FAFD26402B2F757800BD031B /* SwiftUIIntrospect */; };
-		FAFD264B2B31A04200BD031B /* OrdersScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFD264A2B31A04200BD031B /* OrdersScreen.swift */; };
+		FAFD264B2B31A04200BD031B /* UserScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFD264A2B31A04200BD031B /* UserScreen.swift */; };
 		FAFD264D2B31A05000BD031B /* CartScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFD264C2B31A05000BD031B /* CartScreen.swift */; };
 		FAFD26512B31A46F00BD031B /* CoffeeDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFD26502B31A46F00BD031B /* CoffeeDetailScreen.swift */; };
 		FAFD26552B31A4A900BD031B /* CoffeeDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFD26542B31A4A900BD031B /* CoffeeDetailViewModel.swift */; };
@@ -84,6 +85,7 @@
 		FA131A762B336E8800A2823F /* CoffeeCartCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeCartCard.swift; sourceTree = "<group>"; };
 		FA2C9A9C2B3593130098ECC9 /* PaymentRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRow.swift; sourceTree = "<group>"; };
 		FA2C9A9E2B35A37C0098ECC9 /* AppMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMap.swift; sourceTree = "<group>"; };
+		FA8EA2582B382555004B81F5 /* UserScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserScreenViewModel.swift; sourceTree = "<group>"; };
 		FAAFD9FA2B2C4F7D00FC4B39 /* CategoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryItem.swift; sourceTree = "<group>"; };
 		FAAFD9FE2B2C5A2100FC4B39 /* IdentifiableCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableCategory.swift; sourceTree = "<group>"; };
 		FAAFDA002B2C5E7800FC4B39 /* CoffeeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeCard.swift; sourceTree = "<group>"; };
@@ -96,7 +98,7 @@
 		FACD83EA2B276761004F2414 /* AppPrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPrimaryButton.swift; sourceTree = "<group>"; };
 		FACD83EC2B276A5A004F2414 /* PasswordTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTextField.swift; sourceTree = "<group>"; };
 		FAFD263E2B2F74A200BD031B /* FavoriteScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteScreen.swift; sourceTree = "<group>"; };
-		FAFD264A2B31A04200BD031B /* OrdersScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersScreen.swift; sourceTree = "<group>"; };
+		FAFD264A2B31A04200BD031B /* UserScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserScreen.swift; sourceTree = "<group>"; };
 		FAFD264C2B31A05000BD031B /* CartScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartScreen.swift; sourceTree = "<group>"; };
 		FAFD26502B31A46F00BD031B /* CoffeeDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeDetailScreen.swift; sourceTree = "<group>"; };
 		FAFD26542B31A4A900BD031B /* CoffeeDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeDetailViewModel.swift; sourceTree = "<group>"; };
@@ -257,12 +259,13 @@
 			path = cart_screen;
 			sourceTree = "<group>";
 		};
-		FAFD26492B31A01100BD031B /* orders_screen */ = {
+		FAFD26492B31A01100BD031B /* user_screen */ = {
 			isa = PBXGroup;
 			children = (
-				FAFD264A2B31A04200BD031B /* OrdersScreen.swift */,
+				FAFD264A2B31A04200BD031B /* UserScreen.swift */,
+				FA8EA2582B382555004B81F5 /* UserScreenViewModel.swift */,
 			);
-			path = orders_screen;
+			path = user_screen;
 			sourceTree = "<group>";
 		};
 		FAFD264E2B31A3CC00BD031B /* screens */ = {
@@ -275,7 +278,7 @@
 				FA08ADFA2B29787D005269F2 /* main_screen */,
 				FAFD263D2B2F748400BD031B /* favorite_screen */,
 				FAFD26462B319FD400BD031B /* cart_screen */,
-				FAFD26492B31A01100BD031B /* orders_screen */,
+				FAFD26492B31A01100BD031B /* user_screen */,
 			);
 			path = screens;
 			sourceTree = "<group>";
@@ -401,8 +404,9 @@
 				FACD83ED2B276A5A004F2414 /* PasswordTextField.swift in Sources */,
 				FACD83EB2B276761004F2414 /* AppPrimaryButton.swift in Sources */,
 				FA0D5E382B33072200D681CF /* OutlineButtonWithCheck.swift in Sources */,
-				FAFD264B2B31A04200BD031B /* OrdersScreen.swift in Sources */,
+				FAFD264B2B31A04200BD031B /* UserScreen.swift in Sources */,
 				FA08ADF92B29760C005269F2 /* SplashViewModel.swift in Sources */,
+				FA8EA2592B382555004B81F5 /* UserScreenViewModel.swift in Sources */,
 				FA2C9A9D2B3593130098ECC9 /* PaymentRow.swift in Sources */,
 				FAFD26572B31C02D00BD031B /* SmallTabButton.swift in Sources */,
 				FACD83E62B275171004F2414 /* LoginViewModel.swift in Sources */,
@@ -565,7 +569,7 @@
 				INFOPLIST_FILE = iosApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = CoffeeShop;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -598,7 +602,7 @@
 				INFOPLIST_FILE = iosApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = CoffeeShop;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

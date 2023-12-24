@@ -93,6 +93,7 @@ struct MainScreen: View {
                                 .padding(.horizontal, 4)
                             }
                         }
+                        .padding(.bottom, 40)
                      
                         Spacer()
                             .frame( height: 70)
