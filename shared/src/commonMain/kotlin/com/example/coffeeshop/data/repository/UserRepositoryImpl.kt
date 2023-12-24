@@ -35,6 +35,7 @@ class UserRepositoryImpl(
     override suspend fun syncUser() {
         val user = getUser()!!
         val serverUser = userRemoteDataSource.getUserInfo(user.session!!)
+        println(serverUser.toString() + "   sdfghgfdfgfddfe")
         userDiskDataSource.putUserData(serverUser.toDataUser())
     }
 

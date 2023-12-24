@@ -14,37 +14,45 @@ struct UserScreen: View {
     @StateObject private var viewModel = UserScreenViewModel()
     
     var body: some View {
+        
         ZStack{
+            NavigationLink(destination: SplashScreen(), isActive: $viewModel.hasBeenExit, label: {
+                EmptyView()
+            })
+            .navigationBarHidden(true)
             Color(hexStringToUIColor(hex: "F9F9F9"))
             ScrollView(.vertical){
                 VStack{
                     ZStack{
                         LinearGradient(gradient: Gradient(colors: [Color(hexStringToUIColor(hex: "131313")), Color(hexStringToUIColor(hex: "313131"))]), startPoint: .leading, endPoint: .trailing)
                         VStack{
-                            ZStack(alignment: .bottomTrailing){
-                                
-
-                                AsyncImage(url: URL(string: Constants().USER_PHOTO_URL + (viewModel.user?.login ?? ""))){image in
-                                    image
-                                        .resizable()
-                                }placeholder: {
-                                    ZStack(alignment: .center){
-                                        Image(systemName: "person.circle")
+                            Button(action: {
+                                viewModel.changeUserPhoto(mode: true)
+                            }, label: {
+                                ZStack(alignment: .bottomTrailing){
+                                    AsyncImage(url: URL(string: Constants().USER_PHOTO_URL + (viewModel.user?.login ?? ""))){image in
+                                        image
                                             .resizable()
-                                            .frame(width: 89, height: 89)
-                                            .foregroundColor(.white)
-                                      
+                                            .cornerRadius(360)
+                                    }placeholder: {
+                                        ZStack(alignment: .center){
+                                            Image(systemName: "person.circle")
+                                                .resizable()
+                                                .frame(width: 89, height: 89)
+                                                .foregroundColor(.white)
+                                          
+                                        }
                                     }
-                                }
+                                    .id(viewModel.userImageId)
                                 
-                                Image(systemName: "plus.circle")
-                                    .resizable()
-                                    .foregroundColor(Color(hexStringToUIColor(hex: "F2F2F2")))
-                                    .frame(width: 25, height: 25)
-                            }
-                            .frame(width: 89, height: 89)
-                            .padding(.top, 65)
-                            
+                                    Image(systemName: "plus.circle")
+                                        .resizable()
+                                        .foregroundColor(Color(hexStringToUIColor(hex: "F2F2F2")))
+                                        .frame(width: 25, height: 25)
+                                }
+                                .frame(width: 89, height: 89)
+                                .padding(.top, 65)
+                            })
                             HStack{
                                 if(viewModel.nameChangeMode){
                                     TextField(viewModel.user?.name ?? "", text: $viewModel.nameTextField)
@@ -98,6 +106,12 @@ struct UserScreen: View {
                             }
                             .accentColor(.black)
                         }
+                        Button(action: {
+                            viewModel.toExit()
+                        }, label: {
+                            Text("Exit")
+                                .foregroundColor(.red)
+                        })
                     }
                     .padding(.top, 15)
                     .padding(.horizontal, 27)
@@ -105,6 +119,9 @@ struct UserScreen: View {
             }
         }
         .ignoresSafeArea()
+        .sheet(isPresented: $viewModel.showSheet) {
+            ImagePicker(sourceType: .photoLibrary, selectedImage: $viewModel.image)
+        }
     }
 }
 

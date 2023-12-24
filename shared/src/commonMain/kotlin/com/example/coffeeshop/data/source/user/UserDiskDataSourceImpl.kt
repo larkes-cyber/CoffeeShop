@@ -17,6 +17,7 @@ class UserDiskDataSourceImpl(
 
     override suspend fun getUserData(): DataUser? {
         val data = jsonStorage.getItemsByKey(USER_JSON_FILED)
+        println((if(data.isNotEmpty()) Json.decodeFromString(DataUser.serializer(), data) else null).toString() + "dfgvsxvvccvvcv")
         return if(data.isNotEmpty()) Json.decodeFromString(DataUser.serializer(), data) else null
     }
 

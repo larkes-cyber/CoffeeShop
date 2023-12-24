@@ -101,6 +101,11 @@ class UserRemoteDataSourceImpl(
 
     override suspend fun uploadProfileImage(userId: String, file: ByteArray) {
         httpClient.post(POST_UPLOAD_PHOTO){
+
+            url{
+                parameters.append("login",userId)
+            }
+
             setBody(
                 MultiPartFormDataContent(
                 formData {

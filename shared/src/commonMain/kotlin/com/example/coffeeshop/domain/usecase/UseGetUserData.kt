@@ -13,6 +13,8 @@ class UseGetUserData(
 
     suspend fun execute(): Resource<User?> {
         return try {
+            val user = userRepository.getUser()
+            println(user.toString() + "@@@@@@@@@@@@@@")
             Resource.Success(userRepository.getUser()?.toUser())
         }catch (e:Exception){
             Resource.Error(e.message!!)

@@ -31,10 +31,11 @@ struct iOSApp: App {
                 .tabItem {
                     Image(systemName: "bag")
                 }
-                UserScreen()
+                NavigationView(){
+                    UserScreen()
+                }
                 .tabItem {
                     Image(systemName: "person.crop.circle")
-                  //  Text("Cart")
                 }
                 
             }

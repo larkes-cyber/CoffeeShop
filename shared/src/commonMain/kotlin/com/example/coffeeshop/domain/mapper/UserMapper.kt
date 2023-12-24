@@ -19,7 +19,9 @@ fun User.toDataUser():DataUser{
 fun DataUser.toUser():User{
     return User(
         name = name,
-        number = number
+        number = number,
+        login = login,
+        password = password
     )
 }
 

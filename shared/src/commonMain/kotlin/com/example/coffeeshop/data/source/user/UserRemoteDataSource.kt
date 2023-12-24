@@ -23,7 +23,7 @@ interface UserRemoteDataSource {
         val POST_ADD_FAVORITE_COFFEE = "$COFFEE_API/user/add_favorite_coffee"
         val POST_GET_USER_INFO = "$COFFEE_API/user/get_user_info"
         val POST_REMOVE_USER_INFO = "$COFFEE_API/user/remove_favorite_coffee"
-        val POST_UPLOAD_PHOTO = "$COFFEE_API/user/upload_user_photo"
+        val POST_UPLOAD_PHOTO = "$COFFEE_API/user/change_profile_photo"
         val GET_ADDRESS = "COFFEE_API/user/get_address"
 
     }

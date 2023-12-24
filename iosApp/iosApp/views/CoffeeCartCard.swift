@@ -30,6 +30,7 @@ struct CoffeeCartCard: View {
                 .cornerRadius(12)
                 .frame(width: 54, height: 54)
                 .padding(.trailing, 12)
+                
                 VStack(alignment:.leading){
                     Text(coffee?.categoryTitle ?? "")
                         .font(.system(size: 18, weight: .semibold))

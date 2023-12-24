@@ -1,6 +1,7 @@
 package com.example.coffeeshop.android.screen.main_screen
 
 import android.graphics.BitmapFactory
+import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.ui.graphics.ImageBitmap
@@ -35,6 +36,10 @@ class MainViewModel @Inject constructor():ViewModel(){
     fun loadUserData(){
         viewModelScope.launch {
             _userUIState.value = UserUIState(isLoading = true)
+
+            val some =  UseCases.useGetUserData().execute().data
+            Log.d("wefgfdsdfgfdf", some.toString())
+
             _userUIState.value = UserUIState(user = UseCases.useGetUserData().execute().data)
         }
     }

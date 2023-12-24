@@ -48,6 +48,7 @@ struct FavoriteCoffeeCard: View {
                         .frame(width: 128)
                         .clipShape(RoundedRectangle(cornerRadius: 16.0))
                         .padding(.leading, 8)
+
                         VStack(alignment: .leading){
                             Text(coffee.categoryTitle)
                                 .font(.system(size: 16, weight: .semibold))

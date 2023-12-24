@@ -58,7 +58,7 @@ class CartViewModel @Inject constructor():ViewModel() {
 
     private suspend fun getAddress(points:Pair<Float, Float>):String{
         _addressUIState.value = addressUIState.value.copy(isLoading = true)
-        return UseCases.useGetAddress().execute(points).data!!
+        return UseCases.useGetAddress().execute(points).data ?: ""
     }
 
     private fun checkAmount(){

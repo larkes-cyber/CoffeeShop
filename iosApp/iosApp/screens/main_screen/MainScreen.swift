@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import shared
 
 struct MainScreen: View {
     
@@ -39,9 +40,17 @@ struct MainScreen: View {
                                         .foregroundColor(Color(hexStringToUIColor(hex: "DDDDDD")))
                                 }
                                 Spacer()
-                                Image("coffee_background_image")
-                                    .frame(width: 44, height: 44)
-                                    .clipShape(RoundedRectangle(cornerRadius: 14.0))
+                                AsyncImage(url: URL(string: Constants().USER_PHOTO_URL + (viewModel.user?.login ?? ""))){image in
+                                    image
+                                        .resizable()
+                                }placeholder: {
+                                    ZStack(alignment: .center){
+                                        ProgressView()
+                                      
+                                    }
+                                }
+                                .frame(width: 44, height: 44)
+                                .clipShape(RoundedRectangle(cornerRadius: 14.0))
                             }
                             
                             AppSearchBar(callback: {str in
