@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.coffeeshop.android.untils.Constants.DELIVER_TAB_TITLE
 import com.example.coffeeshop.di.UseCases
+import com.example.coffeeshop.domain.model.Location
+import com.yandex.mapkit.geometry.Point
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -21,6 +23,14 @@ class CartViewModel @Inject constructor():ViewModel() {
 
     private val _receiveOrderModeUIState = MutableStateFlow(DELIVER_TAB_TITLE)
     val receiveOrderModeUIState:StateFlow<String> = _receiveOrderModeUIState
+
+    private val _selectedLocationUIState = MutableStateFlow<String?>(null)
+    val selectedLocationUIState:StateFlow<String?> = _selectedLocationUIState
+
+    val locations = listOf(
+        Location(name = "Buckingham Palace", latitude = 51.501, longitude = -0.141),
+        Location(name = "Tower of London", latitude = 51.508, longitude = -0.076),
+    )
 
     fun getCartCoffee(){
         viewModelScope.launch {
@@ -75,15 +85,26 @@ class CartViewModel @Inject constructor():ViewModel() {
     fun changeMapActive(active:Boolean){
         _addressUIState.value = addressUIState.value.copy(showingMap = active)
     }
-    fun onAddressChange(points:Pair<Float, Float>){
+    fun onAddressChange(points:Pair<Double, Double>){
         viewModelScope.launch {
-            val address = getAddress(points)
+            val address = getAddress(Pair(points.first.toFloat(), points.second.toFloat()))
             _addressUIState.value = addressUIState.value.copy(selectedAddress = address, isLoading = false)
         }
     }
 
     fun onReceiveModeChange(title:String){
         _receiveOrderModeUIState.value = title
+    }
+
+    fun onLocationChange(point:Pair<Double, Double>){
+
+        val location = locations.find {
+            String.format("%.2f", it.latitude) == String.format("%.2f", point.first)
+                    && String.format("%.2f", it.longitude) == String.format("%.2f", point.second)
+        } ?: return
+
+        _selectedLocationUIState.value = location.name
+
     }
 
 }

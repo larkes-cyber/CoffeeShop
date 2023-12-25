@@ -1,6 +1,7 @@
 package com.example.coffeeshop.android.component
 
 import android.content.Context
+import android.content.DialogInterface.OnClickListener
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.util.Log
@@ -15,13 +16,16 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import com.example.coffeeshop.R
+import com.example.coffeeshop.domain.model.Location
 import com.yandex.mapkit.MapKitFactory
 import com.yandex.mapkit.geometry.Point
 import com.yandex.mapkit.map.CameraPosition
 import com.yandex.mapkit.map.IconStyle
 import com.yandex.mapkit.map.InputListener
 import com.yandex.mapkit.map.Map
+import com.yandex.mapkit.map.MapObject
 import com.yandex.mapkit.map.MapObjectCollection
+import com.yandex.mapkit.map.MapObjectTapListener
 import com.yandex.mapkit.map.PlacemarkMapObject
 import com.yandex.mapkit.mapview.MapView
 import com.yandex.runtime.image.ImageProvider
@@ -29,11 +33,13 @@ import com.yandex.runtime.image.ImageProvider
 @Composable
 fun MapView(
     modifier: Modifier = Modifier,
-    onMapChange:(Pair<Float, Float>) -> Unit
-) {
+    locations:(List<Location>) = listOf(),
+    selectingMode:Boolean = false,
+    onMapChange:(Pair<Double, Double>) -> Unit
+    ) {
 
-    val startLocation = Point(59.9402, 30.315)
-    var zoomValue = 16.5f
+    val startLocation = Point(51.5, -0.12)
+    var zoomValue = 10.5f
 
     val ctx = LocalContext.current
 
@@ -45,15 +51,26 @@ fun MapView(
         ctx = ctx
     )
 
+    fun addMarkerOnMap(
+        point:Point,
+        clickable:Boolean = false,
+        onClickListener: MapObjectTapListener? = null
+    ){
+        mapObjectCollection = mapView!!.map.mapObjects
+        placemarkMapObject = mapObjectCollection?.addPlacemark(point, ImageProvider.fromBitmap(marker))
+        placemarkMapObject?.opacity = 0.5f
+
+        if(clickable){
+            placemarkMapObject!!.addTapListener(onClickListener!!)
+        }
+
+    }
 
     val inputListener = remember {
         object : InputListener {
             override fun onMapTap(p0: Map, p1: Point) {
-                onMapChange(Pair(p1.longitude.toFloat(), p1.latitude.toFloat()))
-                mapObjectCollection = mapView!!.map.mapObjects
-                if(placemarkMapObject != null) mapObjectCollection?.remove(placemarkMapObject!!)
-                placemarkMapObject = mapObjectCollection?.addPlacemark(p1, ImageProvider.fromBitmap(marker))
-                placemarkMapObject?.opacity = 0.5f
+                onMapChange(Pair(p1.longitude, p1.latitude))
+                addMarkerOnMap(p1)
 
             }
 
@@ -62,15 +79,21 @@ fun MapView(
         }
     }
 
+    val onLocationClickListener = MapObjectTapListener { mapObject, point ->
+        onMapChange(Pair(point.latitude, point.longitude))
+        true
+    }
+
 
     AndroidView(
         modifier = modifier,
         factory = {context ->
             val view = LayoutInflater.from(context).inflate(com.example.coffeeshop.android.R.layout.map_view, null)
-            mapView = view.findViewById<MapView>(com.example.coffeeshop.android.R.id.mapview)
+            mapView = view.findViewById(com.example.coffeeshop.android.R.id.mapview)
 
-            mapView!!.map.addInputListener(inputListener)
-
+            if(selectingMode){
+                mapView!!.map.addInputListener(inputListener)
+            }
 
             MapKitFactory.getInstance().onStart()
             mapView!!.onStart()
@@ -79,6 +102,13 @@ fun MapView(
                 CameraPosition(startLocation, zoomValue, 0.0f, 0.0f)
             )
 
+            locations.forEach {
+                addMarkerOnMap(
+                    point = Point(it.latitude, it.longitude),
+                    clickable = true,
+                    onClickListener = onLocationClickListener
+                )
+            }
 
 
             mapView!!

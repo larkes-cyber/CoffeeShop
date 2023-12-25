@@ -27,7 +27,7 @@ object Constants {
     const val HOME_ICON = "home"
     const val FAVORITE_ICON = "favorite"
     const val CART_ICON = "cart"
-    const val NOTIFICATIONS_ICON = "notifications"
+    const val PROFILE_ICON = "profile"
     const val WELCOME_TITLE = "Welcome"
     const val SEARCH_COFFEE_TITLE = "Search coffee"
     const val DETAIL_MAIN_SCREEN_TITLE = "Detail"
@@ -57,6 +57,8 @@ object Constants {
     const val SELECT_ADDRESS_TITLE = "Select the address"
     const val SELECTED_ADDRESS_TITLE = "Selected address"
     const val SELECT_ADDRESS_BTN_TITLE = "Select"
-
+    const val SELECTED_PICK_UP_ADDRESS = "Pick up address: "
+    const val SETTINGS_TITLE = "Settings"
+    const val SELECT_LANG_TITLE = "Select your language"
 
 }

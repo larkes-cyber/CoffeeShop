@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Divider
@@ -28,6 +29,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -54,6 +56,7 @@ import com.example.coffeeshop.android.untils.Constants.PAYMENT_SUMMARY_SUBTITLE_
 import com.example.coffeeshop.android.untils.Constants.PAYMENT_SUMMARY_SUBTITLE_TOTAL_PAYMENT
 import com.example.coffeeshop.android.untils.Constants.PAYMENT_SUMMARY_TITLE
 import com.example.coffeeshop.android.untils.Constants.PICK_UP_TAB_TITLE
+import com.example.coffeeshop.android.untils.Constants.SELECTED_PICK_UP_ADDRESS
 import com.example.coffeeshop.android.untils.Constants.SELECT_ADDRESS_BTN_TITLE
 import com.example.coffeeshop.android.untils.Constants.SELECT_ADDRESS_TITLE
 import com.example.coffeeshop.android.untils.Constants.YOUR_ORDER_TITLE
@@ -67,6 +70,7 @@ fun CartScreen(
     val cartUIState by viewModel.cartUIState.collectAsState()
     val addressUIState by viewModel.addressUIState.collectAsState()
     val receiveOrderUIState by viewModel.receiveOrderModeUIState.collectAsState()
+    val selectedLocationUIState by viewModel.selectedLocationUIState.collectAsState()
     
     val scrollState = rememberScrollState()
 
@@ -82,34 +86,14 @@ fun CartScreen(
                 .background(AppTheme.colors.secondBackground)
                 .verticalScroll(scrollState)
         ) {
-            Box(modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 20.dp)) {
-                Box(
-                    modifier = Modifier.padding(top = 6.dp)
-                ) {
-                    IconButton(onClick = {
-                        navController.navigate(Screen.MainScreen.route)
-                    }) {
-                        Icon(
-                            imageVector = Icons.Default.KeyboardArrowLeft,
-                            contentDescription = "",
-                            modifier = Modifier.size(34.dp),
-                            tint = AppTheme.colors.background
-                        )
-                    }
-                }
-
-                Text(
-                    text = YOUR_ORDER_TITLE,
-                    fontSize = 18.sp,
-                    color = AppTheme.colors.secondPrimaryTitle,
-                    fontFamily = sora,
-                    fontWeight = FontWeight.SemiBold,
-                    modifier = Modifier.align(Alignment.Center)
-                )
-
-            }
+            Text(
+                text = YOUR_ORDER_TITLE,
+                fontSize = 24.sp,
+                color = AppTheme.colors.secondPrimaryTitle,
+                fontFamily = sora,
+                fontWeight = FontWeight.SemiBold,
+                modifier = Modifier.padding(top = 25.dp, start = 20.dp)
+            )
 
             Spacer(modifier = Modifier.height(25.dp))
 
@@ -168,11 +152,33 @@ fun CartScreen(
                         }
                     }
                     Spacer(modifier = Modifier.height(16.dp))
-                    SmallButton(
-                        icon = R.drawable.baseline_edit_note_24,
-                        title = ADD_ADDRESS_TITLE_BTN
-                    ) {
-                        viewModel.changeMapActive(true)
+                    if(receiveOrderUIState == DELIVER_TAB_TITLE) {
+                        SmallButton(
+                            icon = R.drawable.baseline_edit_note_24,
+                            title = ADD_ADDRESS_TITLE_BTN
+                        ) {
+                            viewModel.changeMapActive(true)
+                        }
+                    }else{
+                        if(selectedLocationUIState != null){
+                            Text(
+                                text = SELECTED_PICK_UP_ADDRESS + selectedLocationUIState!!,
+                                fontSize = 14.sp,
+                                color = AppTheme.colors.secondPrimaryTitle,
+                                fontFamily = sora,
+                                fontWeight = FontWeight.Normal
+                            )
+                            Spacer(modifier = Modifier.height(20.dp))
+                        }
+                        Box(modifier = Modifier
+                            .fillMaxWidth()
+                            .height(300.dp)
+                            .clip(RoundedCornerShape(14.dp))
+                        ){
+                            MapView(locations = viewModel.locations){
+                                viewModel.onLocationChange(it)
+                            }
+                        }
                     }
                     Column(
                         modifier = Modifier.fillMaxWidth()
@@ -281,7 +287,7 @@ fun CartScreen(
                         ){
 
                         }
-                        Spacer(modifier = Modifier.height(20.dp))
+                        Spacer(modifier = Modifier.height(70.dp))
                     }
                 }
             }
@@ -342,7 +348,7 @@ fun CartScreen(
                         modifier = Modifier
                             .size(23.dp)
                             .clickable {
-
+                                viewModel.closeMap()
                             },
                         tint = AppTheme.colors.secondPrimaryTitle
                     )

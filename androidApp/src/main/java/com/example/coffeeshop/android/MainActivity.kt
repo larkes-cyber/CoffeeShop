@@ -7,17 +7,11 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.*
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
-import com.example.coffeeshop.BusinessModule
 import com.example.coffeeshop.android.navigation.BottomNavBar
 import com.example.coffeeshop.android.navigation.BottomNavItem
 import com.example.coffeeshop.android.navigation.Navigation
@@ -26,11 +20,9 @@ import com.example.coffeeshop.android.theme.CoffeeShopAppTheme
 import com.example.coffeeshop.android.untils.Constants.CART_ICON
 import com.example.coffeeshop.android.untils.Constants.FAVORITE_ICON
 import com.example.coffeeshop.android.untils.Constants.HOME_ICON
-import com.example.coffeeshop.android.untils.Constants.NOTIFICATIONS_ICON
-import com.example.coffeeshop.di.UseCases
+import com.example.coffeeshop.android.untils.Constants.PROFILE_ICON
 import com.yandex.mapkit.MapKitFactory
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -41,8 +33,6 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Log.d("sdfsdfsdfsdf","######################")
-
 
             MapKitFactory.setApiKey("848aefe2-e81e-4b91-b0ea-b006e36e9c52")
 
@@ -79,6 +69,11 @@ class MainActivity : ComponentActivity() {
                                     icon = R.drawable.cart,
                                     name = CART_ICON,
                                     route = Screen.CartScreen.route
+                                ),
+                                BottomNavItem(
+                                    icon = R.drawable.baseline_person_24,
+                                    name = PROFILE_ICON,
+                                    route = Screen.ProfileScreen.route
                                 )
                             ),
                             navController = navController
