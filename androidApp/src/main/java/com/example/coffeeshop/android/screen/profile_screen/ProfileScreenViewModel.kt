@@ -1,5 +1,9 @@
 package com.example.coffeeshop.android.screen.profile_screen
 
+import android.content.Context
+import android.graphics.Bitmap
+import android.net.Uri
+import android.provider.MediaStore
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.coffeeshop.di.UseCases
@@ -8,6 +12,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import java.io.ByteArrayOutputStream
 import javax.inject.Inject
 
 @HiltViewModel
@@ -16,13 +21,14 @@ class ProfileScreenViewModel @Inject constructor():ViewModel() {
     private val _userUIState = MutableStateFlow<User?>(null)
     val userUIState:StateFlow<User?> = _userUIState
 
+    private val _profileUIState = MutableStateFlow(ProfileUIState())
+    val profileUIState:StateFlow<ProfileUIState> = _profileUIState
+
+    private val _selectedImageUriUIState = MutableStateFlow<Uri?>(null)
+    val selectedImageUriUIState:StateFlow<Uri?> = _selectedImageUriUIState
+
     val languages = listOf("Russian", "English")
 
-    private val _selectedLangUIState = MutableStateFlow("English")
-    val selectedLangUIState:StateFlow<String> = _selectedLangUIState
-
-    private val _showingPickerUIState = MutableStateFlow(false)
-    val showingPickerUIState:StateFlow<Boolean> = _showingPickerUIState
 
     init {
         fetchUser()
@@ -35,13 +41,23 @@ class ProfileScreenViewModel @Inject constructor():ViewModel() {
     }
 
     fun onTitleChange(title:String){
-        _selectedLangUIState.value = title
+        _profileUIState.value = profileUIState.value.copy(selectedLang = title)
         switchShowingPicker()
     }
 
     fun switchShowingPicker(){
-        _showingPickerUIState.value = !showingPickerUIState.value
+        _profileUIState.value = profileUIState.value.copy(isPickerActive = profileUIState.value.isPickerActive.not())
     }
 
+    fun uploadProfileImage(uri:Uri, context:Context){
+        viewModelScope.launch {
+            _selectedImageUriUIState.value = uri
+            val bitmap = MediaStore.Images.Media.getBitmap(context.contentResolver, uri)
+            val stream = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.PNG, 90, stream)
+            val bytes = stream.toByteArray()
+            UseCases.useUploadUserPhoto().execute(userId = userUIState.value?.login ?: "", file = bytes)
+        }
+    }
 
 }

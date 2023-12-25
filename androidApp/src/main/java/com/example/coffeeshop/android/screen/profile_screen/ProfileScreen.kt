@@ -1,6 +1,9 @@
 package com.example.coffeeshop.android.screen.profile_screen
 
 import android.widget.Space
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -42,6 +45,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -63,8 +67,17 @@ fun ProfileScreen(
 ) {
 
     val userUIState by viewModel.userUIState.collectAsState()
-    val selectedLangUIState by viewModel.selectedLangUIState.collectAsState()
-    val showingPickerUIState by viewModel.showingPickerUIState.collectAsState()
+    val selectedImageUriUIState by viewModel.selectedImageUriUIState.collectAsState()
+    val profileUIState by viewModel.profileUIState.collectAsState()
+    val context = LocalContext.current
+
+
+    val galleryLauncher = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+        if(uri != null) {
+            viewModel.uploadProfileImage(uri = uri, context = context)
+        }
+    }
+
 
     LazyColumn(
         modifier = Modifier
@@ -95,30 +108,44 @@ fun ProfileScreen(
                 ) {
                     if(userUIState != null) {
                         Button(
-                            onClick = {  },
+                            onClick = {
+                                galleryLauncher.launch("image/*")
+                            },
                             colors = ButtonDefaults.buttonColors(backgroundColor = Color.Transparent),
                             contentPadding = PaddingValues(0.dp),
                             elevation = ButtonDefaults.elevation(0.dp)
                         ) {
                             Box {
-                                SubcomposeAsyncImage(
-                                    model = Constants.COFFEE_PHOTOS_URL + userUIState?.login,
-                                    contentDescription = "",
-                                    modifier = Modifier
-                                        .size(89.dp)
-                                        .clip(RoundedCornerShape(16.dp)),
-                                    contentScale = ContentScale.Crop
-                                ){
-                                    Box(
-                                        modifier = Modifier.size(89.dp)
-                                    ) {
-                                        Icon(
-                                            imageVector = Icons.Rounded.AccountCircle,
-                                            contentDescription = "",
-                                            tint = AppTheme.colors.primaryTitle,
-                                            modifier = Modifier.size(89.dp)
+                                if(selectedImageUriUIState != null){
+                                    AsyncImage(
+                                        model = selectedImageUriUIState,
+                                        contentDescription = "",
+                                        modifier = Modifier
+                                            .size(89.dp)
+                                            .clip(RoundedCornerShape(100)),
+                                        contentScale = ContentScale.Crop
                                         )
-                                    }
+                                }else{
+                                    SubcomposeAsyncImage(
+                                        model =  Constants.USER_PHOTO_URL + userUIState?.login,
+                                        contentDescription = "",
+                                        modifier = Modifier
+                                            .size(89.dp)
+                                            .clip(RoundedCornerShape(100)),
+                                        contentScale = ContentScale.Crop,
+                                        loading = {
+                                            Box(
+                                                modifier = Modifier.size(89.dp)
+                                            ) {
+                                                Icon(
+                                                    imageVector = Icons.Rounded.AccountCircle,
+                                                    contentDescription = "",
+                                                    tint = AppTheme.colors.primaryTitle,
+                                                    modifier = Modifier.size(89.dp)
+                                                )
+                                            }
+                                        }
+                                    )
                                 }
                                 Icon(
                                     imageVector = Icons.Outlined.AddCircle,
@@ -127,14 +154,16 @@ fun ProfileScreen(
                                         .size(25.dp)
                                         .align(Alignment.BottomEnd),
                                     tint = AppTheme.colors.primaryTitle
-                                    )
+                                )
                             }
                         }
                         Row(
                             horizontalArrangement = Arrangement.spacedBy(3.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
+                            if(profileUIState.isNameFormActive){
 
+                            }
                             Text(
                                 text = viewModel.userUIState.value?.name ?: "",
                                 fontSize = 17.sp,
@@ -218,20 +247,20 @@ fun ProfileScreen(
                             }
                         ) {
                             Icon(
-                               imageVector = if(showingPickerUIState) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
+                               imageVector = if(profileUIState.isPickerActive) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
                                contentDescription = "",
                                tint = AppTheme.colors.secondPrimaryTitle
                             )
                             Text(
-                               text = selectedLangUIState,
+                               text = profileUIState.selectedLang,
                                fontFamily = sora,
                                color = AppTheme.colors.secondPrimaryTitle,
                                fontSize = 14.sp
                             )
                         }
-                        if(showingPickerUIState) {
+                        if(profileUIState.isPickerActive) {
                             ItemsPicker(
-                                currentTitle = selectedLangUIState,
+                                currentTitle = profileUIState.selectedLang,
                                 options = viewModel.languages,
                                 onClick = {
                                     viewModel.onTitleChange(it)
