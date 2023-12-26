@@ -32,7 +32,11 @@ class CartViewModel @Inject constructor():ViewModel() {
         Location(name = "Tower of London", latitude = 51.508, longitude = -0.076),
     )
 
-    fun getCartCoffee(){
+    init {
+        getCartCoffee()
+    }
+
+    private fun getCartCoffee(){
         viewModelScope.launch {
             _cartUIState.value = cartUIState.value.copy(isLoading = true)
 

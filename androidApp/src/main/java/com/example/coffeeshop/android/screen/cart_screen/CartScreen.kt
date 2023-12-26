@@ -74,9 +74,7 @@ fun CartScreen(
     
     val scrollState = rememberScrollState()
 
-    LaunchedEffect(Unit){
-        viewModel.getCartCoffee()
-    }
+
 
     
     if(addressUIState.showingMap.not()){

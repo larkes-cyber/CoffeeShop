@@ -1,6 +1,5 @@
 package com.example.coffeeshop.android.screen.coffee_detail_screen
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -17,12 +16,12 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Card
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
@@ -46,8 +45,10 @@ import com.example.coffeeshop.android.R
 import com.example.coffeeshop.android.component.AppPrimaryButton
 import com.example.coffeeshop.android.component.CoffeeSizeBtn
 import com.example.coffeeshop.android.component.DescriptionComponent
+import com.example.coffeeshop.android.component.OutlinedAppPrimaryButton
 import com.example.coffeeshop.android.theme.AppTheme
 import com.example.coffeeshop.android.theme.sora
+import com.example.coffeeshop.android.untils.Constants.ADDED_TO_CART_TITLE
 import com.example.coffeeshop.android.untils.Constants.BUY_NOW_TITLE
 import com.example.coffeeshop.android.untils.Constants.DETAIL_MAIN_SCREEN_DESCR_TITLE
 import com.example.coffeeshop.android.untils.Constants.DETAIL_MAIN_SCREEN_TITLE
@@ -66,6 +67,7 @@ fun CoffeeDetailScreen(
 ) {
 
     val coffeeDetailUIState by viewModel.coffeeDetailUIState.collectAsState()
+    val hasBeenAddedToCartUIState by viewModel.hasBeenAddedToCartUIState.collectAsState()
 
     val scrollState = rememberScrollState()
 
@@ -133,7 +135,10 @@ fun CoffeeDetailScreen(
                 AsyncImage(
                     model = Constants.COFFEE_PHOTOS_URL + id,
                     contentDescription = "",
-                    modifier = Modifier.fillMaxWidth().height(226.dp).clip(RoundedCornerShape(16.dp)),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(226.dp)
+                        .clip(RoundedCornerShape(16.dp)),
                     contentScale = ContentScale.Crop
                 )
             }
@@ -279,12 +284,29 @@ fun CoffeeDetailScreen(
                                 fontFamily = sora
                             )
                         }
-                        AppPrimaryButton(
-                            title = BUY_NOW_TITLE,
-                            modifier = Modifier.weight(1.4f)
-                        ){
-
+                        if(hasBeenAddedToCartUIState){
+                            OutlinedAppPrimaryButton(
+                                title = ADDED_TO_CART_TITLE,
+                                icon = {
+                                    Icon(
+                                        imageVector = Icons.Default.Check,
+                                        contentDescription = "",
+                                        tint = AppTheme.colors.thirdBackground
+                                    )
+                                },
+                                modifier = Modifier.weight(1.4f)
+                            ){
+                                viewModel.changeCoffeeCartStatus()
+                            }
+                        }else{
+                            AppPrimaryButton(
+                                title = BUY_NOW_TITLE,
+                                modifier = Modifier.weight(1.4f)
+                            ){
+                                viewModel.changeCoffeeCartStatus()
+                            }
                         }
+
                     }
                 }
             }

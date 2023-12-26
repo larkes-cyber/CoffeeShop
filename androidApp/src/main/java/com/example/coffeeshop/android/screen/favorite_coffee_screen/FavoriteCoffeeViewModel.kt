@@ -24,6 +24,10 @@ class FavoriteCoffeeViewModel @Inject constructor():ViewModel() {
     private val _searchCoffeeUIState = MutableStateFlow(SearchCoffeeUIState())
     val searchCoffeeUIState:StateFlow<SearchCoffeeUIState> = _searchCoffeeUIState
 
+    init {
+        refreshData()
+    }
+
     fun refreshData(){
         viewModelScope.launch {
             UseCases.useFullAppSync().execute()

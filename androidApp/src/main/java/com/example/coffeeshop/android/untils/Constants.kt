@@ -61,5 +61,5 @@ object Constants {
     const val SETTINGS_TITLE = "Settings"
     const val SELECT_LANG_TITLE = "Select your language"
     const val EXIT_TITLE = "Exit"
-
+    const val ADDED_TO_CART_TITLE = "Added to cart"
 }
