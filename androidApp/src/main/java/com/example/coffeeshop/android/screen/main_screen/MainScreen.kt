@@ -20,7 +20,10 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.Icon
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.AccountCircle
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -38,6 +41,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import coil.compose.SubcomposeAsyncImage
 import com.example.coffeeshop.android.R
 import com.example.coffeeshop.android.component.CategoryItem
 import com.example.coffeeshop.android.component.CoffeeCard
@@ -45,6 +49,8 @@ import com.example.coffeeshop.android.component.SearchBar
 import com.example.coffeeshop.android.navigation.Screen
 import com.example.coffeeshop.android.theme.AppTheme
 import com.example.coffeeshop.android.theme.sora
+import com.example.coffeeshop.android.untils.Constants.EXIT_TITLE
+import com.example.coffeeshop.untils.Constants
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 
@@ -57,7 +63,6 @@ fun MainScreen(
     val mainScreenUIState by viewModel.mainScreenUIState.collectAsState()
     val searchCoffeeUIState by viewModel.searchCoffeeUIState.collectAsState()
     val userUIState by viewModel.userUIState.collectAsState()
-    val hasBeenExit by viewModel.hasBeenExit.collectAsState()
 
     LaunchedEffect(Unit){
         viewModel.loadCategories().join()
@@ -65,11 +70,6 @@ fun MainScreen(
         viewModel.loadUserData()
     }
 
-    LaunchedEffect(hasBeenExit){
-        if(hasBeenExit){
-            navController.navigate(Screen.SplashScreen.route)
-        }
-    }
 
     SwipeRefresh(
         state = rememberSwipeRefreshState(isRefreshing = mainScreenUIState.isCategoriesLoading || mainScreenUIState.isCoffeeLoading),
@@ -100,40 +100,43 @@ fun MainScreen(
                 ) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
                     ){
-                        Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                        if(userUIState.user != null) {
+                            Column(horizontalAlignment = Alignment.Start) {
 
-                            if(userUIState.user != null) {
+                                Text(
+                                    text = "Welcome",
+                                    fontFamily = sora,
+                                    fontWeight = FontWeight.SemiBold,
+                                    fontSize = 16.sp,
+                                    color = AppTheme.colors.thirdPrimaryTitle
+                                )
+                                Spacer(modifier = Modifier.height(3.dp))
                                 Text(
                                     text = userUIState.user!!.name,
                                     fontFamily = sora,
                                     fontWeight = FontWeight.SemiBold,
-                                    fontSize = 14.sp,
+                                    fontSize = 12.sp,
                                     color = AppTheme.colors.thirdPrimaryTitle
                                 )
-                                ClickableText(
-                                    text = AnnotatedString("exit"),
-                                    onClick = {
-                                        viewModel.deleteUser()
-                                    },
-                                    style = TextStyle(
-                                        fontFamily = sora,
-                                        fontWeight = FontWeight.SemiBold,
-                                        fontSize = 12.sp,
-                                        color = AppTheme.colors.thirdBackground
-                                    )
-                                )
                             }
-
                         }
-                        Image(
-                            painter = painterResource(id =R.drawable.ton_bird),
+                        SubcomposeAsyncImage(
+                            model =  Constants.USER_PHOTO_URL + userUIState.user?.login,
                             contentDescription = "",
                             modifier = Modifier
                                 .size(44.dp)
                                 .clip(RoundedCornerShape(14.dp)),
-                            contentScale = ContentScale.Crop
+                            contentScale = ContentScale.Crop,
+                            loading = {
+                                Box(
+                                    modifier = Modifier.size(44.dp)
+                                ) {
+                                    CircularProgressIndicator()
+                                }
+                            }
                         )
                     }
                     Spacer(modifier = Modifier.height(28.dp))

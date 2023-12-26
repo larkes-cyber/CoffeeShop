@@ -18,6 +18,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ProfileScreenViewModel @Inject constructor():ViewModel() {
 
+    val languages = listOf("Russian", "English")
+
     private val _userUIState = MutableStateFlow<User?>(null)
     val userUIState:StateFlow<User?> = _userUIState
 
@@ -27,8 +29,8 @@ class ProfileScreenViewModel @Inject constructor():ViewModel() {
     private val _selectedImageUriUIState = MutableStateFlow<Uri?>(null)
     val selectedImageUriUIState:StateFlow<Uri?> = _selectedImageUriUIState
 
-    val languages = listOf("Russian", "English")
-
+    private val _hasBeenExitUIState = MutableStateFlow(false)
+    val hasBeenExitUIState:StateFlow<Boolean> = _hasBeenExitUIState
 
     init {
         fetchUser()
@@ -69,22 +71,31 @@ class ProfileScreenViewModel @Inject constructor():ViewModel() {
     }
 
     fun switchShowingNameTextField(){
-        _userUIState.value = userUIState.value?.copy(name = profileUIState.value.nameTextField)
-        _profileUIState.value = profileUIState.value.copy(isNameFormActive = !profileUIState.value.isNameFormActive, nameTextField = "")
+        _profileUIState.value = profileUIState.value.copy(isNameFormActive = !profileUIState.value.isNameFormActive)
         if(profileUIState.value.isNameFormActive.not()){
             viewModelScope.launch {
+                _userUIState.value = userUIState.value?.copy(name = profileUIState.value.nameTextField)
+                _profileUIState.value = profileUIState.value.copy(nameTextField = "")
                 UseCases.useEditUser().execute(userUIState.value!!)
             }
         }
     }
 
     fun switchShowingNumber(){
-        _userUIState.value = userUIState.value?.copy(number = profileUIState.value.numberTextField)
-        _profileUIState.value = profileUIState.value.copy(isNumberFormActive = !profileUIState.value.isNumberFormActive, numberTextField = "")
+        _profileUIState.value = profileUIState.value.copy(isNumberFormActive = !profileUIState.value.isNumberFormActive)
         if(profileUIState.value.isNumberFormActive.not()){
             viewModelScope.launch {
+                _userUIState.value = userUIState.value?.copy(number = profileUIState.value.numberTextField)
+                _profileUIState.value = profileUIState.value.copy(numberTextField = "")
                 UseCases.useEditUser().execute(userUIState.value!!)
             }
+        }
+    }
+
+    fun toQuit(){
+        viewModelScope.launch {
+            UseCases.useDeleteUser().execute()
+            _hasBeenExitUIState.value = true
         }
     }
 

@@ -71,7 +71,6 @@ fun CoffeeDetailScreen(
 
     LaunchedEffect(Unit){
         viewModel.getCoffee()
-        viewModel.pullCoffeeImage()
     }
 
     Column(

@@ -4,8 +4,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.Button
@@ -38,7 +40,7 @@ fun ItemsPicker(
     ) {
         Column(
             modifier = Modifier.padding(10.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             options.forEach {title ->
                 Row(verticalAlignment = Alignment.CenterVertically) {
@@ -49,7 +51,7 @@ fun ItemsPicker(
                         tint = AppTheme.colors.secondPrimaryTitle.copy(alpha = if(title == currentTitle) 1f else 0f),
                         modifier = Modifier.size(15.dp)
                     )
-
+                    Spacer(modifier = Modifier.width(10.dp))
                     ClickableText(
                         text = AnnotatedString(title),
                         onClick = {
@@ -59,7 +61,8 @@ fun ItemsPicker(
                             fontFamily = sora,
                             color = AppTheme.colors.secondPrimaryTitle,
                             fontSize = 14.sp
-                        )
+                        ),
+                        modifier = modifier
                     )
                 }
             }

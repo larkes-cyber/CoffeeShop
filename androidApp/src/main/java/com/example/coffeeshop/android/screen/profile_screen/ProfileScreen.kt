@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.CircularProgressIndicator
@@ -39,6 +40,7 @@ import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material.icons.outlined.AddCircle
 import androidx.compose.material.icons.rounded.AccountCircle
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -48,6 +50,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontWeight
@@ -58,6 +61,7 @@ import coil.compose.AsyncImage
 import coil.compose.SubcomposeAsyncImage
 import com.example.coffeeshop.android.component.ItemsPicker
 import com.example.coffeeshop.android.component.SimpleTextField
+import com.example.coffeeshop.android.navigation.Screen
 import com.example.coffeeshop.android.theme.AppTheme
 import com.example.coffeeshop.android.theme.sora
 import com.example.coffeeshop.android.untils.Constants.SELECT_LANG_TITLE
@@ -70,10 +74,12 @@ fun ProfileScreen(
     viewModel:ProfileScreenViewModel
 ) {
 
+    val context = LocalContext.current
+
     val userUIState by viewModel.userUIState.collectAsState()
     val selectedImageUriUIState by viewModel.selectedImageUriUIState.collectAsState()
     val profileUIState by viewModel.profileUIState.collectAsState()
-    val context = LocalContext.current
+    val hasBeenExit by viewModel.hasBeenExitUIState.collectAsState()
 
 
     val galleryLauncher = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri ->
@@ -82,6 +88,9 @@ fun ProfileScreen(
         }
     }
 
+    LaunchedEffect(hasBeenExit){
+        if(hasBeenExit) navController.navigate(Screen.SplashScreen.route)
+    }
 
     LazyColumn(
         modifier = Modifier
@@ -219,6 +228,49 @@ fun ProfileScreen(
                     color = AppTheme.colors.secondPrimaryTitle
                 )
                 Spacer(modifier = Modifier.height(19.dp))
+                Column(modifier = Modifier.fillMaxWidth()) {
+                    Row(
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.Top,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable {
+                                viewModel.switchShowingPicker()
+                            }
+                    ) {
+                        Text(
+                            text = SELECT_LANG_TITLE,
+                            fontFamily = sora,
+                            color = AppTheme.colors.secondPrimaryTitle,
+                            fontSize = 14.sp
+                        )
+                        Row {
+                            Icon(
+                                imageVector = if(profileUIState.isPickerActive) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
+                                contentDescription = "",
+                                tint = AppTheme.colors.secondPrimaryTitle
+                            )
+                            Text(
+                                text = profileUIState.selectedLang,
+                                fontFamily = sora,
+                                color = AppTheme.colors.secondPrimaryTitle,
+                                fontSize = 14.sp
+                            )
+                        }
+                    }
+                    if(profileUIState.isPickerActive) {
+                        Spacer(modifier = Modifier.height(15.dp))
+                        ItemsPicker(
+                            currentTitle = profileUIState.selectedLang,
+                            options = viewModel.languages,
+                            onClick = {
+                                viewModel.onTitleChange(it)
+                            },
+                            modifier = Modifier.fillMaxWidth()
+                        )
+                    }
+                }
+                Spacer(modifier = Modifier.height(20.dp))
                 Row(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     modifier = Modifier.fillMaxWidth(),
@@ -230,7 +282,7 @@ fun ProfileScreen(
                             contentDescription = "",
                             tint = AppTheme.colors.secondPrimaryTitle
                         )
-                        if(profileUIState.isNumberFormActive){
+                        if(profileUIState.isNumberFormActive && userUIState != null){
                             SimpleTextField(
                                 text = profileUIState.numberTextField,
                                 textStyle = TextStyle(
@@ -238,8 +290,8 @@ fun ProfileScreen(
                                     color = AppTheme.colors.secondPrimaryTitle,
                                     fontSize = 14.sp
                                 ),
-                                placeholder = (userUIState?.number ?: "").ifEmpty { "+79XXXXXXXXX" },
-                                modifier = Modifier.width(250.dp)
+                                placeholder = userUIState?.number ?: "",
+                                modifier = Modifier.width(200.dp)
                             ){
                                 viewModel.onNumberChange(it)
                             }
@@ -252,61 +304,29 @@ fun ProfileScreen(
                             )
                         }
                     }
-                    IconButton(onClick = {
-                        viewModel.switchShowingNumber()
+                    Icon(
+                        imageVector = if(profileUIState.isNumberFormActive) Icons.Default.Check else Icons.Default.Edit,
+                        contentDescription = "",
+                        tint = AppTheme.colors.secondPrimaryTitle,
+                        modifier = Modifier.clickable {
+                            viewModel.switchShowingNumber()
 
-                    }) {
-                        Icon(
-                            imageVector = if(profileUIState.isNumberFormActive) Icons.Default.Check else Icons.Default.Edit,
-                            contentDescription = "",
-                            tint = AppTheme.colors.secondPrimaryTitle
-                        )
-                    }
-                }
-                Spacer(modifier = Modifier.height(10.dp))
-                Row(
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.Top,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text(
-                        text = SELECT_LANG_TITLE,
-                        fontFamily = sora,
-                        color = AppTheme.colors.secondPrimaryTitle,
-                        fontSize = 14.sp
+                        }
                     )
-                    Column(
-                        horizontalAlignment = Alignment.End,
-                        verticalArrangement = Arrangement.spacedBy(5.dp)
-                    ) {
-                        Row(
-                            modifier = Modifier.clickable {
-                                viewModel.switchShowingPicker()
-                            }
-                        ) {
-                            Icon(
-                               imageVector = if(profileUIState.isPickerActive) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
-                               contentDescription = "",
-                               tint = AppTheme.colors.secondPrimaryTitle
-                            )
-                            Text(
-                               text = profileUIState.selectedLang,
-                               fontFamily = sora,
-                               color = AppTheme.colors.secondPrimaryTitle,
-                               fontSize = 14.sp
-                            )
-                        }
-                        if(profileUIState.isPickerActive) {
-                            ItemsPicker(
-                                currentTitle = profileUIState.selectedLang,
-                                options = viewModel.languages,
-                                onClick = {
-                                    viewModel.onTitleChange(it)
-                                }
-                            )
-                        }
-                    }
                 }
+                Spacer(modifier = Modifier.height(35.dp))
+                ClickableText(
+                    text = AnnotatedString("Exit"),
+                    onClick = {
+                         viewModel.toQuit()
+                    },
+                    style = TextStyle(
+                        color = Color.Red,
+                        fontSize = 14.sp,
+                        fontFamily = sora,
+                        fontWeight = FontWeight.Bold
+                    )
+                )
             }
         }
 

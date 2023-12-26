@@ -30,24 +30,10 @@ class MainViewModel @Inject constructor():ViewModel(){
     private val _userUIState = MutableStateFlow(UserUIState())
     val userUIState:StateFlow<UserUIState> = _userUIState
 
-    private val _hasBeenExit = MutableStateFlow(false)
-    val hasBeenExit:StateFlow<Boolean> = _hasBeenExit
-
     fun loadUserData(){
         viewModelScope.launch {
             _userUIState.value = UserUIState(isLoading = true)
-
-            val some =  UseCases.useGetUserData().execute().data
-            Log.d("wefgfdsdfgfdf", some.toString())
-
             _userUIState.value = UserUIState(user = UseCases.useGetUserData().execute().data)
-        }
-    }
-
-    fun deleteUser(){
-        viewModelScope.launch {
-            UseCases.useDeleteUser().execute()
-            _hasBeenExit.value = true
         }
     }
     fun syncCoffee(){
