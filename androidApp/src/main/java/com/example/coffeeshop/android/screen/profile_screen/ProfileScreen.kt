@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
@@ -29,6 +30,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
@@ -46,6 +48,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -54,6 +57,7 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import coil.compose.SubcomposeAsyncImage
 import com.example.coffeeshop.android.component.ItemsPicker
+import com.example.coffeeshop.android.component.SimpleTextField
 import com.example.coffeeshop.android.theme.AppTheme
 import com.example.coffeeshop.android.theme.sora
 import com.example.coffeeshop.android.untils.Constants.SELECT_LANG_TITLE
@@ -162,19 +166,35 @@ fun ProfileScreen(
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             if(profileUIState.isNameFormActive){
-
+                                Box(modifier = Modifier.width(150.dp)) {
+                                    SimpleTextField(
+                                        text = profileUIState.nameTextField,
+                                        textStyle = TextStyle(
+                                            fontSize = 17.sp,
+                                            color = AppTheme.colors.primaryTitle,
+                                            fontFamily = sora,
+                                            fontWeight = FontWeight.Bold
+                                        ),
+                                        placeholder = userUIState?.name ?: "",
+                                        modifier = Modifier.fillMaxWidth()
+                                    ){
+                                        viewModel.onNameChange(it)
+                                    }
+                                }
+                            }else{
+                                Text(
+                                    text = viewModel.userUIState.value?.name ?: "",
+                                    fontSize = 17.sp,
+                                    color = AppTheme.colors.primaryTitle,
+                                    fontFamily = sora,
+                                    fontWeight = FontWeight.Bold
+                                )
                             }
-                            Text(
-                                text = viewModel.userUIState.value?.name ?: "",
-                                fontSize = 17.sp,
-                                color = AppTheme.colors.primaryTitle,
-                                fontFamily = sora,
-                                fontWeight = FontWeight.Bold
-                            )
-
-                            IconButton(onClick = {  }) {
+                            IconButton(onClick = {
+                                viewModel.switchShowingNameTextField()
+                            }) {
                                 Icon(
-                                    imageVector = Icons.Default.Edit,
+                                    imageVector = if(profileUIState.isNameFormActive) Icons.Default.Check else Icons.Default.Edit,
                                     contentDescription = "",
                                     tint = AppTheme.colors.primaryTitle
                                 )
@@ -210,16 +230,33 @@ fun ProfileScreen(
                             contentDescription = "",
                             tint = AppTheme.colors.secondPrimaryTitle
                         )
-                        Text(
-                            text = userUIState?.number ?: "+79XXXXXXXXX",
-                            fontFamily = sora,
-                            color = AppTheme.colors.secondPrimaryTitle,
-                            fontSize = 14.sp
-                        )
+                        if(profileUIState.isNumberFormActive){
+                            SimpleTextField(
+                                text = profileUIState.numberTextField,
+                                textStyle = TextStyle(
+                                    fontFamily = sora,
+                                    color = AppTheme.colors.secondPrimaryTitle,
+                                    fontSize = 14.sp
+                                ),
+                                placeholder = (userUIState?.number ?: "").ifEmpty { "+79XXXXXXXXX" }
+                            ){
+                                viewModel.onNumberChange(it)
+                            }
+                        }else{
+                            Text(
+                                text = userUIState?.number ?: "+79XXXXXXXXX",
+                                fontFamily = sora,
+                                color = AppTheme.colors.secondPrimaryTitle,
+                                fontSize = 14.sp
+                            )
+                        }
                     }
-                    IconButton(onClick = {  }) {
+                    IconButton(onClick = {
+                        viewModel.switchShowingNumber()
+
+                    }) {
                         Icon(
-                            imageVector = Icons.Default.Edit,
+                            imageVector = if(profileUIState.isNumberFormActive) Icons.Default.Check else Icons.Default.Edit,
                             contentDescription = "",
                             tint = AppTheme.colors.secondPrimaryTitle
                         )
