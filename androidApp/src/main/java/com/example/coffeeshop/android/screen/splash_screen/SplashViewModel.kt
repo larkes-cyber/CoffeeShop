@@ -1,5 +1,6 @@
 package com.example.coffeeshop.android.screen.splash_screen
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.coffeeshop.android.untils.Constants.AUTH_NOT_STATED
@@ -22,6 +23,8 @@ class SplashViewModel @Inject constructor(
     fun init(){
         viewModelScope.launch {
             val user = UseCases.useGetUserData().execute().data
+
+            Log.d("sdfsdfffddff", user.toString())
 
             if(user != null){
                 UseCases.useSyncCoffeeCategories().execute()

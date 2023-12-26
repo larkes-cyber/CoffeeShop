@@ -8,14 +8,13 @@ import com.example.coffeeshop.untils.Resource
 class UseEditUser(
     private val userRepository: UserRepository
 ) {
-
     suspend fun execute(user: User):Resource<String>{
         return try {
-            userRepository.editUser(user.toDataUser())
+            val oldUser = userRepository.getUser()
+            userRepository.editUser(user.toDataUser(session = oldUser!!.session!!, favoriteCoffee = oldUser.favoriteCoffee!!))
             Resource.Success("success")
         }catch (e:Exception){
             Resource.Error(e.message!!)
         }
     }
-
 }

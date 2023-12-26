@@ -69,11 +69,23 @@ class ProfileScreenViewModel @Inject constructor():ViewModel() {
     }
 
     fun switchShowingNameTextField(){
+        _userUIState.value = userUIState.value?.copy(name = profileUIState.value.nameTextField)
         _profileUIState.value = profileUIState.value.copy(isNameFormActive = !profileUIState.value.isNameFormActive, nameTextField = "")
+        if(profileUIState.value.isNameFormActive.not()){
+            viewModelScope.launch {
+                UseCases.useEditUser().execute(userUIState.value!!)
+            }
+        }
     }
 
     fun switchShowingNumber(){
+        _userUIState.value = userUIState.value?.copy(number = profileUIState.value.numberTextField)
         _profileUIState.value = profileUIState.value.copy(isNumberFormActive = !profileUIState.value.isNumberFormActive, numberTextField = "")
+        if(profileUIState.value.isNumberFormActive.not()){
+            viewModelScope.launch {
+                UseCases.useEditUser().execute(userUIState.value!!)
+            }
+        }
     }
 
 }

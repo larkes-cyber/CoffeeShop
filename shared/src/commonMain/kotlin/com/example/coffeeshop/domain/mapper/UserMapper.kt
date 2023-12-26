@@ -5,12 +5,15 @@ import com.example.coffeeshop.data.network.model.UserDto
 import com.example.coffeeshop.domain.model.User
 import kotlin.math.log
 
-fun User.toDataUser():DataUser{
+fun User.toDataUser(
+    session:String? = null,
+    favoriteCoffee:String? = null
+):DataUser{
     return DataUser(
         name = name,
         number = number,
-        favoriteCoffee = null,
-        session = null,
+        favoriteCoffee = favoriteCoffee,
+        session = session,
         login = login,
         password = password
     )
@@ -38,6 +41,7 @@ fun UserDto.toDataUser():DataUser{
 
 fun DataUser.toUserDto():UserDto{
     return UserDto(
+        id = session,
         name = name,
         number = number,
         favoriteCoffee = favoriteCoffee ?: "",

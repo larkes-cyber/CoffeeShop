@@ -224,7 +224,7 @@ fun ProfileScreen(
                     modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Row(horizontalArrangement = Arrangement.spacedBy(3.dp)) {
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         Icon(
                             imageVector = Icons.Default.Phone,
                             contentDescription = "",
@@ -238,13 +238,14 @@ fun ProfileScreen(
                                     color = AppTheme.colors.secondPrimaryTitle,
                                     fontSize = 14.sp
                                 ),
-                                placeholder = (userUIState?.number ?: "").ifEmpty { "+79XXXXXXXXX" }
+                                placeholder = (userUIState?.number ?: "").ifEmpty { "+79XXXXXXXXX" },
+                                modifier = Modifier.width(250.dp)
                             ){
                                 viewModel.onNumberChange(it)
                             }
                         }else{
                             Text(
-                                text = userUIState?.number ?: "+79XXXXXXXXX",
+                                text =if(userUIState?.number == null || userUIState?.number!!.isEmpty()) "+79XXXXXXXXX" else userUIState?.number!!,
                                 fontFamily = sora,
                                 color = AppTheme.colors.secondPrimaryTitle,
                                 fontSize = 14.sp

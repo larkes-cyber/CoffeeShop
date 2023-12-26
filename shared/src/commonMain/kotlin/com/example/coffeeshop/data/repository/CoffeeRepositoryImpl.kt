@@ -29,6 +29,7 @@ class CoffeeRepositoryImpl(
     override suspend fun syncCoffeeCategory() {
         logInTerminal(userRepository.getUser().toString())
         val session = userRepository.getUser()!!.session
+        println(session)
         val coffee = coffeeRemoteDataSource.getAllCoffeeCategory(session!!)
         coffeeDiskDataSource.cleanUpCoffeeCategory()
         coffee.forEach {
