@@ -28,6 +28,8 @@ import com.example.coffeeshop.android.navigation.Screen
 import com.example.coffeeshop.android.theme.AppTheme
 import com.example.coffeeshop.android.theme.sora
 import com.example.coffeeshop.android.untils.Constants.FAVORITE_COFFEE_TITLE
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 
 @Composable
 fun FavoriteCoffeeScreen(
@@ -42,50 +44,54 @@ fun FavoriteCoffeeScreen(
         viewModel.getFavoriteCoffee()
     }
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(AppTheme.colors.secondBackground)
-    ) {
-        Box(modifier = Modifier
-            .fillMaxWidth()
-            .background(
-                brush = Brush.horizontalGradient(
-                    colors = listOf(
-                        AppTheme.colors.secondGradientBackground,
-                        AppTheme.colors.firstGradientBackground
-                    )
-                )
-            )
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 30.dp)
-                    .padding(top = 20.dp, bottom = 50.dp)
-            ) {
-                Text(
-                    text = FAVORITE_COFFEE_TITLE,
-                    fontFamily = sora,
-                    fontWeight = FontWeight.SemiBold,
-                    fontSize = 22.sp,
-                    color = AppTheme.colors.thirdPrimaryTitle
-                )
-                Spacer(modifier = Modifier.height(40.dp))
-                SearchBar(
-                    text = searchCoffeeUIState.symbols,
-                    modifier = Modifier.fillMaxWidth()
-                ){
-                    viewModel.onSearchText(it)
-                }
-            }
+    SwipeRefresh(
+        state = rememberSwipeRefreshState(isRefreshing = favoriteCoffeeUIState.isLoading),
+        onRefresh = {
+            viewModel.getFavoriteCoffee()
         }
-        Spacer(modifier = Modifier.height(19.dp))
+    ) {
         LazyColumn(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 15.dp)
-        ){
+                .fillMaxSize()
+                .background(AppTheme.colors.secondBackground)
+        ) {
+            item {
+                Box(modifier = Modifier
+                    .fillMaxWidth()
+                    .background(
+                        brush = Brush.horizontalGradient(
+                            colors = listOf(
+                                AppTheme.colors.secondGradientBackground,
+                                AppTheme.colors.firstGradientBackground
+                            )
+                        )
+                    )
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 30.dp)
+                            .padding(top = 20.dp, bottom = 50.dp)
+                    ) {
+                        Text(
+                            text = FAVORITE_COFFEE_TITLE,
+                            fontFamily = sora,
+                            fontWeight = FontWeight.SemiBold,
+                            fontSize = 22.sp,
+                            color = AppTheme.colors.thirdPrimaryTitle
+                        )
+                        Spacer(modifier = Modifier.height(40.dp))
+                        SearchBar(
+                            text = searchCoffeeUIState.symbols,
+                            modifier = Modifier.fillMaxWidth()
+                        ){
+                            viewModel.onSearchText(it)
+                        }
+                    }
+                }
+                Spacer(modifier = Modifier.height(19.dp))
+            }
+
             itemsIndexed(favoriteCoffeeUIState.coffee){index, item ->
                 FavoriteCoffeeItem(
                     modifier = Modifier
@@ -98,6 +104,7 @@ fun FavoriteCoffeeScreen(
                 }
                 Spacer(modifier = Modifier.height(10.dp))
             }
+
             item {
                 Spacer(modifier = Modifier.height(100.dp))
             }

@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.net.Uri
 import android.provider.MediaStore
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.coffeeshop.di.UseCases
@@ -35,10 +36,13 @@ class ProfileScreenViewModel @Inject constructor():ViewModel() {
     init {
         fetchUser()
     }
-    private fun fetchUser(){
+    fun fetchUser(){
         viewModelScope.launch {
+            _profileUIState.value = profileUIState.value.copy(isLoading = true)
+            UseCases.useSyncUserData().execute()
             val user = UseCases.useGetUserData().execute().data
             _userUIState.value = user
+            _profileUIState.value = profileUIState.value.copy(isLoading = false)
         }
     }
 

@@ -67,6 +67,8 @@ import com.example.coffeeshop.android.theme.sora
 import com.example.coffeeshop.android.untils.Constants.SELECT_LANG_TITLE
 import com.example.coffeeshop.android.untils.Constants.SETTINGS_TITLE
 import com.example.coffeeshop.untils.Constants
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 
 @Composable
 fun ProfileScreen(
@@ -92,243 +94,250 @@ fun ProfileScreen(
         if(hasBeenExit) navController.navigate(Screen.SplashScreen.route)
     }
 
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(AppTheme.colors.secondBackground)
-    ){
+    SwipeRefresh(
+        state = rememberSwipeRefreshState(isRefreshing = profileUIState.isLoading),
+        onRefresh = {
+            viewModel.fetchUser()
+        }
+    ) {
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(AppTheme.colors.secondBackground)
+        ){
 
-        item {
-            Column(
-                Modifier
-                    .fillMaxWidth()
-                    .background(
-                        brush = Brush.horizontalGradient(
-                            colors = listOf(
-                                AppTheme.colors.secondGradientBackground,
-                                AppTheme.colors.firstGradientBackground
+            item {
+                Column(
+                    Modifier
+                        .fillMaxWidth()
+                        .background(
+                            brush = Brush.horizontalGradient(
+                                colors = listOf(
+                                    AppTheme.colors.secondGradientBackground,
+                                    AppTheme.colors.firstGradientBackground
 
+                                )
                             )
                         )
-                    )
-                    .padding(horizontal = 30.dp)
-                    .padding(vertical = 20.dp)
-            ) {
-
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = Modifier.fillMaxWidth()
+                        .padding(horizontal = 30.dp)
+                        .padding(vertical = 20.dp)
                 ) {
-                    if(userUIState != null) {
-                        Button(
-                            onClick = {
-                                galleryLauncher.launch("image/*")
-                            },
-                            colors = ButtonDefaults.buttonColors(backgroundColor = Color.Transparent),
-                            contentPadding = PaddingValues(0.dp),
-                            elevation = ButtonDefaults.elevation(0.dp)
-                        ) {
-                            Box {
-                                if(selectedImageUriUIState != null){
-                                    AsyncImage(
-                                        model = selectedImageUriUIState,
-                                        contentDescription = "",
-                                        modifier = Modifier
-                                            .size(89.dp)
-                                            .clip(RoundedCornerShape(100)),
-                                        contentScale = ContentScale.Crop
+
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        if(userUIState != null) {
+                            Button(
+                                onClick = {
+                                    galleryLauncher.launch("image/*")
+                                },
+                                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Transparent),
+                                contentPadding = PaddingValues(0.dp),
+                                elevation = ButtonDefaults.elevation(0.dp)
+                            ) {
+                                Box {
+                                    if(selectedImageUriUIState != null){
+                                        AsyncImage(
+                                            model = selectedImageUriUIState,
+                                            contentDescription = "",
+                                            modifier = Modifier
+                                                .size(89.dp)
+                                                .clip(RoundedCornerShape(100)),
+                                            contentScale = ContentScale.Crop
                                         )
-                                }else{
-                                    SubcomposeAsyncImage(
-                                        model =  Constants.USER_PHOTO_URL + userUIState?.login,
+                                    }else{
+                                        SubcomposeAsyncImage(
+                                            model =  Constants.USER_PHOTO_URL + userUIState?.login,
+                                            contentDescription = "",
+                                            modifier = Modifier
+                                                .size(89.dp)
+                                                .clip(RoundedCornerShape(100)),
+                                            contentScale = ContentScale.Crop,
+                                            loading = {
+                                                Box(
+                                                    modifier = Modifier.size(89.dp)
+                                                ) {
+                                                    Icon(
+                                                        imageVector = Icons.Rounded.AccountCircle,
+                                                        contentDescription = "",
+                                                        tint = AppTheme.colors.primaryTitle,
+                                                        modifier = Modifier.size(89.dp)
+                                                    )
+                                                }
+                                            }
+                                        )
+                                    }
+                                    Icon(
+                                        imageVector = Icons.Outlined.AddCircle,
                                         contentDescription = "",
                                         modifier = Modifier
-                                            .size(89.dp)
-                                            .clip(RoundedCornerShape(100)),
-                                        contentScale = ContentScale.Crop,
-                                        loading = {
-                                            Box(
-                                                modifier = Modifier.size(89.dp)
-                                            ) {
-                                                Icon(
-                                                    imageVector = Icons.Rounded.AccountCircle,
-                                                    contentDescription = "",
-                                                    tint = AppTheme.colors.primaryTitle,
-                                                    modifier = Modifier.size(89.dp)
-                                                )
-                                            }
-                                        }
+                                            .size(25.dp)
+                                            .align(Alignment.BottomEnd),
+                                        tint = AppTheme.colors.primaryTitle
                                     )
                                 }
-                                Icon(
-                                    imageVector = Icons.Outlined.AddCircle,
-                                    contentDescription = "",
-                                    modifier = Modifier
-                                        .size(25.dp)
-                                        .align(Alignment.BottomEnd),
-                                    tint = AppTheme.colors.primaryTitle
-                                )
                             }
-                        }
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(3.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            if(profileUIState.isNameFormActive){
-                                Box(modifier = Modifier.width(150.dp)) {
-                                    SimpleTextField(
-                                        text = profileUIState.nameTextField,
-                                        textStyle = TextStyle(
-                                            fontSize = 17.sp,
-                                            color = AppTheme.colors.primaryTitle,
-                                            fontFamily = sora,
-                                            fontWeight = FontWeight.Bold
-                                        ),
-                                        placeholder = userUIState?.name ?: "",
-                                        modifier = Modifier.fillMaxWidth()
-                                    ){
-                                        viewModel.onNameChange(it)
+                            Row(
+                                horizontalArrangement = Arrangement.spacedBy(3.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                if(profileUIState.isNameFormActive){
+                                    Box(modifier = Modifier.width(150.dp)) {
+                                        SimpleTextField(
+                                            text = profileUIState.nameTextField,
+                                            textStyle = TextStyle(
+                                                fontSize = 17.sp,
+                                                color = AppTheme.colors.primaryTitle,
+                                                fontFamily = sora,
+                                                fontWeight = FontWeight.Bold
+                                            ),
+                                            placeholder = userUIState?.name ?: "",
+                                            modifier = Modifier.fillMaxWidth()
+                                        ){
+                                            viewModel.onNameChange(it)
+                                        }
                                     }
+                                }else{
+                                    Text(
+                                        text = viewModel.userUIState.value?.name ?: "",
+                                        fontSize = 17.sp,
+                                        color = AppTheme.colors.primaryTitle,
+                                        fontFamily = sora,
+                                        fontWeight = FontWeight.Bold
+                                    )
                                 }
-                            }else{
-                                Text(
-                                    text = viewModel.userUIState.value?.name ?: "",
-                                    fontSize = 17.sp,
-                                    color = AppTheme.colors.primaryTitle,
-                                    fontFamily = sora,
-                                    fontWeight = FontWeight.Bold
-                                )
-                            }
-                            IconButton(onClick = {
-                                viewModel.switchShowingNameTextField()
-                            }) {
-                                Icon(
-                                    imageVector = if(profileUIState.isNameFormActive) Icons.Default.Check else Icons.Default.Edit,
-                                    contentDescription = "",
-                                    tint = AppTheme.colors.primaryTitle
-                                )
+                                IconButton(onClick = {
+                                    viewModel.switchShowingNameTextField()
+                                }) {
+                                    Icon(
+                                        imageVector = if(profileUIState.isNameFormActive) Icons.Default.Check else Icons.Default.Edit,
+                                        contentDescription = "",
+                                        tint = AppTheme.colors.primaryTitle
+                                    )
+                                }
                             }
                         }
                     }
                 }
             }
-        }
 
-        item {
-            Column(
-                modifier = Modifier
-                    .padding(horizontal = 30.dp)
-                    .padding(top = 34.dp)
-            ) {
-                Text(
-                    text = SETTINGS_TITLE,
-                    fontSize = 20.sp,
-                    fontFamily = sora,
-                    fontWeight = FontWeight.Bold,
-                    color = AppTheme.colors.secondPrimaryTitle
-                )
-                Spacer(modifier = Modifier.height(19.dp))
-                Column(modifier = Modifier.fillMaxWidth()) {
-                    Row(
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.Top,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clickable {
-                                viewModel.switchShowingPicker()
-                            }
-                    ) {
-                        Text(
-                            text = SELECT_LANG_TITLE,
-                            fontFamily = sora,
-                            color = AppTheme.colors.secondPrimaryTitle,
-                            fontSize = 14.sp
-                        )
-                        Row {
-                            Icon(
-                                imageVector = if(profileUIState.isPickerActive) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
-                                contentDescription = "",
-                                tint = AppTheme.colors.secondPrimaryTitle
-                            )
+            item {
+                Column(
+                    modifier = Modifier
+                        .padding(horizontal = 30.dp)
+                        .padding(top = 34.dp)
+                ) {
+                    Text(
+                        text = SETTINGS_TITLE,
+                        fontSize = 20.sp,
+                        fontFamily = sora,
+                        fontWeight = FontWeight.Bold,
+                        color = AppTheme.colors.secondPrimaryTitle
+                    )
+                    Spacer(modifier = Modifier.height(19.dp))
+                    Column(modifier = Modifier.fillMaxWidth()) {
+                        Row(
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.Top,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable {
+                                    viewModel.switchShowingPicker()
+                                }
+                        ) {
                             Text(
-                                text = profileUIState.selectedLang,
+                                text = SELECT_LANG_TITLE,
                                 fontFamily = sora,
                                 color = AppTheme.colors.secondPrimaryTitle,
                                 fontSize = 14.sp
                             )
-                        }
-                    }
-                    if(profileUIState.isPickerActive) {
-                        Spacer(modifier = Modifier.height(15.dp))
-                        ItemsPicker(
-                            currentTitle = profileUIState.selectedLang,
-                            options = viewModel.languages,
-                            onClick = {
-                                viewModel.onTitleChange(it)
-                            },
-                            modifier = Modifier.fillMaxWidth()
-                        )
-                    }
-                }
-                Spacer(modifier = Modifier.height(20.dp))
-                Row(
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        Icon(
-                            imageVector = Icons.Default.Phone,
-                            contentDescription = "",
-                            tint = AppTheme.colors.secondPrimaryTitle
-                        )
-                        if(profileUIState.isNumberFormActive && userUIState != null){
-                            SimpleTextField(
-                                text = profileUIState.numberTextField,
-                                textStyle = TextStyle(
+                            Row {
+                                Icon(
+                                    imageVector = if(profileUIState.isPickerActive) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
+                                    contentDescription = "",
+                                    tint = AppTheme.colors.secondPrimaryTitle
+                                )
+                                Text(
+                                    text = profileUIState.selectedLang,
                                     fontFamily = sora,
                                     color = AppTheme.colors.secondPrimaryTitle,
                                     fontSize = 14.sp
-                                ),
-                                placeholder = userUIState?.number ?: "",
-                                modifier = Modifier.width(200.dp)
-                            ){
-                                viewModel.onNumberChange(it)
+                                )
                             }
-                        }else{
-                            Text(
-                                text =if(userUIState?.number == null || userUIState?.number!!.isEmpty()) "+79XXXXXXXXX" else userUIState?.number!!,
-                                fontFamily = sora,
-                                color = AppTheme.colors.secondPrimaryTitle,
-                                fontSize = 14.sp
+                        }
+                        if(profileUIState.isPickerActive) {
+                            Spacer(modifier = Modifier.height(15.dp))
+                            ItemsPicker(
+                                currentTitle = profileUIState.selectedLang,
+                                options = viewModel.languages,
+                                onClick = {
+                                    viewModel.onTitleChange(it)
+                                },
+                                modifier = Modifier.fillMaxWidth()
                             )
                         }
                     }
-                    Icon(
-                        imageVector = if(profileUIState.isNumberFormActive) Icons.Default.Check else Icons.Default.Edit,
-                        contentDescription = "",
-                        tint = AppTheme.colors.secondPrimaryTitle,
-                        modifier = Modifier.clickable {
-                            viewModel.switchShowingNumber()
-
+                    Spacer(modifier = Modifier.height(20.dp))
+                    Row(
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                            Icon(
+                                imageVector = Icons.Default.Phone,
+                                contentDescription = "",
+                                tint = AppTheme.colors.secondPrimaryTitle
+                            )
+                            if(profileUIState.isNumberFormActive && userUIState != null){
+                                SimpleTextField(
+                                    text = profileUIState.numberTextField,
+                                    textStyle = TextStyle(
+                                        fontFamily = sora,
+                                        color = AppTheme.colors.secondPrimaryTitle,
+                                        fontSize = 14.sp
+                                    ),
+                                    placeholder = userUIState?.number ?: "",
+                                    modifier = Modifier.width(200.dp)
+                                ){
+                                    viewModel.onNumberChange(it)
+                                }
+                            }else{
+                                Text(
+                                    text =if(userUIState?.number == null || userUIState?.number!!.isEmpty()) "+79XXXXXXXXX" else userUIState?.number!!,
+                                    fontFamily = sora,
+                                    color = AppTheme.colors.secondPrimaryTitle,
+                                    fontSize = 14.sp
+                                )
+                            }
                         }
+                        Icon(
+                            imageVector = if(profileUIState.isNumberFormActive) Icons.Default.Check else Icons.Default.Edit,
+                            contentDescription = "",
+                            tint = AppTheme.colors.secondPrimaryTitle,
+                            modifier = Modifier.clickable {
+                                viewModel.switchShowingNumber()
+
+                            }
+                        )
+                    }
+                    Spacer(modifier = Modifier.height(35.dp))
+                    ClickableText(
+                        text = AnnotatedString("Exit"),
+                        onClick = {
+                            viewModel.toQuit()
+                        },
+                        style = TextStyle(
+                            color = Color.Red,
+                            fontSize = 14.sp,
+                            fontFamily = sora,
+                            fontWeight = FontWeight.Bold
+                        )
                     )
                 }
-                Spacer(modifier = Modifier.height(35.dp))
-                ClickableText(
-                    text = AnnotatedString("Exit"),
-                    onClick = {
-                         viewModel.toQuit()
-                    },
-                    style = TextStyle(
-                        color = Color.Red,
-                        fontSize = 14.sp,
-                        fontFamily = sora,
-                        fontWeight = FontWeight.Bold
-                    )
-                )
             }
-        }
 
+        }
     }
 }

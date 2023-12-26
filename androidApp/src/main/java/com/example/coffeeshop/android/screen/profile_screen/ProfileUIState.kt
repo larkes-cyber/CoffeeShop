@@ -6,5 +6,6 @@ data class ProfileUIState(
     val nameTextField:String = "",
     val numberTextField:String = "",
     val selectedLang:String = "",
-    val isPickerActive:Boolean = false
+    val isPickerActive:Boolean = false,
+    val isLoading:Boolean = false
 )
