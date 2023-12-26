@@ -36,10 +36,17 @@ class ProfileScreenViewModel @Inject constructor():ViewModel() {
     init {
         fetchUser()
     }
+
+    fun refreshData(){
+        viewModelScope.launch {
+            UseCases.useFullAppSync().execute()
+            fetchUser()
+        }
+    }
+
     fun fetchUser(){
         viewModelScope.launch {
             _profileUIState.value = profileUIState.value.copy(isLoading = true)
-            UseCases.useSyncUserData().execute()
             val user = UseCases.useGetUserData().execute().data
             _userUIState.value = user
             _profileUIState.value = profileUIState.value.copy(isLoading = false)

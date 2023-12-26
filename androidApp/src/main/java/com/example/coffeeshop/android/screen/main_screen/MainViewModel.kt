@@ -30,25 +30,28 @@ class MainViewModel @Inject constructor():ViewModel(){
     private val _userUIState = MutableStateFlow(UserUIState())
     val userUIState:StateFlow<UserUIState> = _userUIState
 
-    fun loadUserData(){
-        viewModelScope.launch {
-            _userUIState.value = UserUIState(isLoading = true)
+    init {
+        refreshData()
+    }
+
+    fun loadUserData():Job{
+        return viewModelScope.launch {
             _userUIState.value = UserUIState(user = UseCases.useGetUserData().execute().data)
         }
     }
-    fun syncCoffee(){
+    fun refreshData(){
         viewModelScope.launch {
             _mainScreenUIState.value = mainScreenUIState.value.copy(isCoffeeLoading = true, categories = listOf())
             _mainScreenUIState.value = mainScreenUIState.value.copy(isCategoriesLoading = true, coffee = listOf())
-            UseCases.useSyncCoffee().execute()
-            UseCases.useSyncCoffeeCategories().execute()
+            _userUIState.value = userUIState.value.copy(isLoading = true)
+            UseCases.useFullAppSync().execute()
             loadCategories().join()
             loadCoffee().join()
+            loadUserData().join()
         }
     }
     fun loadCategories(): Job {
         return viewModelScope.launch {
-            _mainScreenUIState.value = mainScreenUIState.value.copy(isCategoriesLoading = true)
             val categories = UseCases.useGetCoffeeCategories().execute().data!!
             _mainScreenUIState.value = mainScreenUIState.value.copy(
                 categories = categories,
@@ -59,7 +62,6 @@ class MainViewModel @Inject constructor():ViewModel(){
     }
     fun loadCoffee(): Job{
         return viewModelScope.launch {
-            _mainScreenUIState.value = mainScreenUIState.value.copy(isCoffeeLoading = true)
             val coffee = UseCases.useGetCoffeeByCategory().execute(mainScreenUIState.value.selectedCategory).data!!
             _mainScreenUIState.value = mainScreenUIState.value.copy(
                 coffee = coffee,
@@ -70,19 +72,11 @@ class MainViewModel @Inject constructor():ViewModel(){
 
     fun changeCategory(id:String){
         viewModelScope.launch {
-            _mainScreenUIState.value = mainScreenUIState.value.copy(selectedCategory = id, isCoffeeLoading = true, coffee = listOf())
             val coffee = UseCases.useGetCoffeeByCategory().execute(id).data!!
             _mainScreenUIState.value = mainScreenUIState.value.copy(selectedCategory = id, isCoffeeLoading = false, coffee = coffee)
         }
     }
 
-    fun getCoffeeImage(id:String, imageState:MutableState<ImageBitmap?>){
-        viewModelScope.launch {
-            val bytes = UseCases.useGetCoffeeImage().execute(id).data ?: return@launch
-            val bmp = BitmapFactory.decodeByteArray(bytes, 0 , bytes.size)
-            imageState.value = bmp.asImageBitmap()
-        }
-    }
 
     fun searchForCoffee(symbols:String){
         viewModelScope.launch {

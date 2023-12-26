@@ -23,16 +23,6 @@ class SplashViewModel @Inject constructor(
     fun init(){
         viewModelScope.launch {
             val user = UseCases.useGetUserData().execute().data
-
-            Log.d("sdfsdfffddff", user.toString())
-
-            if(user != null){
-                UseCases.useSyncCoffeeCategories().execute()
-                UseCases.useSyncCoffee().execute()
-                UseCases.useSyncUserData().execute()
-                UseCases.useSyncOrders().execute()
-            }
-
             _authUIState.value =  if(user == null) NOT_AUTH else AUTH_SUCCESS
         }
     }

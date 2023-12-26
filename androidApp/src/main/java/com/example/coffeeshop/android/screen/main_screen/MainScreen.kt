@@ -64,17 +64,11 @@ fun MainScreen(
     val searchCoffeeUIState by viewModel.searchCoffeeUIState.collectAsState()
     val userUIState by viewModel.userUIState.collectAsState()
 
-    LaunchedEffect(Unit){
-        viewModel.loadCategories().join()
-        viewModel.loadCoffee().join()
-        viewModel.loadUserData()
-    }
-
 
     SwipeRefresh(
         state = rememberSwipeRefreshState(isRefreshing = mainScreenUIState.isCategoriesLoading || mainScreenUIState.isCoffeeLoading),
         onRefresh = {
-            viewModel.syncCoffee()
+            viewModel.refreshData()
         }
     ) {
         LazyColumn(
@@ -229,11 +223,6 @@ fun MainScreen(
                     }
                 }
                 Spacer(modifier = Modifier.height(8.dp))
-            }
-            item {
-                if(mainScreenUIState.isCoffeeLoading){
-                    CircularProgressIndicator()
-                }
             }
             item{
                 Spacer(modifier = Modifier.height(90.dp))

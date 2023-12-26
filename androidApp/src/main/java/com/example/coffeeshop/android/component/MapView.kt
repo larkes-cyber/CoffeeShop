@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
@@ -37,6 +38,7 @@ fun MapView(
     selectingMode:Boolean = false,
     onMapChange:(Pair<Double, Double>) -> Unit
     ) {
+
 
     val startLocation = Point(51.5, -0.12)
     var zoomValue = 10.5f
@@ -83,6 +85,8 @@ fun MapView(
         onMapChange(Pair(point.latitude, point.longitude))
         true
     }
+
+
 
 
     AndroidView(

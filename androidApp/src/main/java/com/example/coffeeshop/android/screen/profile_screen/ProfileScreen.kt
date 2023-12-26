@@ -97,7 +97,7 @@ fun ProfileScreen(
     SwipeRefresh(
         state = rememberSwipeRefreshState(isRefreshing = profileUIState.isLoading),
         onRefresh = {
-            viewModel.fetchUser()
+            viewModel.refreshData()
         }
     ) {
         LazyColumn(

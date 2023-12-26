@@ -47,7 +47,7 @@ fun FavoriteCoffeeScreen(
     SwipeRefresh(
         state = rememberSwipeRefreshState(isRefreshing = favoriteCoffeeUIState.isLoading),
         onRefresh = {
-            viewModel.getFavoriteCoffee()
+            viewModel.refreshData()
         }
     ) {
         LazyColumn(

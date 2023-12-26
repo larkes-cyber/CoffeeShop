@@ -9,12 +9,5 @@ import javax.inject.Inject
 @HiltViewModel
 class MainActivityViewModel @Inject constructor():ViewModel(){
 
-    fun initKoin(context: Context){
-        try {
-            BusinessModule(context).init()
-        }catch (e:Exception){
-
-        }
-    }
 
 }

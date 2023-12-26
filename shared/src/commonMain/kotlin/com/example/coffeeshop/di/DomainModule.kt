@@ -16,6 +16,7 @@ import com.example.coffeeshop.domain.usecase.UseGetUserData
 import com.example.coffeeshop.domain.usecase.UseChangeCartAmount
 import com.example.coffeeshop.domain.usecase.UseDeleteCart
 import com.example.coffeeshop.domain.usecase.UseDeleteUserData
+import com.example.coffeeshop.domain.usecase.UseFullAppSync
 import com.example.coffeeshop.domain.usecase.UseGetCoffeeCartAmount
 import com.example.coffeeshop.domain.usecase.UseGetAddress
 import com.example.coffeeshop.domain.usecase.UseMakePayment
@@ -60,5 +61,6 @@ fun domainModule() = module {
     single { UseDeleteUserData(get(), get()) }
     single { UseGetAddress(get()) }
     single { UseEditUser(get()) }
+    single { UseFullAppSync(get(), get(), get()) }
 
 }

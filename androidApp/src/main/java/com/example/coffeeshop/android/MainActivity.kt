@@ -29,19 +29,16 @@ class MainActivity : ComponentActivity() {
 
     private val viewmodel: MainActivityViewModel by viewModels()
 
+    override fun onStart() {
+        super.onStart()
 
+
+
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-
-            MapKitFactory.setApiKey("848aefe2-e81e-4b91-b0ea-b006e36e9c52")
-
-
             val context = LocalContext.current
-
-            LaunchedEffect(Unit){
-                viewmodel.initKoin(context)
-            }
 
             val navController = rememberNavController()
 
