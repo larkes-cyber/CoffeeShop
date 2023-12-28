@@ -21,7 +21,13 @@ class FavoriteScreenViewModel:ObservableObject{
         self.fetchCoffee()
     }
     
-    func fetchCoffee(){
+    func syncData(){
+        UseCases().useFullAppSync().execute(completionHandler: { res, err in
+            self.fetchCoffee()
+        })
+    }
+    
+    private func fetchCoffee(){
         UseCases().useGetFavoriteCoffee().execute(completionHandler: { res, err in
             let coffee = res?.data ?? []
             self.coffee = (coffee as! [Coffee]).map{$0.toIndCoffee()}

@@ -8,19 +8,24 @@ struct iOSApp: App {
         BusinessModule().doInit()
     }
     
+    @State private var tabState: Visibility = .hidden
+
+    
 	var body: some Scene {
         
 		WindowGroup {
             TabView {
-                SplashScreen()
-                    .tabItem {
-                        Image(systemName: "house.fill")
-                     //   Text("Home")
+                NavigationView{
+                    SplashScreen()
                 }
-                
+                .phoneOnlyStackNavigationView()
+                .tabItem {
+                    Image(systemName: "house.fill")
+                }
                 NavigationView{
                     FavoriteScreen()
                 }
+                .phoneOnlyStackNavigationView()
                 .tabItem {
                     Image(systemName: "heart.fill")
                 }
@@ -28,12 +33,14 @@ struct iOSApp: App {
                     CartScreen()
                         
                 }
+                .phoneOnlyStackNavigationView()
                 .tabItem {
                     Image(systemName: "bag")
                 }
                 NavigationView(){
                     UserScreen()
                 }
+                .phoneOnlyStackNavigationView()
                 .tabItem {
                     Image(systemName: "person.crop.circle")
                 }
@@ -109,5 +116,15 @@ extension View {
 
     func hiddenTabBar() -> some View {
         return self.modifier(HiddenTabBar())
+    }
+}
+
+extension View {
+    func phoneOnlyStackNavigationView() -> some View {
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            return AnyView(self.navigationViewStyle(StackNavigationViewStyle()))
+        } else {
+            return AnyView(self)
+        }
     }
 }

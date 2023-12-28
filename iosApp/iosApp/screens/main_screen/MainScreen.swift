@@ -114,9 +114,12 @@ struct MainScreen: View {
         }
         .showTabBar()
         .refreshable {
-            viewModel.syncCoffee()
+            viewModel.syncData()
         }
         .ignoresSafeArea()
+        .onAppear{
+            viewModel.syncData()
+        }
        
     }
 }

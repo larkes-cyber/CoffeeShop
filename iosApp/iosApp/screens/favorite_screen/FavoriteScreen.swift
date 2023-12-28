@@ -13,63 +13,66 @@ struct FavoriteScreen: View {
     @StateObject private var viewModel = FavoriteScreenViewModel()
     
     var body: some View {
-       
-    
-    VStack{
-        NavigationLink(destination:CoffeeDetailScreen(id: viewModel.selectedCoffeeToTranfer), isActive: $viewModel.isTransferToDetailScreenActive){
-            EmptyView()
-        }.hidden()
-            .navigationBarHidden(true)
-            ZStack{
-                Color(hexStringToUIColor(hex: "F9F9F9"))
-                VStack{
-                    ZStack{
-                        LinearGradient(gradient: Gradient(colors: [Color(hexStringToUIColor(hex: "131313")), Color(hexStringToUIColor(hex: "313131"))]), startPoint: .leading, endPoint: .trailing)
-                        VStack(alignment: .leading){
-                            Text("Favorite coffee")
-                                .font(.system(size: 22, weight:.semibold))
-                                .foregroundColor(Color(hexStringToUIColor(hex: "DDDDDD")))
-                            Spacer()
-                            AppSearchBar(callback: {str in
-                                viewModel.onSearch(text: str)
-                            })
-                        }
-                        .padding(.horizontal, 30)
-                        .padding(.top, 70)
-                        .padding(.bottom, 50)
-                    }
-                    .frame(maxHeight: 234)
-                    ScrollView(.vertical){
-                        VStack(spacing: 10){
-                            ForEach(viewModel.coffee, id:\.self.id){item in
-                                FavoriteCoffeeCard(
-                                    coffee: item,
-                                    height: 96,
-                                    callback: {
-                                        viewModel.transferToDetail(id: item.id)
-                                    },
-                                    cartCallback: {
-                                        viewModel.addToCart(id: item.id)
-                                    }
-                                )
+        VStack{
+                NavigationLink(destination:CoffeeDetailScreen(id: viewModel.selectedCoffeeToTranfer), isActive: $viewModel.isTransferToDetailScreenActive){
+                    EmptyView()
+                }.hidden()
+                    .navigationBarHidden(true)
+
+                
+                ZStack{
+                    Color(hexStringToUIColor(hex: "F9F9F9"))
+                    VStack{
+                        ZStack{
+                            LinearGradient(gradient: Gradient(colors: [Color(hexStringToUIColor(hex: "131313")), Color(hexStringToUIColor(hex: "313131"))]), startPoint: .leading, endPoint: .trailing)
+                            VStack(alignment: .leading){
+                                Text("Favorite coffee")
+                                    .font(.system(size: 22, weight:.semibold))
+                                    .foregroundColor(Color(hexStringToUIColor(hex: "DDDDDD")))
+                                Spacer()
+                                AppSearchBar(callback: {str in
+                                    viewModel.onSearch(text: str)
+                                })
                             }
+                            .padding(.horizontal, 30)
+                            .padding(.top, 70)
+                            .padding(.bottom, 50)
                         }
-                        .padding(.horizontal, 15)
-                        .padding(.top, 20)
-                        .padding(.bottom, 120)
+                        .frame(maxHeight: 234)
+                        
+                        ScrollView(.vertical){
+                            VStack(spacing: 10){
+                                ForEach(viewModel.coffee, id:\.self.id){item in
+                                    FavoriteCoffeeCard(
+                                        coffee: item,
+                                        height: 96,
+                                        callback: {
+                                            viewModel.transferToDetail(id: item.id)
+                                        },
+                                        cartCallback: {
+                                            viewModel.addToCart(id: item.id)
+                                        }
+                                    )
+                                }
+                            }
+                            .padding(.horizontal, 15)
+                            .padding(.top, 20)
+                            .padding(.bottom, 120)
+                        }
                     }
                 }
+                .frame(maxHeight: .infinity)
             }
-            .frame(maxHeight: .infinity)
             .ignoresSafeArea()
-            .onAppear{
-                viewModel.fetchCoffee()
-            }
             .showTabBar()
+            .onAppear{
+                viewModel.syncData()
+            }
+            .refreshable {
+                viewModel.syncData()
+            }
         }
-        
     }
-}
 
 #Preview {
     FavoriteScreen()

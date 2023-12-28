@@ -28,38 +28,30 @@ class MainScreenViewModel:ObservableObject{
     @Published var isLoading = false
     
     init() {
-        refreash()
+        self.syncData()
     }
     
        
-    func syncCoffee(){
-        self.isLoading = true
-        UseCases().useSyncCoffeeCategories().execute(completionHandler: { res, err in
-            UseCases().useSyncCoffee().execute(completionHandler: {res, err in
-                self.refreash()
+
+    
+    func syncData(){
+        UseCases().useFullAppSync().execute(completionHandler: {res, err in
+            UseCases().useGetCoffeeCategories().execute(completionHandler: {res, err in
+                if(res?.data != nil){
+                    let categories = res?.data as! [CoffeeCategory]
+                    self.coffeeCategories = categories.map({coffee in coffee.toIndCoffeeCategory()})
+                    self.activeCategory = categories[0].id
+                    self.refreashCoffee()
+                }
+                self.isLoading = false
+            })
+            UseCases().useGetUserData().execute(completionHandler: { res, err in
+                self.user = res?.data
             })
         })
     }
     
-    private func refreash(){
-        UseCases().useGetCoffeeCategories().execute(completionHandler: {res, err in
-            if(res?.data != nil){
-                let categories = res?.data as! [CoffeeCategory]
-                self.coffeeCategories = categories.map({coffee in coffee.toIndCoffeeCategory()})
-                self.activeCategory = categories[0].id
-                self.refreashCoffee()
-            }
-            self.isLoading = false
-        })
-        
-        
-        UseCases().useGetUserData().execute(completionHandler: { res, err in
-            self.user = res?.data
-        })
-        
-    }
-    
-    func refreashCoffee(){
+    private func refreashCoffee(){
         UseCases().useGetCoffeeByCategory().execute(categoryId: activeCategory ?? "", completionHandler: {res, err in
             let coffee = res?.data as! [Coffee]
             self.coffeeCards = []

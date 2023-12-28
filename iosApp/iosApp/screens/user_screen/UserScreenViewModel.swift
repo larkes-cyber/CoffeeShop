@@ -31,7 +31,13 @@ class UserScreenViewModel:ObservableObject{
     let languages = ["Russian", "English"]
     
     init() {
-        fetchUser()
+        self.fetchUser()
+    }
+    
+    func syncData(){
+        UseCases().useFullAppSync().execute(completionHandler: {res, err in
+            self.fetchUser()
+        })
     }
     
     func convertImageToBytesString(image: UIImage) -> String? {
@@ -59,7 +65,7 @@ class UserScreenViewModel:ObservableObject{
         }
     }
     
-    func fetchUser(){
+    private func fetchUser(){
         
         UseCases().useGetUserData().execute(completionHandler: {res, err in
             let user = res?.data

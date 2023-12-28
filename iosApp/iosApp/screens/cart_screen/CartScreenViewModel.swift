@@ -19,6 +19,8 @@ class CartScreenViewModel:ObservableObject{
     @Published var deliveryMode = "Pick Up"
     @Published var selectedLocation:Location? = nil
     
+
+    
     let coords = [
         Location(name: "Buckingham Palace", coordinate: CLLocationCoordinate2D(latitude: 51.501, longitude: -0.141)),
         Location(name: "Tower of London", coordinate: CLLocationCoordinate2D(latitude: 51.508, longitude: -0.076))

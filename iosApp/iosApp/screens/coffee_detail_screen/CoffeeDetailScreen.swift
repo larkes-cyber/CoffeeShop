@@ -121,6 +121,8 @@ struct CoffeeDetailScreen: View {
                         })
                     }
                     .padding(.bottom, 14)
+                    Spacer()
+                        .frame(height: 120)
                 }
                 .padding(.horizontal, 40)
             }

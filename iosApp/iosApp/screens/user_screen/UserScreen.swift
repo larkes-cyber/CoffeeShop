@@ -115,12 +115,16 @@ struct UserScreen: View {
                     }
                     .padding(.top, 15)
                     .padding(.horizontal, 27)
+                    .padding(.bottom, 70)
                 }
             }
         }
         .ignoresSafeArea()
         .sheet(isPresented: $viewModel.showSheet) {
             ImagePicker(sourceType: .photoLibrary, selectedImage: $viewModel.image)
+        }
+        .refreshable {
+            viewModel.syncData()
         }
     }
 }
