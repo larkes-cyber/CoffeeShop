@@ -1,8 +1,32 @@
-![photo_1_2023-11-28_17-32-48](https://github.com/larkes-cyber/CoffeeShop/assets/79082708/c59d3a3f-0082-47bd-a79e-e778d3dd55f8)
-![photo_3_2023-11-28_17-32-48](https://github.com/larkes-cyber/CoffeeShop/assets/79082708/0e3152ad-2063-4648-8f7b-1519e50560e2)
-![photo_4_2023-11-28_17-32-48](https://github.com/larkes-cyber/CoffeeShop/assets/79082708/9421b189-b480-43c5-8fb1-dfa6fc55c7cc)
-![photo_5_2023-11-28_17-32-48](https://github.com/larkes-cyber/CoffeeShop/assets/79082708/aeef3d8b-7361-4619-9f5b-a1f3fd657b64)
-![photo_6_2023-11-28_17-32-48](https://github.com/larkes-cyber/CoffeeShop/assets/79082708/16c950c5-403c-4c7e-8c9a-d716d39eae04)
-![photo_7_2023-11-28_17-32-48](https://github.com/larkes-cyber/CoffeeShop/assets/79082708/bee2c507-3012-4a21-b262-df495a4e589a)
-![photo_8_2023-11-28_17-32-48](https://github.com/larkes-cyber/CoffeeShop/assets/79082708/930d614b-9855-4473-98a9-8e2d4d8a4198)
+Landing screen:
+<img width="888" alt="Снимок экрана 2024-01-04 в 15 09 34" src="https://github.com/larkes-cyber/CoffeeShop/assets/79082708/e7a38936-5f6a-40c1-a58e-bfd36797b56f">
+
+Registration screen:
+<img width="872" alt="Снимок экрана 2024-01-04 в 15 10 14" src="https://github.com/larkes-cyber/CoffeeShop/assets/79082708/45000413-c6ae-4b52-ad88-e86f23ae9fba">
+
+Coffee cards screen:
+<img width="862" alt="Снимок экрана 2024-01-04 в 15 11 31" src="https://github.com/larkes-cyber/CoffeeShop/assets/79082708/c770b029-68ef-4f34-af6c-beb0a7f502fe">
+
+Adding to cart:
+![image](https://github.com/larkes-cyber/CoffeeShop/assets/79082708/b622991a-b1b4-4b40-9546-90cd90cfad79)
+
+Search for coffee and tabs:
+<img width="858" alt="Снимок экрана 2024-01-04 в 15 12 18" src="https://github.com/larkes-cyber/CoffeeShop/assets/79082708/950d50db-86b6-495b-8f6d-13055f88df45">
+
+Coffee detail:
+<img width="863" alt="Снимок экрана 2024-01-04 в 15 12 35" src="https://github.com/larkes-cyber/CoffeeShop/assets/79082708/4e6f2758-dcad-4979-be3a-c1ffa5bc20b9">
+
+Favorite coffee screen:
+![image](https://github.com/larkes-cyber/CoffeeShop/assets/79082708/9d5f220a-2e5e-42f0-b0ab-9dfce339a984)
+
+Favorite screen with details:
+![image](https://github.com/larkes-cyber/CoffeeShop/assets/79082708/e7836c0a-1c29-4149-a5ac-a215b11f2829)
+
+
+Cart screen:
+![image](https://github.com/larkes-cyber/CoffeeShop/assets/79082708/a3dede2f-b41e-4068-9aa6-fe24fa0b75ad)
+
+Cart screen with maps:
+<img width="823" alt="Снимок экрана 2024-01-04 в 15 17 38" src="https://github.com/larkes-cyber/CoffeeShop/assets/79082708/d01c86d4-3349-49fd-9bb9-fae9c4790639">
+
 
