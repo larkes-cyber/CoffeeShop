@@ -4,6 +4,7 @@ Tech:
 - Ktor-Client
 - SqlDelight
 - Local Storage
+- Koin
 
 Features:
 - Online Synchronization
