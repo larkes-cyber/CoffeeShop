@@ -40,6 +40,10 @@ fun FavoriteCoffeeScreen(
     val favoriteCoffeeUIState by viewModel.favoriteCoffeeUIState.collectAsState()
     val searchCoffeeUIState by viewModel.searchCoffeeUIState.collectAsState()
 
+    LaunchedEffect(Unit){
+        viewModel.refreshData()
+    }
+
     SwipeRefresh(
         state = rememberSwipeRefreshState(isRefreshing = favoriteCoffeeUIState.isLoading),
         onRefresh = {

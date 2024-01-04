@@ -37,6 +37,7 @@ struct SplashScreen: View {
             .ignoresSafeArea()
             .hiddenTabBar()
         }
+        .navigationBarHidden(true)
     }
 }
 
