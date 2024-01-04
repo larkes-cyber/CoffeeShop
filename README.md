@@ -7,8 +7,8 @@ Tech:
 
 Features:
 - Online Synchronization
-- Data caching using json
-- Images caching
+- Json Cache Storage
+- Images Caching
 - Ios/Android
 
 Ktor server:
