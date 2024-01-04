@@ -11,9 +11,6 @@ Features:
 - Images Caching
 - Ios/Android
 
-Ktor server:
-https://github.com/larkes-cyber/SniCoffeeBackend.git
-
 To use an app with server you need:
 - download soure code
 - download ktor server
@@ -22,6 +19,14 @@ To use an app with server you need:
 - put your local ip to COFFEE_API variable in constants file in shared module
 - launch android app in android studio and launch ios in xcode
 - enjoy the app!
+
+Links:
+
+Ktor server:
+https://github.com/larkes-cyber/SniCoffeeBackend.git
+
+App overview:
+https://drive.google.com/file/d/1IvfysGWkKWgfbMjJXCfAwTOVhC3SF6X4/view?usp=sharing
 
 
 
