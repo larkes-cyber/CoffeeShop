@@ -18,6 +18,7 @@ class CartScreenViewModel:ObservableObject{
     let fee:Float = 1.0
     @Published var deliveryMode = "Pick Up"
     @Published var selectedLocation:Location? = nil
+    @Published var showingAlert = false
     
 
     
@@ -77,4 +78,9 @@ class CartScreenViewModel:ObservableObject{
     func selectLocation(location:Location){
         self.selectedLocation = location
     }
+    
+    func switchAlertActivity(){
+        showingAlert = !showingAlert
+    }
+    
 }

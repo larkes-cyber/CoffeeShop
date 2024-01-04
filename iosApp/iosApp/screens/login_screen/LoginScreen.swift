@@ -14,7 +14,7 @@ struct LoginScreen: View {
     
     var body: some View {
         VStack{
-            NavigationLink(destination:SplashScreen(), isActive: $loginViewModel.isSucceed){
+            NavigationLink(destination:MainScreen(), isActive: $loginViewModel.isSucceed){
                   EmptyView()
               }.hidden()
               .navigationBarHidden(true)

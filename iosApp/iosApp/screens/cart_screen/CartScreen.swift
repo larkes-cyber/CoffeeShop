@@ -117,11 +117,19 @@ struct CartScreen: View {
                                 .frame(height: 1)
                                 .foregroundColor(Color(hexStringToUIColor(hex: "EAEAEA")))
                             PaymentRow(title: "Total Payment", price: viewModel.fee + viewModel.price)
-                            AppPrimaryButton(title: "Order"){
-                                
+                            if(viewModel.showingAlert){
+                                SmallSpanAlert(title: "Sorry, on this moment payment is not available", callback: {
+                                    viewModel.switchAlertActivity()
+                                })
+                                .padding(.top, 16)
+                                .padding(.bottom, 30)
+                            }else{
+                                AppPrimaryButton(title: "Order"){
+                                    viewModel.switchAlertActivity()
+                                }
+                                .padding(.top, 16)
+                                .padding(.bottom, 30)
                             }
-                            .padding(.top, 16)
-                            .padding(.bottom, 30)
                         }
                         .padding(.horizontal, 30)
                         

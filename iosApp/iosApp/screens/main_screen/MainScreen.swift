@@ -51,6 +51,7 @@ struct MainScreen: View {
                                 }
                                 .frame(width: 44, height: 44)
                                 .clipShape(RoundedRectangle(cornerRadius: 14.0))
+                                .id(viewModel.imageId)
                             }
                             
                             AppSearchBar(callback: {str in

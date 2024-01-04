@@ -15,10 +15,7 @@ struct iOSApp: App {
         
 		WindowGroup {
             TabView {
-                NavigationView{
-                    SplashScreen()
-                }
-                .phoneOnlyStackNavigationView()
+                SplashScreen()
                 .tabItem {
                     Image(systemName: "house.fill")
                 }

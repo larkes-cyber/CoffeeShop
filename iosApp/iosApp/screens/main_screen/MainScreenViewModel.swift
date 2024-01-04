@@ -27,6 +27,8 @@ class MainScreenViewModel:ObservableObject{
     
     @Published var isLoading = false
     
+    @Published var imageId = UUID()
+    
     init() {
         self.syncData()
     }
@@ -47,8 +49,10 @@ class MainScreenViewModel:ObservableObject{
             })
             UseCases().useGetUserData().execute(completionHandler: { res, err in
                 self.user = res?.data
+                self.imageId = UUID()
             })
         })
+        
     }
     
     private func refreashCoffee(){

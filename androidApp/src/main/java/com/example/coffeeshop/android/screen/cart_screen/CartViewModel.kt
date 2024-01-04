@@ -27,6 +27,9 @@ class CartViewModel @Inject constructor():ViewModel() {
     private val _selectedLocationUIState = MutableStateFlow<String?>(null)
     val selectedLocationUIState:StateFlow<String?> = _selectedLocationUIState
 
+    private val _showingAlertUIState = MutableStateFlow(false)
+    val showingAlertUIState:StateFlow<Boolean> = _showingAlertUIState
+
     val locations = listOf(
         Location(name = "Buckingham Palace", latitude = 51.501, longitude = -0.141),
         Location(name = "Tower of London", latitude = 51.508, longitude = -0.076),
@@ -109,6 +112,10 @@ class CartViewModel @Inject constructor():ViewModel() {
 
         _selectedLocationUIState.value = location.name
 
+    }
+
+    fun switchAlertActivity(){
+        _showingAlertUIState.value = showingAlertUIState.value.not()
     }
 
 }
