@@ -25,7 +25,6 @@ To use an app with server you need:
 
 
 
-
 Landing screen:
 
 <img width="1000" alt="Снимок экрана 2024-01-04 в 15 09 34" src="https://github.com/larkes-cyber/CoffeeShop/assets/79082708/e7a38936-5f6a-40c1-a58e-bfd36797b56f">
